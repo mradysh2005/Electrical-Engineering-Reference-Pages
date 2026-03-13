@@ -3,888 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BJT & MOSFET Key Parameters</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Rad.ish Engineering</title>
+<link rel="stylesheet" href="css/style.css">
 <style>
-  :root {
-    --bg: #f7f7fa;
-    --surface: #ffffff;
-    --surface2: #f0f0f5;
-    --border: #d8d8e8;
-    --bjt: #c9400a;
-    --bjt-dim: rgba(201,64,10,0.08);
-    --bjt-mid: rgba(201,64,10,0.25);
-    --mos: #007a65;
-    --mos-dim: rgba(0,122,101,0.08);
-    --mos-mid: rgba(0,122,101,0.25);
-    --gold: #b07800;
-    --text: #1a1a2e;
-    --muted: #6060a0;
-    --formula-bg: #f0f0f8;
+  /* Landing-page-specific styles */
+  .hero { padding: 80px 0 36px; text-align: center; }
+  .hero-label {
+    display: inline-block; font-family: var(--font-m); font-size: 0.63rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted);
+    background: var(--bg-raised); border: 1px solid var(--border);
+    padding: 5px 16px; border-radius: 20px; margin-bottom: 22px;
   }
+  .hero h1 { font-size: 3.4rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 14px; }
+  .hero h1 .dot { text-shadow: 0 0 20px rgba(77,142,255,0.3); }
+  .hero-tag { font-size: 0.84rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 36px; line-height: 1.75; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-    padding: 40px 24px 80px;
+  .stats-bar {
+    display: flex; justify-content: center; gap: 48px; padding: 36px 0; margin: 20px 0;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); flex-wrap: wrap;
   }
+  .stat-num { font-family: var(--font-h); font-size: 1.7rem; font-weight: 800; color: var(--text-h); text-align: center; }
+  .stat-lbl { font-family: var(--font-m); font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; margin-top: 3px; }
 
-  /* ---- Header ---- */
-  header {
-    max-width: 1100px;
-    margin: 0 auto 56px;
-    position: relative;
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 48px 0; }
+  .pcard { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.3s ease; display: block; }
+  .pcard:hover { border-color: var(--border-hover); box-shadow: 0 8px 32px rgba(0,0,0,0.4); transform: translateY(-3px); }
+  .banner { height: 170px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .banner.eng { background: linear-gradient(135deg, #0a1628, #142244, #0d1a33); }
+  .banner.cars { background: linear-gradient(135deg, #1a0d04, #2a1508, #1f1008); }
+  .banner-ico { font-size: 48px; opacity: 0.15; }
+  .banner-lbl {
+    position: absolute; bottom: 12px; right: 14px; font-family: var(--font-m);
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 10px; border-radius: var(--radius-xs);
   }
-
-  .header-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 12px;
+  .lbl-eng { background: var(--accent-eng-glow); color: var(--accent-eng); }
+  .lbl-cars { background: var(--accent-cars-glow); color: var(--accent-cars); }
+  .glow {
+    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 200px; pointer-events: none;
   }
+  .glow-eng { background: radial-gradient(circle, rgba(77,142,255,0.08), transparent 70%); }
+  .glow-cars { background: radial-gradient(circle, rgba(255,107,53,0.08), transparent 70%); }
 
-  h1 {
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 800;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
+  .cbody { padding: 24px 26px 26px; }
+  .cbody h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .cbody p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .acard { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+  .acard h3 { font-size: 1rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .acard ul { list-style: none; }
+  .acard li { font-size: 0.78rem; color: var(--text-muted); padding: 6px 0 6px 20px; position: relative; line-height: 1.65; }
+  .acard li::before { content: '→'; position: absolute; left: 0; color: var(--text-ghost); }
+
+  @media (max-width: 768px) {
+    .grid2 { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.4rem; }
+    .stats-bar { gap: 24px; }
   }
-
-  h1 .bjt-word { color: var(--bjt); }
-  h1 .mos-word { color: var(--mos); }
-
-  .header-sub {
-    margin-top: 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    color: var(--muted);
-    max-width: 560px;
-    line-height: 1.6;
-  }
-
-  .header-line {
-    position: absolute;
-    bottom: -24px;
-    left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--bjt), var(--mos), transparent);
-    opacity: 0.4;
-  }
-
-  /* ---- Layout ---- */
-  .container { max-width: 1100px; margin: 0 auto; }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  @media (max-width: 720px) {
-    .two-col { grid-template-columns: 1fr; }
-  }
-
-  /* ---- Cards ---- */
-  .card {
-    background: var(--surface);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-  }
-
-  .card.bjt::before { background: linear-gradient(90deg, var(--bjt), transparent); }
-  .card.mos::before { background: linear-gradient(90deg, var(--mos), transparent); }
-  .card.both::before { background: linear-gradient(90deg, var(--bjt), var(--mos)); }
-  .card.gold::before { background: linear-gradient(90deg, var(--gold), transparent); }
-
-  .card-header {
-    padding: 18px 22px 14px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .chip {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    padding: 3px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-
-  .chip.bjt { background: var(--bjt-dim); color: var(--bjt); border: 1px solid var(--bjt-mid); }
-  .chip.mos { background: var(--mos-dim); color: var(--mos); border: 1px solid var(--mos-mid); }
-  .chip.both { background: rgba(176,120,0,0.10); color: var(--gold); border: 1px solid rgba(176,120,0,0.3); }
-
-  .card-title {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-  }
-
-  .card-body { padding: 20px 22px; }
-
-  /* ---- Parameter rows ---- */
-  .param-list { display: flex; flex-direction: column; gap: 16px; }
-
-  .param {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 14px;
-    align-items: start;
-  }
-
-  .param-left {}
-
-  .param-symbol {
-    font-family: 'Space Mono', monospace;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.1;
-  }
-
-  .param-symbol.bjt-color { color: var(--bjt); }
-  .param-symbol.mos-color { color: var(--mos); }
-  .param-symbol.gold-color { color: var(--gold); }
-
-  .param-name {
-    font-size: 11px;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    margin-top: 3px;
-    line-height: 1.4;
-  }
-
-  .param-right {}
-
-  .formula-box {
-    background: var(--formula-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    color: var(--gold);
-    margin-bottom: 7px;
-    display: inline-block;
-  }
-
-  .param-desc {
-    font-size: 13px;
-    color: #404060;
-    line-height: 1.6;
-  }
-
-  .param-desc strong { color: var(--text); font-weight: 600; }
-  .param-desc em { color: var(--gold); font-style: normal; font-weight: 600; }
-
-  .param-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 4px 0;
-    opacity: 0.5;
-  }
-
-  /* ---- Insight boxes ---- */
-  .insight {
-    background: rgba(176,120,0,0.07);
-    border: 1px solid rgba(176,120,0,0.25);
-    border-radius: 8px;
-    padding: 13px 16px;
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: #7a5500;
-    line-height: 1.7;
-    margin-top: 16px;
-  }
-
-  .insight::before {
-    content: '⚡ KEY INSIGHT  ';
-    color: var(--gold);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-
-  /* ---- Comparison table ---- */
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-  }
-
-  .compare-table th {
-    padding: 10px 14px;
-    text-align: left;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .compare-table th:nth-child(1) { color: var(--muted); }
-  .compare-table th:nth-child(2) { color: var(--bjt); }
-  .compare-table th:nth-child(3) { color: var(--mos); }
-
-  .compare-table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid rgba(180,180,210,0.5);
-    line-height: 1.5;
-    vertical-align: top;
-  }
-
-  .compare-table tr:last-child td { border-bottom: none; }
-
-  .compare-table td:nth-child(1) { color: var(--muted); font-size: 11px; }
-  .compare-table td:nth-child(2) { color: #7a2800; }
-  .compare-table td:nth-child(3) { color: #005544; }
-
-  .compare-table tr:hover td { background: rgba(0,0,0,0.02); }
-
-  /* ---- Small signal section ---- */
-  .ss-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  .ss-box {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 14px;
-    border: 1px solid var(--border);
-  }
-
-  .ss-box-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .ss-param-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(42,42,58,0.5);
-    gap: 8px;
-  }
-
-  .ss-param-row:last-child { border-bottom: none; }
-
-  .ss-sym {
-    font-family: 'Space Mono', monospace;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .ss-formula {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--gold);
-    text-align: right;
-  }
-
-  .ss-note {
-    font-size: 10px;
-    color: var(--muted);
-    text-align: right;
-    font-family: 'Space Mono', monospace;
-  }
-
-  /* ---- Region markers ---- */
-  .region-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .region-box {
-    border-radius: 8px;
-    padding: 12px;
-    text-align: center;
-  }
-
-  .region-box.cutoff { background: rgba(100,100,140,0.15); border: 1px solid rgba(100,100,140,0.3); }
-  .region-box.active { background: rgba(255,107,53,0.10); border: 1px solid rgba(255,107,53,0.3); }
-  .region-box.sat { background: rgba(0,201,167,0.08); border: 1px solid rgba(0,201,167,0.2); }
-
-  .region-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .region-cond {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  /* ---- Full width card ---- */
-  .full-width { margin-bottom: 20px; }
-
-  /* ---- Footer note ---- */
-  .footer-note {
-    max-width: 1100px;
-    margin: 40px auto 0;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-    line-height: 1.8;
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-  }
-
-  /* ---- Animations ---- */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .card { animation: fadeUp 0.4s ease both; }
-  .card:nth-child(1) { animation-delay: 0.05s; }
-  .card:nth-child(2) { animation-delay: 0.12s; }
-  .two-col .card:nth-child(1) { animation-delay: 0.08s; }
-  .two-col .card:nth-child(2) { animation-delay: 0.15s; }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-tag">EE Reference Sheet · Series 01</div>
-  <h1><span class="bjt-word">BJT</span> & <span class="mos-word">MOSFET</span><br>Key Parameters</h1>
-  <p class="header-sub">Every critical parameter, formula, and insight you need — from physics to small-signal models.</p>
-  <div class="header-line"></div>
-</header>
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-brand">Rad<span class="dot">.</span>ish Engineering</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="engineering.html">Engineering</a></li>
+    <li><a href="cars.html">Cars</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
 
-<div class="container">
-
-  <!-- ===== BJT CORE ===== -->
-  <div class="two-col">
-
-    <div class="card bjt">
-      <div class="card-header">
-        <span class="chip bjt">BJT</span>
-        <span class="card-title">Core DC Parameters</span>
-      </div>
-      <div class="card-body">
-        <div class="param-list">
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol bjt-color">β (h<sub>FE</sub>)</div>
-              <div class="param-name">Current Gain<br>(common emitter)</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">β = IC / IB</div>
-              <p class="param-desc">Ratio of collector to base current. Typically <strong>50–300</strong> but highly variable. <em>Never design around a specific β value</em> — it drifts with temperature, IC, and device variation.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol bjt-color">α</div>
-              <div class="param-name">Common-Base<br>Current Gain</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">α = IC / IE = β/(β+1)</div>
-              <p class="param-desc">Always less than 1 (typically 0.99+). Relates to β by α = β/(β+1). Tells you how much of IE actually makes it to the collector. <em>α → 1 as β → ∞</em>.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol bjt-color">IS</div>
-              <div class="param-name">Saturation<br>Current</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">IC = IS · e^(VBE/VT)</div>
-              <p class="param-desc">Extremely small (~10⁻¹⁵ A). Sets the absolute scale of IC. The exponential relationship means <em>every 60mV increase in VBE multiplies IC by 10</em>.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol bjt-color">VT</div>
-              <div class="param-name">Thermal<br>Voltage</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">VT = kT/q ≈ 26mV @ 300K</div>
-              <p class="param-desc">k = Boltzmann constant, T = temp in Kelvin, q = electron charge. This appears everywhere in BJT analysis. <em>Increases ~0.086 mV/°C</em> — critical for tempco calculations.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol bjt-color">VA</div>
-              <div class="param-name">Early<br>Voltage</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">IC = IS·e^(VBE/VT)·(1 + VCE/VA)</div>
-              <p class="param-desc">Models base-width modulation (IC rising with VCE in active region). Typically <strong>50–200V</strong>. <em>Higher VA = better current source behavior</em>. Defines the finite output resistance ro.</p>
-            </div>
-          </div>
-
-        </div>
-        <div class="insight">VBE ≈ 0.6–0.7V for Si BJT. It DECREASES ~2mV/°C — this is why BJT amplifiers drift with temperature.</div>
-      </div>
-    </div>
-
-    <!-- MOSFET CORE -->
-    <div class="card mos">
-      <div class="card-header">
-        <span class="chip mos">MOSFET</span>
-        <span class="card-title">Core DC Parameters</span>
-      </div>
-      <div class="card-body">
-        <div class="param-list">
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol mos-color">VTH</div>
-              <div class="param-name">Threshold<br>Voltage</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">VGS &gt; VTH to turn on</div>
-              <p class="param-desc">The gate-source voltage needed to invert the channel. Typically <strong>0.4–1V</strong> for NMOS. <em>Decreases with temperature</em> (~−2mV/°C). Affected by body effect if VS ≠ 0.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol mos-color">k'n / μnCox</div>
-              <div class="param-name">Process<br>Transconductance</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">k'n = μn · Cox</div>
-              <p class="param-desc">Combines carrier mobility (μn) and gate oxide capacitance per area (Cox). <em>Set by the fabrication process — you cannot change it</em>. μn ≈ 2–3× μp, so NMOS is naturally faster/stronger.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol mos-color">W/L</div>
-              <div class="param-name">Aspect<br>Ratio</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">kn = k'n · (W/L)</div>
-              <p class="param-desc">The designer's primary knob. <em>Wider W → more current drive</em>. Shorter L → faster but more λ (channel length modulation). kn is the device transconductance parameter.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol mos-color">ID (sat)</div>
-              <div class="param-name">Drain Current<br>Saturation</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">ID = (kn/2)(VGS − VTH)²</div>
-              <p class="param-desc">The square-law relationship. VGS−VTH is called <em>overdrive voltage (VOV)</em>. Squaring means doubling VOV quadruples current. Valid when VDS ≥ VGS − VTH.</p>
-            </div>
-          </div>
-
-          <div class="param-divider"></div>
-
-          <div class="param">
-            <div class="param-left">
-              <div class="param-symbol mos-color">λ</div>
-              <div class="param-name">Channel Length<br>Modulation</div>
-            </div>
-            <div class="param-right">
-              <div class="formula-box">ID = (kn/2)(VOV)²(1 + λVDS)</div>
-              <p class="param-desc">MOSFET equivalent of Early effect. Typically <strong>0.01–0.1 V⁻¹</strong>. <em>Longer channel → smaller λ → better current source</em>. Defines output resistance ro = 1/(λID).</p>
-            </div>
-          </div>
-
-        </div>
-        <div class="insight">MOSFET is voltage-controlled (IG ≈ 0). BJT is current-controlled (IB drives IC). This is the fundamental architectural difference in circuit design.</div>
-      </div>
-    </div>
-
+<section class="hero"><div class="container">
+  <div class="hero-label">Portfolio &amp; Knowledge Base</div>
+  <h1>Rad<span class="dot">.</span>ish Engineering</h1>
+  <p class="hero-tag">Electrical engineering reference library, car project database, and reliability analysis — built by Mike Radysh.</p>
+  <div class="hero-btns">
+    <a href="engineering.html" class="btn btn-eng">⚡ Engineering</a>
+    <a href="cars.html" class="btn btn-cars">🔧 Cars</a>
   </div>
+</div></section>
 
-  <!-- ===== SMALL SIGNAL MODELS ===== -->
-  <div class="full-width">
-    <div class="card both">
-      <div class="card-header">
-        <span class="chip both">BOTH</span>
-        <span class="card-title">Small-Signal Model Parameters — Hybrid-π</span>
-      </div>
-      <div class="card-body">
-        <div class="ss-grid">
+<div class="container"><div class="stats-bar">
+  <div><div class="stat-num">3</div><div class="stat-lbl">Vehicles</div></div>
+  <div><div class="stat-num">6+</div><div class="stat-lbl">EE Topic Areas</div></div>
+  <div><div class="stat-num">NJIT</div><div class="stat-lbl">B.S. Electrical Eng.</div></div>
+  <div><div class="stat-num">DIY</div><div class="stat-lbl">Self-Taught Mechanic</div></div>
+</div></div>
 
-          <div class="ss-box">
-            <div class="ss-box-title" style="color: var(--bjt);">▸ BJT Small-Signal</div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym bjt-color">gm</div>
-                <div class="ss-note">transconductance</div>
-              </div>
-              <div>
-                <div class="ss-formula">IC / VT</div>
-                <div class="ss-note">≈ IC / 0.026</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym bjt-color">rπ</div>
-                <div class="ss-note">input resistance</div>
-              </div>
-              <div>
-                <div class="ss-formula">β / gm = VT / IB</div>
-                <div class="ss-note">base→emitter</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym bjt-color">ro</div>
-                <div class="ss-note">output resistance</div>
-              </div>
-              <div>
-                <div class="ss-formula">VA / IC ≈ 1/(λIC)</div>
-                <div class="ss-note">C→E, Early effect</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym bjt-color">re</div>
-                <div class="ss-note">emitter resistance</div>
-              </div>
-              <div>
-                <div class="ss-formula">VT / IE ≈ 1/gm</div>
-                <div class="ss-note">T-model equiv.</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym bjt-color">Cπ, Cμ</div>
-                <div class="ss-note">parasitic caps</div>
-              </div>
-              <div>
-                <div class="ss-formula">B-E diff. cap + B-C junc.</div>
-                <div class="ss-note">limit fT, f3dB</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="ss-box">
-            <div class="ss-box-title" style="color: var(--mos);">▸ MOSFET Small-Signal</div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym mos-color">gm</div>
-                <div class="ss-note">transconductance</div>
-              </div>
-              <div>
-                <div class="ss-formula">√(2knID) = kn·VOV</div>
-                <div class="ss-note">2ID/VOV also</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym mos-color">ro</div>
-                <div class="ss-note">output resistance</div>
-              </div>
-              <div>
-                <div class="ss-formula">1 / (λ · ID)</div>
-                <div class="ss-note">|VA|/ID equiv.</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym mos-color">gmb</div>
-                <div class="ss-note">body effect gm</div>
-              </div>
-              <div>
-                <div class="ss-formula">η · gm  (η ≈ 0.1–0.2)</div>
-                <div class="ss-note">VSB ≠ 0 only</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym mos-color">Cgs, Cgd</div>
-                <div class="ss-note">gate capacitances</div>
-              </div>
-              <div>
-                <div class="ss-formula">≈ (2/3)WLCox · Cgd</div>
-                <div class="ss-note">Miller effect via Cgd</div>
-              </div>
-            </div>
-
-            <div class="ss-param-row">
-              <div>
-                <div class="ss-sym mos-color">rg</div>
-                <div class="ss-note">gate resistance</div>
-              </div>
-              <div>
-                <div class="ss-formula">≈ ∞ at DC</div>
-                <div class="ss-note">finite at RF/high-f</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="insight">gm is the most important small-signal parameter — it converts input voltage to output current. Higher gm = higher gain. For BJT: gm ∝ IC directly. For MOSFET: gm ∝ √ID, so doubling current only raises gm by √2.</div>
+<div class="container"><div class="grid2">
+  <a href="engineering.html" class="pcard">
+    <div class="banner eng"><div class="glow glow-eng"></div><div class="banner-ico">⚡</div><span class="banner-lbl lbl-eng">Engineering</span></div>
+    <div class="cbody">
+      <h3>Engineering Reference Library</h3>
+      <p>Circuit design, power systems, embedded programming — organized by topic with interactive reference sheets and formulas.</p>
+      <div class="tags">
+        <span class="chip chip-eng">Op-Amps</span><span class="chip chip-eng">555 Timers</span><span class="chip chip-eng">Filters</span><span class="chip chip-eng">Transformers</span><span class="chip chip-eng">RISC-V</span>
       </div>
     </div>
+  </a>
+  <a href="cars.html" class="pcard">
+    <div class="banner cars"><div class="glow glow-cars"></div><div class="banner-ico">🔧</div><span class="banner-lbl lbl-cars">Automotive</span></div>
+    <div class="cbody">
+      <h3>Car Projects &amp; Reliability</h3>
+      <p>DIY project database with full step-by-step guides, tools lists, and an objective reliability rating system for self-taught mechanics.</p>
+      <div class="tags">
+        <span class="chip chip-cars">Ford Ranger</span><span class="chip chip-cars">Honda Civic</span><span class="chip chip-cars">Nissan Rogue</span><span class="chip chip-cars">Reliability</span>
+      </div>
+    </div>
+  </a>
+</div></div>
+
+<div class="container"><div class="grid2 mt-0">
+  <div class="acard">
+    <h3><span class="chip chip-eng">EE</span> Engineering</h3>
+    <ul>
+      <li>Circuits &amp; Electronics — op-amps, comparators, Schmitt triggers, oscillators</li>
+      <li>Power Systems — transformers, AC/DC, energy conversion</li>
+      <li>Embedded Systems — MCU programming, GPIO, RISC-V assembly</li>
+      <li>Fundamentals — dB, two-port networks, filters, g-parameters</li>
+    </ul>
   </div>
-
-  <!-- ===== SIDE BY SIDE COMPARISON ===== -->
-  <div class="full-width">
-    <div class="card both">
-      <div class="card-header">
-        <span class="chip both">COMPARE</span>
-        <span class="card-title">BJT vs MOSFET — Parameter by Parameter</span>
-      </div>
-      <div class="card-body">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>BJT (NPN)</th>
-              <th>MOSFET (NMOS)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Control mechanism</td>
-              <td>Current (IB controls IC)</td>
-              <td>Voltage (VGS controls ID)</td>
-            </tr>
-            <tr>
-              <td>Input impedance</td>
-              <td>Moderate — rπ = β/gm (~kΩ)</td>
-              <td>Extremely high — ~∞ at DC</td>
-            </tr>
-            <tr>
-              <td>Transconductance gm</td>
-              <td>IC / VT — high at moderate IC</td>
-              <td>√(2knID) — lower for same current</td>
-            </tr>
-            <tr>
-              <td>Output resistance ro</td>
-              <td>VA / IC (VA = 50–200V)</td>
-              <td>1 / (λID) (λ = 0.01–0.1 V⁻¹)</td>
-            </tr>
-            <tr>
-              <td>Gain (gm·ro product)</td>
-              <td>β·VA/VT — very high</td>
-              <td>Lower — trades off with speed</td>
-            </tr>
-            <tr>
-              <td>I-V law</td>
-              <td>Exponential: IC = IS·e^(VBE/VT)</td>
-              <td>Square-law: ID = (kn/2)VOV²</td>
-            </tr>
-            <tr>
-              <td>Temperature behavior</td>
-              <td>VBE drops ~2mV/°C; β changes</td>
-              <td>VTH drops; μ decreases (→ safer)</td>
-            </tr>
-            <tr>
-              <td>Speed (fT)</td>
-              <td>Very high — SiGe BJTs reach >300GHz</td>
-              <td>High; limited by Cgs, Cgd</td>
-            </tr>
-            <tr>
-              <td>Noise</td>
-              <td>Lower 1/f noise; good at RF</td>
-              <td>Higher 1/f noise (flicker noise)</td>
-            </tr>
-            <tr>
-              <td>Integration density</td>
-              <td>Larger — harder to scale</td>
-              <td>Excellent — dominant in VLSI</td>
-            </tr>
-            <tr>
-              <td>Body effect</td>
-              <td>None</td>
-              <td>VSB ≠ 0 raises VTH (gmb)</td>
-            </tr>
-            <tr>
-              <td>Analog analog use</td>
-              <td>Precision analog, low noise, RF</td>
-              <td>CMOS analog, digital, mixed-signal</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <div class="acard">
+    <h3><span class="chip chip-cars">AUTO</span> Cars</h3>
+    <ul>
+      <li>2001 Ford Ranger 3.0 V6 RWD Edge</li>
+      <li>2019 Honda Civic 2.0 NA CVT Sport</li>
+      <li>2016 Nissan Rogue 2.5L CVT</li>
+      <li>DIY projects, reliability ratings, buying guides</li>
+    </ul>
   </div>
+</div></div>
 
-  <!-- ===== OPERATING REGIONS ===== -->
-  <div class="two-col">
+<footer class="footer"><div class="container">
+  <p>Rad<span class="dot">.</span>ish Engineering — Mike Radysh — NJIT Electrical Engineering</p>
+  <p style="margin-top:4px;">Built with care. Not generated slop.</p>
+</div></footer>
 
-    <div class="card bjt">
-      <div class="card-header">
-        <span class="chip bjt">BJT</span>
-        <span class="card-title">Operating Regions</span>
-      </div>
-      <div class="card-body">
-        <div class="region-grid">
-          <div class="region-box cutoff">
-            <div class="region-name" style="color: #8888cc;">Cutoff</div>
-            <div class="region-cond">VBE &lt; 0.5V<br>VBC &lt; 0.4V<br>IC ≈ 0</div>
-          </div>
-          <div class="region-box active">
-            <div class="region-name" style="color: var(--bjt);">Active</div>
-            <div class="region-cond">VBE ≈ 0.7V (fwd)<br>VBC reverse<br>IC = β·IB</div>
-          </div>
-          <div class="region-box sat">
-            <div class="region-name" style="color: var(--mos);">Saturation</div>
-            <div class="region-cond">Both junctions<br>forward biased<br>VCE &lt; ~0.2V</div>
-          </div>
-        </div>
-        <p class="param-desc" style="font-size:12px; color: var(--muted); font-family: 'Space Mono', monospace;">⚠ BJT "saturation" = fully ON switch. Different from MOSFET "saturation" which = constant current amplifier region. Do not confuse these.</p>
-      </div>
-    </div>
-
-    <div class="card mos">
-      <div class="card-header">
-        <span class="chip mos">MOSFET</span>
-        <span class="card-title">Operating Regions</span>
-      </div>
-      <div class="card-body">
-        <div class="region-grid">
-          <div class="region-box cutoff">
-            <div class="region-name" style="color: #8888cc;">Cutoff</div>
-            <div class="region-cond">VGS &lt; VTH<br>channel off<br>ID ≈ 0</div>
-          </div>
-          <div class="region-box active" style="background: rgba(0,201,167,0.08); border-color: rgba(0,201,167,0.3);">
-            <div class="region-name" style="color: var(--mos);">Saturation</div>
-            <div class="region-cond">VDS ≥ VOV<br>ID = (kn/2)VOV²<br>amplifier region</div>
-          </div>
-          <div class="region-box sat" style="background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.2);">
-            <div class="region-name" style="color: var(--bjt);">Triode/Linear</div>
-            <div class="region-cond">VDS &lt; VOV<br>resistor-like<br>switch ON</div>
-          </div>
-        </div>
-        <p class="param-desc" style="font-size:12px; color: var(--muted); font-family: 'Space Mono', monospace;">⚠ MOSFET "saturation" = amplifier region (pinch-off). "Triode" = resistive switch. The naming is opposite from BJT conventions.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ===== GOLDEN NUMBERS ===== -->
-  <div class="full-width">
-    <div class="card gold">
-      <div class="card-header">
-        <span class="chip both">GOLD</span>
-        <span class="card-title">Numbers Every EE Should Know By Heart</span>
-      </div>
-      <div class="card-body">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Value</th>
-              <th>Meaning</th>
-              <th>Why it matters</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>VT = 26 mV</td>
-              <td>Thermal voltage at 300K</td>
-              <td>Appears in gm = IC/VT, every BJT formula</td>
-            </tr>
-            <tr>
-              <td>VBE ≈ 0.6–0.7V</td>
-              <td>Silicon BJT forward bias</td>
-              <td>DC bias starting point; drops 2mV/°C</td>
-            </tr>
-            <tr>
-              <td>60 mV / decade</td>
-              <td>BJT subthreshold slope</td>
-              <td>10× IC for every 60mV increase in VBE</td>
-            </tr>
-            <tr>
-              <td>VGS − VTH = VOV</td>
-              <td>MOSFET overdrive voltage</td>
-              <td>Controls gm and ID; designer's knob</td>
-            </tr>
-            <tr>
-              <td>μn ≈ 2–3× μp</td>
-              <td>NMOS vs PMOS mobility ratio</td>
-              <td>Why NMOS is 2–3× stronger than PMOS</td>
-            </tr>
-            <tr>
-              <td>kT/q at 300K = 25.85 mV</td>
-              <td>Exact thermal voltage</td>
-              <td>Round to 26mV for quick calc</td>
-            </tr>
-            <tr>
-              <td>gm·ro = VA/VT (BJT)</td>
-              <td>Intrinsic gain of BJT</td>
-              <td>Upper limit of single-stage gain, ~1000–4000</td>
-            </tr>
-            <tr>
-              <td>gm·ro = 2/λVOV (MOS)</td>
-              <td>Intrinsic gain of MOSFET</td>
-              <td>Typically 20–100 — lower than BJT</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer-note">
-  BJT & MOSFET Key Parameters Reference · EE Series 01<br>
-  Sedra/Smith · Razavi · Horowitz & Hill · MIT OCW 6.012
-</div>
-
+<script src="js/main.js"></script>
 </body>
 </html>

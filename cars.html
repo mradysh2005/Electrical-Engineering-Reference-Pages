@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cars — Rad.ish Engineering</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .reliability-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; }
+  .reliability-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .reliability-score { font-family: var(--font-h); font-size: 2rem; font-weight: 800; }
+  .score-great { color: var(--accent-green); }
+  .score-good { color: #4a9e2d; }
+  .score-fair { color: var(--accent-gold); }
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-brand">Rad<span class="dot">.</span>ish Engineering</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="engineering.html">Engineering</a></li>
+    <li><a href="cars.html" class="active-cars">Cars</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
+
+<div class="container">
+  <div class="page-header">
+    <span class="chip chip-cars">Automotive</span>
+    <h1>Cars — Projects &amp; Reliability</h1>
+    <p>DIY project database, step-by-step guides, and an objective reliability rating system built for self-taught mechanics.</p>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom:60px;">
+  <div class="content-layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">My Garage</div>
+        <a href="#" class="sidebar-link active-cars" data-topic="garage" data-accent="cars">All Vehicles</a>
+        <a href="#" class="sidebar-link" data-topic="ranger" data-accent="cars">2001 Ford Ranger</a>
+        <a href="#" class="sidebar-link" data-topic="civic" data-accent="cars">2019 Honda Civic</a>
+        <a href="#" class="sidebar-link" data-topic="rogue" data-accent="cars">2016 Nissan Rogue</a>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Projects</div>
+        <a href="#" class="sidebar-link" data-topic="projects" data-accent="cars">All Projects</a>
+        <a href="#" class="sidebar-link" data-topic="howto" data-accent="cars">How It Works</a>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Analysis</div>
+        <a href="#" class="sidebar-link" data-topic="reliability" data-accent="cars">Reliability Ratings</a>
+        <a href="#" class="sidebar-link" data-topic="buying" data-accent="cars">Buying Guide</a>
+      </div>
+    </aside>
+
+    <main>
+
+      <!-- ═══ GARAGE ═══ -->
+      <div class="topic-section active" id="garage">
+        <div class="topic-header"><span class="chip chip-cars">Garage</span><h2>My Vehicles</h2></div>
+        <div class="garage-grid">
+          <div class="garage-card"><div class="garage-accent" style="background:#4d8eff;"></div>
+            <h4>2001 Ford Ranger</h4><div class="specs">3.0L V6 Vulcan · RWD · 5-Speed Auto · Edge</div>
+            <div class="spec-grid">
+              <div class="spec-item"><div class="spec-label">Engine</div><div class="spec-value">3.0L V6</div></div>
+              <div class="spec-item"><div class="spec-label">Drivetrain</div><div class="spec-value">RWD</div></div>
+              <div class="spec-item"><div class="spec-label">Type</div><div class="spec-value">Body-on-Frame</div></div>
+              <div class="spec-item"><div class="spec-label">Status</div><div class="spec-value" style="color:var(--accent-green)">Active</div></div>
+            </div>
+          </div>
+          <div class="garage-card"><div class="garage-accent" style="background:var(--accent-green);"></div>
+            <h4>2019 Honda Civic</h4><div class="specs">2.0L NA i-VTEC · FWD · CVT · Sport</div>
+            <div class="spec-grid">
+              <div class="spec-item"><div class="spec-label">Engine</div><div class="spec-value">2.0L NA</div></div>
+              <div class="spec-item"><div class="spec-label">Drivetrain</div><div class="spec-value">FWD</div></div>
+              <div class="spec-item"><div class="spec-label">Trans</div><div class="spec-value">CVT</div></div>
+              <div class="spec-item"><div class="spec-label">Status</div><div class="spec-value" style="color:var(--accent-green)">Active</div></div>
+            </div>
+          </div>
+          <div class="garage-card"><div class="garage-accent" style="background:#9b59b6;"></div>
+            <h4>2016 Nissan Rogue</h4><div class="specs">2.5L QR25DE · FWD/AWD · Jatco CVT</div>
+            <div class="spec-grid">
+              <div class="spec-item"><div class="spec-label">Engine</div><div class="spec-value">2.5L I4</div></div>
+              <div class="spec-item"><div class="spec-label">Drivetrain</div><div class="spec-value">FWD/AWD</div></div>
+              <div class="spec-item"><div class="spec-label">Trans</div><div class="spec-value">CVT</div></div>
+              <div class="spec-item"><div class="spec-label">Status</div><div class="spec-value" style="color:var(--accent-green)">Active</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ RANGER ═══ -->
+      <div class="topic-section" id="ranger">
+        <div class="topic-header"><span class="chip chip-cars">Ranger</span><h2>2001 Ford Ranger Edge</h2></div>
+        <div class="card" style="margin-bottom:20px;">
+          <h4 style="margin-bottom:12px;">Vehicle Overview</h4>
+          <p>3rd-gen Ford Ranger (1998–2012). The 3.0L Vulcan V6 is an OHV pushrod engine — reliable, simple, dirt-cheap parts. RWD with 5R55E automatic.</p>
+          <div class="insight"><div class="insight-label">NJ Owner Notes</div><p>Body-on-frame trucks in NJ need regular frame inspections. Check spring perches, brake/fuel lines, crossmembers for salt rot. Undercoat annually.</p></div>
+        </div>
+        <h4 class="mb-sm">Projects on this vehicle:</h4>
+        <div class="project-grid"><div class="add-card"><div class="plus">+</div><p style="font-size:0.78rem;color:var(--text-dim);">Add your first Ranger project.<br>Tell Claude what you need to do.</p></div></div>
+      </div>
+
+      <!-- ═══ CIVIC ═══ -->
+      <div class="topic-section" id="civic">
+        <div class="topic-header"><span class="chip chip-cars">Civic</span><h2>2019 Honda Civic Sport</h2></div>
+        <div class="card" style="margin-bottom:20px;">
+          <h4 style="margin-bottom:12px;">Vehicle Overview</h4>
+          <p>10th-gen Civic with the NA 2.0L R20A i-VTEC and Honda's own CVT. No turbo, no oil dilution — straightforward DOHC four-cylinder. CVT has a better track record than Jatco units.</p>
+          <div class="insight"><div class="insight-label">DIY Friendly</div><p>Most maintenance is basic DIY. CVT fluid: Honda HCF-2 every 30–40k miles.</p></div>
+        </div>
+        <h4 class="mb-sm">Projects on this vehicle:</h4>
+        <div class="project-grid"><div class="add-card"><div class="plus">+</div><p style="font-size:0.78rem;color:var(--text-dim);">Add your first Civic project.</p></div></div>
+      </div>
+
+      <!-- ═══ ROGUE ═══ -->
+      <div class="topic-section" id="rogue">
+        <div class="topic-header"><span class="chip chip-cars">Rogue</span><h2>2016 Nissan Rogue</h2></div>
+        <div class="card" style="margin-bottom:20px;">
+          <h4 style="margin-bottom:12px;">Vehicle Overview</h4>
+          <p>2nd-gen Rogue (T32) with 2.5L QR25DE and Jatco CVT. Engine is reliable. The Jatco CVT is the known weak point — documented premature failure history in 2014–2017 models.</p>
+          <div class="tip"><strong>CVT Warning</strong><p>Change CVT fluid every 30k with Nissan NS-3 only. No generic fluid. Consider an external cooler for heavy use.</p></div>
+        </div>
+        <h4 class="mb-sm">Projects on this vehicle:</h4>
+        <div class="project-grid"><div class="add-card"><div class="plus">+</div><p style="font-size:0.78rem;color:var(--text-dim);">Add your first Rogue project.</p></div></div>
+      </div>
+
+      <!-- ═══ PROJECTS ═══ -->
+      <div class="topic-section" id="projects">
+        <div class="topic-header"><span class="chip chip-cars">Projects</span><h2>Project Database</h2></div>
+        <p style="margin-bottom:20px;font-size:0.84rem;color:var(--text-muted);">Completed work becomes a permanent reference. Planned projects include full prep guides.</p>
+        <div class="project-grid"><div class="add-card"><div class="plus">+</div><p style="font-size:0.78rem;color:var(--text-dim);">Start a new project.<br>Tell Claude what you need to do on which car.</p></div></div>
+        <div class="insight" style="margin-top:24px;"><div class="insight-label">How to add a project</div><p>Tell Claude: "I need to [do X] on my [car]. Build me a project page." Claude researches the job and builds a full page with steps, tools, parts, tips. You do the work, then it's in your portfolio.</p></div>
+      </div>
+
+      <!-- ═══ HOW IT WORKS ═══ -->
+      <div class="topic-section" id="howto">
+        <div class="topic-header"><span class="chip chip-gold">Guide</span><h2>How the Project System Works</h2></div>
+        <div class="card mb-lg">
+          <div class="step-list">
+            <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Tell Claude What You Need</h4><p>"I need to change brake pads on my Ranger" — be specific about the vehicle and job.</p></div></div>
+            <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Claude Builds the Project Page</h4><p>Full research: step-by-step procedure, tools, parts with part numbers, tips, common mistakes, estimated time.</p></div></div>
+            <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>You Do the Work</h4><p>Use the page as your guide. Take photos to add later.</p></div></div>
+            <div class="step-item"><div class="step-num">4</div><div class="step-content"><h4>Mark Complete</h4><p>Project moves from "Planned" to "Completed." Permanent reference you can share with employers.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ RELIABILITY ═══ -->
+      <div class="topic-section" id="reliability">
+        <div class="topic-header"><span class="chip chip-cars">Analysis</span><h2>Reliability Ratings</h2></div>
+        <p style="margin-bottom:8px;font-size:0.84rem;color:var(--text-muted);">Objective scoring for self-taught mechanics. 10 = best.</p>
+        <p style="margin-bottom:24px;font-size:0.72rem;color:var(--text-dim);">Factors: DIY repairability, parts cost, dealer dependency, expected lifespan.</p>
+
+        <!-- Ranger -->
+        <div class="reliability-card">
+          <div class="reliability-header"><div><h4>2001 Ford Ranger 3.0L V6</h4><p style="font-size:0.72rem;color:var(--text-dim);">Compact truck · Body-on-frame · RWD</p></div><div class="reliability-score score-good">7.8</div></div>
+          <div class="rating-row"><div class="rating-label"><span>DIY Repairability</span><span>9.5</span></div><div class="rating-bar"><div class="rating-fill fill-excellent" style="width:95%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Parts Cost</span><span>9.0</span></div><div class="rating-bar"><div class="rating-fill fill-excellent" style="width:90%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Dealer Dependency</span><span>9.0</span></div><div class="rating-bar"><div class="rating-fill fill-excellent" style="width:90%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Engine Reliability</span><span>8.0</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:80%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Trans Reliability</span><span>6.5</span></div><div class="rating-bar"><div class="rating-fill fill-fair" style="width:65%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Rust Resistance (NJ)</span><span>4.0</span></div><div class="rating-bar"><div class="rating-fill fill-poor" style="width:40%"></div></div></div>
+          <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text-muted);">
+            <strong>Lifespan:</strong> 250k–300k mi &nbsp;|&nbsp; <strong>MPG:</strong> 14/19
+          </div>
+        </div>
+
+        <!-- Civic -->
+        <div class="reliability-card">
+          <div class="reliability-header"><div><h4>2019 Honda Civic 2.0L NA</h4><p style="font-size:0.72rem;color:var(--text-dim);">Compact sedan · Unibody · FWD</p></div><div class="reliability-score score-great">8.9</div></div>
+          <div class="rating-row"><div class="rating-label"><span>DIY Repairability</span><span>8.0</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:80%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Parts Cost</span><span>8.5</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:85%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Dealer Dependency</span><span>7.5</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:75%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Engine Reliability</span><span>9.5</span></div><div class="rating-bar"><div class="rating-fill fill-excellent" style="width:95%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Trans Reliability (CVT)</span><span>8.5</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:85%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Rust Resistance (NJ)</span><span>7.5</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:75%"></div></div></div>
+          <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text-muted);">
+            <strong>Lifespan:</strong> 250k–350k mi &nbsp;|&nbsp; <strong>MPG:</strong> 30/38
+          </div>
+        </div>
+
+        <!-- Rogue -->
+        <div class="reliability-card">
+          <div class="reliability-header"><div><h4>2016 Nissan Rogue 2.5L</h4><p style="font-size:0.72rem;color:var(--text-dim);">Compact SUV · Unibody · FWD/AWD</p></div><div class="reliability-score score-fair">6.2</div></div>
+          <div class="rating-row"><div class="rating-label"><span>DIY Repairability</span><span>7.5</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:75%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Parts Cost</span><span>7.0</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:70%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Dealer Dependency</span><span>6.5</span></div><div class="rating-bar"><div class="rating-fill fill-fair" style="width:65%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Engine Reliability</span><span>8.0</span></div><div class="rating-bar"><div class="rating-fill fill-good" style="width:80%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Trans (Jatco CVT)</span><span>4.0</span></div><div class="rating-bar"><div class="rating-fill fill-poor" style="width:40%"></div></div></div>
+          <div class="rating-row"><div class="rating-label"><span>Rust Resistance (NJ)</span><span>6.5</span></div><div class="rating-bar"><div class="rating-fill fill-fair" style="width:65%"></div></div></div>
+          <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text-muted);">
+            <strong>Lifespan:</strong> 150k–200k mi (CVT limiter) &nbsp;|&nbsp; <strong>MPG:</strong> 26/33
+          </div>
+          <div class="tip" style="margin-top:12px;"><strong>CVT Note</strong><p>Jatco CVT7 in 2014–2017 Rogues is the #1 concern. NS-3 fluid every 30k. External cooler recommended for summer highway driving.</p></div>
+        </div>
+      </div>
+
+      <!-- ═══ BUYING GUIDE ═══ -->
+      <div class="topic-section" id="buying">
+        <div class="topic-header"><span class="chip chip-gold">Guide</span><h2>Pre-Purchase Inspection</h2></div>
+        <div class="card mb-lg">
+          <h4 style="margin-bottom:16px;">Before you even start the engine — get under it.</h4>
+          <div class="step-list">
+            <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Frame Rails</h4><p>Tap with a screwdriver. Solid thunk = good. Hollow crunch = rot. #1 deal-breaker in NJ.</p></div></div>
+            <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Rear Spring Perches</h4><p>Where leaf springs bolt to frame. NJ trucks rot here first. If gone, walk away.</p></div></div>
+            <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Brake &amp; Fuel Lines</h4><p>Steel lines along the frame. Salt turns them to lace. Replaceable DIY — factor into negotiation.</p></div></div>
+            <div class="step-item"><div class="step-num">4</div><div class="step-content"><h4>Floor Pans</h4><p>Poke from underneath. Rust-free metal resists. Screwdriver goes through = problem.</p></div></div>
+            <div class="step-item"><div class="step-num">5</div><div class="step-content"><h4>Transmission Fluid</h4><p>Red/pink = good. Dark brown or burnt smell = walk away or negotiate hard.</p></div></div>
+          </div>
+          <div class="insight"><div class="insight-label">Negotiation</div><p>Show up with cash at your target. Moderate frame rust → knock $500–700 off. Dark trans fluid → $1,000+ off. Rotted frame → walk away at any price.</p></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<footer class="footer"><div class="container">
+  <p>Rad<span class="dot">.</span>ish Engineering — Mike Radysh — NJIT Electrical Engineering</p>
+</div></footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
