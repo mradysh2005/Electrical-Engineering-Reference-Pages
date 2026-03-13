@@ -5,70 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Engineering — Rad.ish Engineering</title>
 <link rel="stylesheet" href="css/style.css">
-<style>
-  .progress-bar-wrap {
-    margin-bottom: 32px;
-    padding: 20px 24px;
-    background: var(--bg-raised);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .progress-info {
-    flex-shrink: 0;
-  }
-  .progress-info .prog-num {
-    font-family: var(--font-h);
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--accent-eng);
-  }
-  .progress-info .prog-label {
-    font-family: var(--font-m);
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-    margin-top: 1px;
-  }
-  .progress-track {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .progress-track-bar {
-    height: 8px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .progress-track-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-eng), #6da3ff);
-    border-radius: 4px;
-    transition: width 0.8s ease;
-  }
-  .progress-detail {
-    font-family: var(--font-m);
-    font-size: 0.62rem;
-    color: var(--text-dim);
-    display: flex;
-    justify-content: space-between;
-  }
-  .progress-detail .filled { color: var(--accent-eng); }
-</style>
 </head>
 <body>
 
 <nav class="nav"><div class="nav-inner">
-  <a href="index.html" class="nav-brand">Rad<span class="dot">.</span>ish Engineering</a>
+  <a href="index.html" class="nav-brand"><span class="gold">Rad.</span><span class="white">ish</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="engineering.html" class="active-eng">Engineering</a></li>
+    <li><a href="engineering.html" class="active">Engineering</a></li>
     <li><a href="cars.html">Cars</a></li>
   </ul>
   <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -76,35 +20,15 @@
 
 <div class="container">
   <div class="page-header">
-    <span class="chip chip-eng">Electrical Engineering</span>
+    <span class="chip chip-gold">Electrical Engineering</span>
     <h1>Engineering Reference Library</h1>
     <p>Circuit design, power systems, embedded programming — organized by topic with formulas, explanations, and reference material.</p>
-  </div>
-</div>
-
-<!-- Progress Indicator -->
-<div class="container">
-  <div class="progress-bar-wrap">
-    <div class="progress-info">
-      <div class="prog-num" id="prog-count">11/13</div>
-      <div class="prog-label">Topics Filled</div>
-    </div>
-    <div class="progress-track">
-      <div class="progress-track-bar">
-        <div class="progress-track-fill" id="prog-fill" style="width:84.6%"></div>
-      </div>
-      <div class="progress-detail">
-        <span><span class="filled">11 complete</span> · 2 empty</span>
-        <span>84%</span>
-      </div>
-    </div>
   </div>
 </div>
 
 <div class="container" style="padding-bottom:60px;">
   <div class="content-layout">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-section">
         <div class="sidebar-title">Circuits &amp; Electronics</div>
@@ -133,98 +57,97 @@
       </div>
     </aside>
 
-    <!-- CONTENT -->
     <main>
 
       <!-- ═══ OP-AMPS ═══ -->
       <div class="topic-section active" id="opamps">
-        <div class="topic-header"><span class="chip chip-eng">Circuits</span><h2>Op-Amps &amp; Comparators</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Circuits</span><h2>Op-Amps &amp; Comparators</h2></div>
 
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Ideal Op-Amp Assumptions <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
           <h4>The Two Golden Rules</h4>
           <div class="formula-box"><strong>Rule 1:</strong> V+ = V− (virtual short)<br><strong>Rule 2:</strong> I+ = I− = 0 (no input current)</div>
-          <p>Only apply when the op-amp is in its <strong>linear region</strong> (negative feedback present). In comparator mode (open-loop or positive feedback), the virtual short does NOT apply.</p>
-          <div class="insight"><div class="insight-label">Key Insight</div><p>Negative feedback → use virtual short. Positive feedback or open-loop → comparator, output rails to ±V<sub>sat</sub>.</p></div>
+          <p>Only apply in the <strong>linear region</strong> (negative feedback). Comparator mode (open-loop / positive feedback) → no virtual short, output rails to ±V<sub>sat</sub>.</p>
+          <div class="insight"><div class="insight-label">Key Insight</div><p>Negative feedback → virtual short. Positive feedback → comparator.</p></div>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">Jaeger &amp; Blalock Ch. 10</span></div>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Inverting &amp; Non-Inverting Amplifiers <span class="arrow">▶</span></button>
         <div class="concept-content">
           <h4>Inverting</h4>
-          <div class="formula-box">A<sub>v</sub> = −R<sub>f</sub> / R<sub>1</sub> &nbsp;&nbsp;|&nbsp;&nbsp; R<sub>in</sub> = R<sub>1</sub></div>
+          <div class="formula-box">Av = −Rf / R1 &nbsp;&nbsp;|&nbsp;&nbsp; Rin = R1</div>
           <h4>Non-Inverting</h4>
-          <div class="formula-box">A<sub>v</sub> = 1 + R<sub>f</sub> / R<sub>1</sub> &nbsp;&nbsp;|&nbsp;&nbsp; R<sub>in</sub> ≈ ∞</div>
-          <p>Non-inverting always has gain ≥ 1. Inverting can attenuate (|gain| &lt; 1) or amplify.</p>
+          <div class="formula-box">Av = 1 + Rf / R1 &nbsp;&nbsp;|&nbsp;&nbsp; Rin ≈ ∞</div>
+          <p>Non-inverting always has gain ≥ 1. Inverting can attenuate or amplify.</p>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">ECE 271</span></div>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Comparator Circuits <span class="arrow">▶</span></button>
         <div class="concept-content">
-          <p>An op-amp run open-loop. Compares V+ and V−:</p>
-          <div class="formula-box">V+ &gt; V− → V<sub>out</sub> = +V<sub>sat</sub><br>V+ &lt; V− → V<sub>out</sub> = −V<sub>sat</sub> (or 0V single supply)</div>
-          <p>LM311 is open-collector — needs a pull-up resistor to define HIGH.</p>
+          <p>Op-amp run open-loop. Compares V+ and V−:</p>
+          <div class="formula-box">V+ &gt; V− → Vout = +Vsat<br>V+ &lt; V− → Vout = −Vsat (or 0V single supply)</div>
+          <p>LM311 is open-collector — needs a pull-up resistor for HIGH.</p>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">LM311</span></div>
         </div></div>
       </div>
 
-      <!-- ═══ SCHMITT TRIGGERS ═══ -->
+      <!-- ═══ SCHMITT ═══ -->
       <div class="topic-section" id="schmitt">
-        <div class="topic-header"><span class="chip chip-eng">Circuits</span><h2>Schmitt Triggers &amp; Hysteresis</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Circuits</span><h2>Schmitt Triggers &amp; Hysteresis</h2></div>
 
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">What Is a Schmitt Trigger? <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
-          <p>A <strong>comparator with memory</strong>. Uses positive feedback to create two switching thresholds (V<sub>TH</sub> and V<sub>TL</sub>), preventing chatter from noisy signals.</p>
-          <div class="formula-box"><strong>Hysteresis</strong> = V<sub>TH</sub> − V<sub>TL</sub></div>
-          <div class="insight"><div class="insight-label">Key Insight</div><p>Think of it like a light switch with a dead zone — you have to flip it decisively, not nudge it.</p></div>
+          <p>A <strong>comparator with memory</strong>. Positive feedback creates two thresholds (V<sub>TH</sub> and V<sub>TL</sub>), preventing chatter from noise.</p>
+          <div class="formula-box"><strong>Hysteresis</strong> = V_TH − V_TL</div>
+          <div class="insight"><div class="insight-label">Key Insight</div><p>Like a light switch with a dead zone — flip decisively, not nudge.</p></div>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Trip Point Derivation (KCL Superposition) <span class="arrow">▶</span></button>
         <div class="concept-content">
-          <div class="formula-box">V<sub>p</sub> = V<sub>in</sub> × (R<sub>f</sub> / (R<sub>in</sub> + R<sub>f</sub>)) + V<sub>out</sub> × (R<sub>in</sub> / (R<sub>in</sub> + R<sub>f</sub>))</div>
-          <p>Set V<sub>p</sub> = V<sub>ref</sub> and solve for V<sub>in</sub> with V<sub>out</sub> = +V<sub>sat</sub> (gives V<sub>TL</sub>) and V<sub>out</sub> = −V<sub>sat</sub> (gives V<sub>TH</sub>).</p>
+          <div class="formula-box">Vp = Vin × (Rf / (Rin + Rf)) + Vout × (Rin / (Rin + Rf))</div>
+          <p>Set Vp = Vref, solve for Vin with Vout = +Vsat (→ V<sub>TL</sub>) and Vout = −Vsat (→ V<sub>TH</sub>).</p>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">Midterm 1</span></div>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Inverting vs Non-Inverting <span class="arrow">▶</span></button>
         <div class="concept-content">
           <table class="cmp-table"><thead><tr><th>Property</th><th>Non-Inverting</th><th>Inverting</th></tr></thead><tbody>
-            <tr><td>Input goes to</td><td>+ terminal</td><td>− terminal</td></tr>
+            <tr><td>Input to</td><td>+ terminal</td><td>− terminal</td></tr>
             <tr><td>Feedback to</td><td>+ terminal</td><td>+ terminal</td></tr>
-            <tr><td>Output behavior</td><td>Follows input</td><td>Inverts input</td></tr>
-            <tr><td>Transfer curve</td><td>Counter-clockwise</td><td>Clockwise</td></tr>
+            <tr><td>Output</td><td>Follows input</td><td>Inverts input</td></tr>
+            <tr><td>Transfer</td><td>Counter-clockwise</td><td>Clockwise</td></tr>
           </tbody></table>
         </div></div>
       </div>
 
       <!-- ═══ 555 TIMERS ═══ -->
       <div class="topic-section" id="timers">
-        <div class="topic-header"><span class="chip chip-eng">Circuits</span><h2>555 Timers</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Circuits</span><h2>555 Timers</h2></div>
 
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Internal Switching <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
-          <div class="formula-box"><strong>Upper threshold (Pin 6):</strong> 2/3 × V<sub>CC</sub> → triggers DISCHARGE<br><strong>Lower threshold (Pin 2):</strong> 1/3 × V<sub>CC</sub> → triggers CHARGE</div>
-          <p>Capacitor bounces between 1/3 and 2/3 of V<sub>CC</sub>, toggling output each time.</p>
+          <div class="formula-box"><strong>Upper (Pin 6):</strong> 2/3 × Vcc → DISCHARGE<br><strong>Lower (Pin 2):</strong> 1/3 × Vcc → CHARGE</div>
+          <p>Capacitor bounces between 1/3 and 2/3 Vcc, toggling output each threshold hit.</p>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Astable Mode <span class="arrow">▶</span></button>
         <div class="concept-content">
-          <div class="formula-box">t<sub>HIGH</sub> = 0.693 × (R<sub>A</sub> + R<sub>B</sub>) × C<br>t<sub>LOW</sub> = 0.693 × R<sub>B</sub> × C<br>f = 1.44 / ((R<sub>A</sub> + 2R<sub>B</sub>) × C)<br>Duty Cycle = (R<sub>A</sub> + R<sub>B</sub>) / (R<sub>A</sub> + 2R<sub>B</sub>)</div>
-          <div class="insight"><div class="insight-label">Key Insight</div><p>Duty cycle always &gt; 50% in standard astable — charge path includes R<sub>A</sub> + R<sub>B</sub>, discharge only R<sub>B</sub>.</p></div>
+          <div class="formula-box">t_HIGH = 0.693 × (RA + RB) × C<br>t_LOW = 0.693 × RB × C<br>f = 1.44 / ((RA + 2RB) × C)<br>Duty = (RA + RB) / (RA + 2RB)</div>
+          <div class="insight"><div class="insight-label">Key Insight</div><p>Duty &gt; 50% always in standard astable — charge goes through RA+RB, discharge only RB.</p></div>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">Jaeger Ch. 14</span></div>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Monostable Mode <span class="arrow">▶</span></button>
         <div class="concept-content">
-          <div class="formula-box">T = 1.1 × R × C &nbsp;&nbsp;(precisely: T = RC × ln(3) ≈ 1.0986 × RC)</div>
-          <p>One-shot. Triggered by falling edge on Pin 2. Output goes HIGH for duration T, then returns LOW.</p>
+          <div class="formula-box">T = 1.1 × R × C &nbsp;&nbsp;(precise: T = RC × ln(3))</div>
+          <p>One-shot. Falling edge on Pin 2 triggers. Output HIGH for T, then LOW.</p>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">Midterm 1</span></div>
         </div></div>
       </div>
 
       <!-- ═══ FILTERS ═══ -->
       <div class="topic-section" id="filters">
-        <div class="topic-header"><span class="chip chip-eng">Circuits</span><h2>Filters &amp; Frequency Response</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Circuits</span><h2>Filters &amp; Frequency</h2></div>
 
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">LP / HP / BP Overview <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
@@ -233,7 +156,7 @@
             <tr><td>High-Pass</td><td>High freq</td><td>Low freq</td><td>1st</td></tr>
             <tr><td>Band-Pass</td><td>A range</td><td>Above &amp; below</td><td>2nd</td></tr>
           </tbody></table>
-          <div class="formula-box"><strong>Cutoff:</strong> f<sub>c</sub> = 1 / (2πRC)<br><strong>At f<sub>c</sub>:</strong> output = 70.7% of input (−3 dB)</div>
+          <div class="formula-box"><strong>Cutoff:</strong> fc = 1 / (2πRC)<br><strong>At fc:</strong> output = 70.7% (−3 dB)</div>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Roll-Off Rates <span class="arrow">▶</span></button>
@@ -244,63 +167,62 @@
 
       <!-- ═══ WIEN-BRIDGE ═══ -->
       <div class="topic-section" id="oscillators">
-        <div class="topic-header"><span class="chip chip-eng">Circuits</span><h2>Wien-Bridge Oscillators</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Circuits</span><h2>Wien-Bridge Oscillators</h2></div>
 
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Barkhausen Criterion <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
-          <div class="formula-box"><strong>|Aβ| ≥ 1</strong> (loop gain ≥ 1 at startup)<br><strong>∠Aβ = 0°</strong> (total phase = 0°)<br><br>Wien-Bridge: β = 1/3 at f<sub>osc</sub> → need A ≥ 3 → R<sub>f</sub>/R<sub>1</sub> ≥ 2<br><strong>f<sub>osc</sub> = 1 / (2πRC)</strong></div>
-          <div class="insight"><div class="insight-label">Key Insight</div><p>At startup loop gain &gt; 1 to grow oscillations. Diode stabilization brings it to exactly 1 for steady state.</p></div>
+          <div class="formula-box">|Aβ| ≥ 1 at startup &nbsp;&nbsp;|&nbsp;&nbsp; ∠Aβ = 0°<br><br>β = 1/3 → A ≥ 3 → Rf/R1 ≥ 2<br>f_osc = 1 / (2πRC)</div>
+          <div class="insight"><div class="insight-label">Key Insight</div><p>Startup: gain &gt; 1 to grow. Diodes stabilize to exactly 1 for steady state.</p></div>
         </div></div>
 
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Diode Amplitude Stabilization <span class="arrow">▶</span></button>
         <div class="concept-content">
-          <p>Small signal → diodes off → gain &gt; 3. Large signal → diodes conduct → r<sub>d</sub> parallels R<sub>f</sub> → gain drops to 3.</p>
-          <div class="formula-box">Effective R<sub>f</sub> = R<sub>f</sub> ∥ r<sub>d</sub><br>A = 1 + (R<sub>f</sub> ∥ r<sub>d</sub>) / R<sub>1</sub> → 3</div>
+          <p>Small signal → diodes off → gain &gt; 3. Large signal → diodes on → r<sub>d</sub> ∥ R<sub>f</sub> → gain → 3.</p>
+          <div class="formula-box">Effective Rf = Rf ∥ rd<br>A = 1 + (Rf ∥ rd) / R1 → 3</div>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">Midterm 1</span></div>
         </div></div>
       </div>
 
       <!-- ═══ TRANSFORMERS ═══ -->
       <div class="topic-section" id="transformers">
-        <div class="topic-header"><span class="chip chip-eng">Power</span><h2>Transformers</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Power</span><h2>Transformers</h2></div>
 
-        <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Open Circuit (OC) Test <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
+        <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Open Circuit Test <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
-          <p>Determines core branch — R<sub>c</sub> and X<sub>m</sub>.</p>
-          <div class="formula-box"><strong>Setup:</strong> Energize LV at rated voltage, HV open.<br><strong>Measure:</strong> V<sub>oc</sub>, I<sub>oc</sub>, P<sub>oc</sub><br><br>cos(φ₀) = P<sub>oc</sub> / (V<sub>oc</sub> × I<sub>oc</sub>)<br>R<sub>c</sub> = V<sub>oc</sub>² / P<sub>oc</sub><br>I<sub>m</sub> = √(I<sub>oc</sub>² − (P<sub>oc</sub>/V<sub>oc</sub>)²)<br>X<sub>m</sub> = V<sub>oc</sub> / I<sub>m</sub></div>
+          <p>Determines core branch — Rc and Xm.</p>
+          <div class="formula-box"><strong>Setup:</strong> Energize LV at rated V, HV open<br><strong>Measure:</strong> Voc, Ioc, Poc<br><br>cos(φ₀) = Poc / (Voc × Ioc)<br>Rc = Voc² / Poc<br>Im = √(Ioc² − (Poc/Voc)²)<br>Xm = Voc / Im</div>
         </div></div>
 
-        <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Short Circuit (SC) Test <span class="arrow">▶</span></button>
+        <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Short Circuit Test <span class="arrow">▶</span></button>
         <div class="concept-content">
-          <p>Determines series branch — R<sub>eq</sub> and X<sub>eq</sub>.</p>
-          <div class="formula-box"><strong>Setup:</strong> Short LV, reduced voltage on HV until rated current.<br><strong>Measure:</strong> V<sub>sc</sub>, I<sub>sc</sub>, P<sub>sc</sub><br><br>Z<sub>eq</sub> = V<sub>sc</sub> / I<sub>sc</sub><br>R<sub>eq</sub> = P<sub>sc</sub> / I<sub>sc</sub>²<br>X<sub>eq</sub> = √(Z<sub>eq</sub>² − R<sub>eq</sub>²)</div>
-          <div class="insight"><div class="insight-label">Key Insight</div><p>OC test → core losses (iron). SC test → copper losses (I²R). They separate the two loss mechanisms.</p></div>
+          <p>Determines series branch — Req and Xeq.</p>
+          <div class="formula-box"><strong>Setup:</strong> Short LV, reduced V on HV until rated I<br><strong>Measure:</strong> Vsc, Isc, Psc<br><br>Zeq = Vsc / Isc<br>Req = Psc / Isc²<br>Xeq = √(Zeq² − Req²)</div>
+          <div class="insight"><div class="insight-label">Key Insight</div><p>OC → core/iron losses. SC → copper/I²R losses. Two tests separate two loss mechanisms.</p></div>
           <div class="related-classes"><span class="class-chip">ECE 342</span><span class="class-chip">Chapman Ch. 2</span></div>
         </div></div>
       </div>
 
       <!-- ═══ AC/DC ═══ -->
       <div class="topic-section" id="acdc">
-        <div class="topic-header"><span class="chip chip-eng">Power</span><h2>AC / DC Fundamentals</h2></div>
-        <div style="text-align:center;padding:48px 20px;color:var(--text-dim);">
-          <h3 style="color:var(--text-muted);margin-bottom:8px;">Content Coming Soon</h3>
-          <p>Phasors, power factor, rectification — add content as you cover it in class.</p>
+        <div class="topic-header"><span class="chip chip-gold">Power</span><h2>AC / DC Fundamentals</h2></div>
+        <div style="text-align:center;padding:40px 20px;">
+          <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);">Content pending — add as covered in class</p>
         </div>
       </div>
 
-      <!-- ═══ ENERGY CONVERSION ═══ -->
+      <!-- ═══ ENERGY ═══ -->
       <div class="topic-section" id="energy">
-        <div class="topic-header"><span class="chip chip-eng">Power</span><h2>Energy Conversion</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Power</span><h2>Energy Conversion</h2></div>
         <div class="concept-card"><button class="concept-toggle" onclick="toggleConcept(this)">Magnetic Circuits &amp; Three-Phase <span class="arrow">▶</span></button>
         <div class="concept-content">
-          <div class="formula-box"><strong>Magnetic:</strong> ℱ = Φ × ℛ (like V = IR)<br><strong>Three-phase:</strong> P = √3 × V<sub>L</sub> × I<sub>L</sub> × cos(θ)</div>
+          <div class="formula-box"><strong>Magnetic:</strong> ℱ = Φ × ℛ &nbsp;(like V = IR)<br><strong>3-Phase:</strong> P = √3 × V_L × I_L × cos(θ)</div>
           <div class="related-classes"><span class="class-chip">ECE 342</span><span class="class-chip">Chapman</span></div>
         </div></div>
       </div>
 
       <!-- ═══ MCU ═══ -->
       <div class="topic-section" id="mcu">
-        <div class="topic-header"><span class="chip chip-eng">Embedded</span><h2>MCU &amp; GPIO</h2></div>
+        <div class="topic-header"><span class="chip chip-blue">Embedded</span><h2>MCU &amp; GPIO</h2></div>
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Memory-Mapped I/O (SiFive FE310) <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
           <p>GPIO base: <code>0x10012000</code></p>
@@ -312,14 +234,14 @@
             <tr><td><code>0x10</code></td><td>pue</td><td>Pull-up resistor</td></tr>
             <tr><td><code>0x40</code></td><td>out_xor</td><td>Invert output</td></tr>
           </tbody></table>
-          <div class="insight"><div class="insight-label">Key Insight</div><p>RGB LED is active-low (common anode). XOR register inverts so 1 = LED on, 0 = LED off.</p></div>
+          <div class="insight"><div class="insight-label">Key Insight</div><p>RGB LED is active-low. XOR register inverts so 1 = on, 0 = off.</p></div>
           <div class="related-classes"><span class="class-chip">ECE 395</span><span class="class-chip">HiFive1 Rev B</span></div>
         </div></div>
       </div>
 
       <!-- ═══ RISC-V ═══ -->
       <div class="topic-section" id="riscv">
-        <div class="topic-header"><span class="chip chip-eng">Embedded</span><h2>RISC-V Assembly</h2></div>
+        <div class="topic-header"><span class="chip chip-blue">Embedded</span><h2>RISC-V Assembly</h2></div>
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Essential Instructions <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
           <table class="cmp-table"><thead><tr><th>Instr</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
@@ -331,17 +253,17 @@
             <tr><td><code>beqz</code></td><td>Branch if zero</td><td><code>beqz t2, label</code></td></tr>
             <tr><td><code>ret</code></td><td>Return</td><td><code>ret</code></td></tr>
           </tbody></table>
-          <div class="formula-box"><strong>Calling convention:</strong> args in a0–a7, return in a0<br><strong>Stack:</strong> addi sp,sp,-16 → sw ra → work → lw ra → addi sp,sp,16 → ret</div>
+          <div class="formula-box"><strong>Calling:</strong> args a0–a7, return a0<br><strong>Stack:</strong> addi sp,sp,-16 → sw ra → work → lw ra → addi sp,sp,16 → ret</div>
           <div class="related-classes"><span class="class-chip">ECE 395</span><span class="class-chip">RISC-V ISA</span></div>
         </div></div>
       </div>
 
       <!-- ═══ DECIBELS ═══ -->
       <div class="topic-section" id="decibels">
-        <div class="topic-header"><span class="chip chip-eng">Fundamentals</span><h2>Decibel Conversions</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Fundamentals</span><h2>Decibel Conversions</h2></div>
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">dB Formulas &amp; Critical Values <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
-          <div class="formula-box"><strong>Power:</strong> dB = 10 × log₁₀(P<sub>out</sub>/P<sub>in</sub>)<br><strong>Voltage:</strong> dB = 20 × log₁₀(V<sub>out</sub>/V<sub>in</sub>)<br><strong>Current:</strong> dB = 20 × log₁₀(I<sub>out</sub>/I<sub>in</sub>)</div>
+          <div class="formula-box"><strong>Power:</strong> dB = 10 × log₁₀(Pout/Pin)<br><strong>Voltage:</strong> dB = 20 × log₁₀(Vout/Vin)<br><strong>Current:</strong> dB = 20 × log₁₀(Iout/Iin)</div>
           <table class="cmp-table"><thead><tr><th>dB</th><th>Power</th><th>Voltage</th></tr></thead><tbody>
             <tr><td>0</td><td>1×</td><td>1×</td></tr>
             <tr><td>3</td><td>2×</td><td>√2</td></tr>
@@ -349,32 +271,32 @@
             <tr><td>10</td><td>10×</td><td>3.162×</td></tr>
             <tr><td>20</td><td>100×</td><td>10×</td></tr>
           </tbody></table>
-          <div class="insight"><div class="insight-label">Why 10 log vs 20 log?</div><p>Power ∝ V². The factor of 2 turns 10× into 20× when converting between power and voltage dB.</p></div>
+          <div class="insight"><div class="insight-label">Why 10 log vs 20 log?</div><p>P ∝ V². Factor of 2 turns 10× into 20× for voltage dB.</p></div>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">Jaeger Ch. 10</span></div>
         </div></div>
       </div>
 
       <!-- ═══ TWO-PORT ═══ -->
       <div class="topic-section" id="twoport">
-        <div class="topic-header"><span class="chip chip-eng">Fundamentals</span><h2>Two-Port Networks &amp; g-Parameters</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Fundamentals</span><h2>Two-Port Networks</h2></div>
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">g-Parameter Model <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
-          <div class="formula-box">I₁ = g₁₁V₁ + g₁₂I₂<br>V₂ = g₂₁V₁ + g₂₂I₂<br><br>g₁₁ = I₁/V₁ (input admittance)<br>g₁₂ = I₁/I₂ (reverse current gain)<br>g₂₁ = V₂/V₁ (forward voltage gain)<br>g₂₂ = V₂/I₂ (output impedance)</div>
+          <div class="formula-box">I₁ = g₁₁V₁ + g₁₂I₂<br>V₂ = g₂₁V₁ + g₂₂I₂<br><br>g₁₁ = input admittance<br>g₁₂ = reverse current gain<br>g₂₁ = forward voltage gain<br>g₂₂ = output impedance</div>
           <div class="related-classes"><span class="class-chip">ECE 371</span><span class="class-chip">Jaeger Ch. 10</span></div>
         </div></div>
       </div>
 
       <!-- ═══ TRANSISTORS ═══ -->
       <div class="topic-section" id="transistors">
-        <div class="topic-header"><span class="chip chip-eng">Fundamentals</span><h2>MOSFETs vs BJTs</h2></div>
+        <div class="topic-header"><span class="chip chip-gold">Fundamentals</span><h2>MOSFETs vs BJTs</h2></div>
         <div class="concept-card"><button class="concept-toggle open" onclick="toggleConcept(this)">Comparison <span class="arrow" style="transform:rotate(90deg)">▶</span></button>
         <div class="concept-content open">
           <table class="cmp-table"><thead><tr><th>Property</th><th>MOSFET</th><th>BJT</th></tr></thead><tbody>
             <tr><td>Control</td><td>Voltage (gate)</td><td>Current (base)</td></tr>
-            <tr><td>R<sub>in</sub></td><td>≈ ∞</td><td>Moderate</td></tr>
-            <tr><td>g<sub>m</sub></td><td>2I<sub>D</sub>/V<sub>ov</sub></td><td>I<sub>C</sub>/V<sub>T</sub></td></tr>
-            <tr><td>Speed</td><td>Faster</td><td>Slower (saturation delay)</td></tr>
-            <tr><td>Key param</td><td>V<sub>ov</sub> = V<sub>GS</sub>−V<sub>th</sub></td><td>V<sub>BE</sub> ≈ 0.7V</td></tr>
+            <tr><td>Rin</td><td>≈ ∞</td><td>Moderate</td></tr>
+            <tr><td>gm</td><td>2ID/Vov</td><td>IC/VT</td></tr>
+            <tr><td>Speed</td><td>Faster</td><td>Slower</td></tr>
+            <tr><td>Key param</td><td>Vov = VGS−Vth</td><td>VBE ≈ 0.7V</td></tr>
           </tbody></table>
           <div class="related-classes"><span class="class-chip">ECE 271</span><span class="class-chip">ECE 371</span><span class="class-chip">Sedra &amp; Smith</span></div>
         </div></div>
@@ -385,7 +307,7 @@
 </div>
 
 <footer class="footer"><div class="container">
-  <p>Rad<span class="dot">.</span>ish Engineering — Mike Radysh — NJIT Electrical Engineering</p>
+  <p>Rad.ish Engineering — Mike Radysh — NJIT</p>
 </div></footer>
 
 <script src="js/main.js"></script>
