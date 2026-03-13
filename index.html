@@ -6,69 +6,94 @@
 <title>Rad.ish Engineering</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Landing-page-specific styles */
-  .hero { padding: 80px 0 36px; text-align: center; }
-  .hero-label {
-    display: inline-block; font-family: var(--font-m); font-size: 0.63rem; font-weight: 700;
-    letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted);
-    background: var(--bg-raised); border: 1px solid var(--border);
-    padding: 5px 16px; border-radius: 20px; margin-bottom: 22px;
+  .hero { padding: 64px 0 32px; text-align: center; }
+  .hero-brand {
+    font-family: var(--font-display); font-size: 3.8rem; letter-spacing: 4px;
   }
-  .hero h1 { font-size: 3.4rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 14px; }
-  .hero h1 .dot { text-shadow: 0 0 20px rgba(77,142,255,0.3); }
-  .hero-tag { font-size: 0.84rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 36px; line-height: 1.75; }
-  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-  .stats-bar {
-    display: flex; justify-content: center; gap: 48px; padding: 36px 0; margin: 20px 0;
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); flex-wrap: wrap;
+  .hero-brand .gold { color: var(--gold); text-shadow: 0 0 40px var(--gold-glow); }
+  .hero-brand .white { color: #fff; }
+  .hero-tagline {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted);
+    border-left: 2px solid var(--gold); padding-left: 12px;
+    display: inline-block; margin: 16px auto 0; text-align: left;
   }
-  .stat-num { font-family: var(--font-h); font-size: 1.7rem; font-weight: 800; color: var(--text-h); text-align: center; }
-  .stat-lbl { font-family: var(--font-m); font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; margin-top: 3px; }
+  .hero-desc { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; margin: 24px auto 32px; line-height: 1.7; }
+  .hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 48px 0; }
-  .pcard { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.3s ease; display: block; }
-  .pcard:hover { border-color: var(--border-hover); box-shadow: 0 8px 32px rgba(0,0,0,0.4); transform: translateY(-3px); }
-  .banner { height: 170px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-  .banner.eng { background: linear-gradient(135deg, #0a1628, #142244, #0d1a33); }
-  .banner.cars { background: linear-gradient(135deg, #1a0d04, #2a1508, #1f1008); }
-  .banner-ico { font-size: 48px; opacity: 0.15; }
-  .banner-lbl {
-    position: absolute; bottom: 12px; right: 14px; font-family: var(--font-m);
-    font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-    padding: 4px 10px; border-radius: var(--radius-xs);
+  .profile-badge {
+    background: var(--gold-dim); border: 1px solid var(--gold-border);
+    border-radius: var(--radius-sm); padding: 16px 20px;
+    display: inline-block; margin-top: 32px; text-align: left;
   }
-  .lbl-eng { background: var(--accent-eng-glow); color: var(--accent-eng); }
-  .lbl-cars { background: var(--accent-cars-glow); color: var(--accent-cars); }
-  .glow {
-    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
-    width: 200px; height: 200px; pointer-events: none;
+  .profile-badge .badge-title {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
   }
-  .glow-eng { background: radial-gradient(circle, rgba(77,142,255,0.08), transparent 70%); }
-  .glow-cars { background: radial-gradient(circle, rgba(255,107,53,0.08), transparent 70%); }
+  .profile-badge .trait {
+    font-family: var(--font-mono); font-size: 12px; color: #ccc; margin-bottom: 2px;
+  }
+  .trait .yes { color: var(--green); }
+  .trait .no { color: var(--red); }
 
-  .cbody { padding: 24px 26px 26px; }
-  .cbody h3 { font-size: 1.15rem; margin-bottom: 8px; }
-  .cbody p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    padding: 32px 0; margin: 20px 0;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .stat-block { text-align: center; }
+  .stat-block .stat-num {
+    font-family: var(--font-display); font-size: 2rem; letter-spacing: 1px; color: var(--text);
+  }
+  .stat-block .stat-lbl {
+    font-family: var(--font-mono); font-size: 9px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px;
+  }
 
-  .acard { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
-  .acard h3 { font-size: 1rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-  .acard ul { list-style: none; }
-  .acard li { font-size: 0.78rem; color: var(--text-muted); padding: 6px 0 6px 20px; position: relative; line-height: 1.65; }
-  .acard li::before { content: '→'; position: absolute; left: 0; color: var(--text-ghost); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 40px 0; }
+
+  .pcard { overflow: hidden; }
+  .pcard-header {
+    padding: 24px 20px 16px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pcard-icon {
+    width: 40px; height: 40px; border-radius: var(--radius-xs);
+    background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .pcard-header h3 { font-size: 1.3rem; letter-spacing: 1.5px; flex: 1; }
+  .pcard-body { padding: 16px 20px 20px; }
+  .pcard-body p { font-size: 0.88rem; margin-bottom: 14px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .about-card { padding: 20px; }
+  .about-card h3 { font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .about-card ul { list-style: none; }
+  .about-card li {
+    font-family: var(--font-mono); font-size: 12px; color: #aaa;
+    padding: 4px 0 4px 16px; position: relative; line-height: 1.6; letter-spacing: 0.3px;
+  }
+  .about-card li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: 10px; }
+
+  .expand-hint {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--text-dim); text-align: center;
+    padding: 10px 0 4px; transition: color var(--transition);
+  }
+  .pcard:hover .expand-hint { color: var(--gold); }
 
   @media (max-width: 768px) {
     .grid2 { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 2.4rem; }
-    .stats-bar { gap: 24px; }
+    .hero-brand { font-size: 2.8rem; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
 <body>
 
 <nav class="nav"><div class="nav-inner">
-  <a href="index.html" class="nav-brand">Rad<span class="dot">.</span>ish Engineering</a>
+  <span class="nav-brand"><span class="gold">Rad.</span><span class="white">ish</span></span>
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="engineering.html">Engineering</a></li>
@@ -78,48 +103,64 @@
 </div></nav>
 
 <section class="hero"><div class="container">
-  <div class="hero-label">Portfolio &amp; Knowledge Base</div>
-  <h1>Rad<span class="dot">.</span>ish Engineering</h1>
-  <p class="hero-tag">Electrical engineering reference library, car project database, and reliability analysis — built by Mike Radysh.</p>
+  <div class="hero-brand"><span class="gold">Rad.</span><span class="white">ish Engineering</span></div>
+  <div class="hero-tagline">Portfolio &amp; Knowledge Base<br>Mike Radysh · NJIT Electrical Engineering</div>
+  <p class="hero-desc">Engineering reference library, car project database, and reliability analysis — built by a self-taught mechanic studying EE.</p>
   <div class="hero-btns">
-    <a href="engineering.html" class="btn btn-eng">⚡ Engineering</a>
-    <a href="cars.html" class="btn btn-cars">🔧 Cars</a>
+    <a href="engineering.html" class="btn btn-gold">⚡ Engineering</a>
+    <a href="cars.html" class="btn">🔧 Cars</a>
+  </div>
+
+  <div class="profile-badge">
+    <div class="badge-title">Your Profile</div>
+    <div class="trait"><span class="yes">✔</span> Self-taught mechanic</div>
+    <div class="trait"><span class="yes">✔</span> Routine maintenance DIY</div>
+    <div class="trait"><span class="yes">✔</span> Basic to intermediate repairs</div>
+    <div class="trait"><span class="no">✗</span> Computer diagnostics (dealer)</div>
+    <div class="trait"><span class="no">✗</span> Tire mounting/balancing (shop)</div>
   </div>
 </div></section>
 
-<div class="container"><div class="stats-bar">
-  <div><div class="stat-num">3</div><div class="stat-lbl">Vehicles</div></div>
-  <div><div class="stat-num">6+</div><div class="stat-lbl">EE Topic Areas</div></div>
-  <div><div class="stat-num">NJIT</div><div class="stat-lbl">B.S. Electrical Eng.</div></div>
-  <div><div class="stat-num">DIY</div><div class="stat-lbl">Self-Taught Mechanic</div></div>
+<div class="container"><div class="stats-row">
+  <div class="stat-block"><div class="stat-num">3</div><div class="stat-lbl">Vehicles</div></div>
+  <div class="stat-block"><div class="stat-num">13</div><div class="stat-lbl">EE Topics</div></div>
+  <div class="stat-block"><div class="stat-num">NJIT</div><div class="stat-lbl">B.S. Electrical Eng.</div></div>
+  <div class="stat-block"><div class="stat-num">DIY</div><div class="stat-lbl">Mechanic Level</div></div>
 </div></div>
 
 <div class="container"><div class="grid2">
-  <a href="engineering.html" class="pcard">
-    <div class="banner eng"><div class="glow glow-eng"></div><div class="banner-ico">⚡</div><span class="banner-lbl lbl-eng">Engineering</span></div>
-    <div class="cbody">
-      <h3>Engineering Reference Library</h3>
-      <p>Circuit design, power systems, embedded programming — organized by topic with interactive reference sheets and formulas.</p>
+  <a href="engineering.html" class="card pcard">
+    <div class="pcard-header">
+      <div class="pcard-icon">⚡</div>
+      <h3>Engineering</h3>
+    </div>
+    <div class="pcard-body">
+      <p>Circuit design, power systems, embedded programming — organized by topic with reference sheets and formulas.</p>
       <div class="tags">
-        <span class="chip chip-eng">Op-Amps</span><span class="chip chip-eng">555 Timers</span><span class="chip chip-eng">Filters</span><span class="chip chip-eng">Transformers</span><span class="chip chip-eng">RISC-V</span>
+        <span class="chip chip-gold">Op-Amps</span><span class="chip chip-gold">555 Timers</span><span class="chip chip-gold">Filters</span><span class="chip chip-gold">Transformers</span><span class="chip chip-blue">RISC-V</span>
       </div>
     </div>
+    <div class="expand-hint">▸ Enter Engineering Lab</div>
   </a>
-  <a href="cars.html" class="pcard">
-    <div class="banner cars"><div class="glow glow-cars"></div><div class="banner-ico">🔧</div><span class="banner-lbl lbl-cars">Automotive</span></div>
-    <div class="cbody">
-      <h3>Car Projects &amp; Reliability</h3>
-      <p>DIY project database with full step-by-step guides, tools lists, and an objective reliability rating system for self-taught mechanics.</p>
+
+  <a href="cars.html" class="card pcard">
+    <div class="pcard-header">
+      <div class="pcard-icon">🔧</div>
+      <h3>Cars</h3>
+    </div>
+    <div class="pcard-body">
+      <p>DIY project database with step-by-step guides, tools lists, and an objective reliability rating system.</p>
       <div class="tags">
-        <span class="chip chip-cars">Ford Ranger</span><span class="chip chip-cars">Honda Civic</span><span class="chip chip-cars">Nissan Rogue</span><span class="chip chip-cars">Reliability</span>
+        <span class="chip chip-green">Ford Ranger</span><span class="chip chip-green">Honda Civic</span><span class="chip chip-red">Nissan Rogue</span><span class="chip chip-gold">Reliability</span>
       </div>
     </div>
+    <div class="expand-hint">▸ Enter Garage</div>
   </a>
 </div></div>
 
-<div class="container"><div class="grid2 mt-0">
-  <div class="acard">
-    <h3><span class="chip chip-eng">EE</span> Engineering</h3>
+<div class="container"><div class="grid2" style="margin-top:0;">
+  <div class="card-flat about-card">
+    <h3><span class="chip chip-gold">EE</span> Engineering</h3>
     <ul>
       <li>Circuits &amp; Electronics — op-amps, comparators, Schmitt triggers, oscillators</li>
       <li>Power Systems — transformers, AC/DC, energy conversion</li>
@@ -127,8 +168,8 @@
       <li>Fundamentals — dB, two-port networks, filters, g-parameters</li>
     </ul>
   </div>
-  <div class="acard">
-    <h3><span class="chip chip-cars">AUTO</span> Cars</h3>
+  <div class="card-flat about-card">
+    <h3><span class="chip chip-green">AUTO</span> Cars</h3>
     <ul>
       <li>2001 Ford Ranger 3.0 V6 RWD Edge</li>
       <li>2019 Honda Civic 2.0 NA CVT Sport</li>
@@ -139,8 +180,7 @@
 </div></div>
 
 <footer class="footer"><div class="container">
-  <p>Rad<span class="dot">.</span>ish Engineering — Mike Radysh — NJIT Electrical Engineering</p>
-  <p style="margin-top:4px;">Built with care. Not generated slop.</p>
+  <p>Rad.ish Engineering — Mike Radysh — NJIT</p>
 </div></footer>
 
 <script src="js/main.js"></script>
