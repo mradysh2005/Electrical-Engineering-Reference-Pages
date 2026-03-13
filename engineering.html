@@ -5,6 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Engineering — Rad.ish Engineering</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .progress-bar-wrap {
+    margin-bottom: 32px;
+    padding: 20px 24px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .progress-info {
+    flex-shrink: 0;
+  }
+  .progress-info .prog-num {
+    font-family: var(--font-h);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent-eng);
+  }
+  .progress-info .prog-label {
+    font-family: var(--font-m);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-top: 1px;
+  }
+  .progress-track {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .progress-track-bar {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-track-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-eng), #6da3ff);
+    border-radius: 4px;
+    transition: width 0.8s ease;
+  }
+  .progress-detail {
+    font-family: var(--font-m);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-detail .filled { color: var(--accent-eng); }
+</style>
 </head>
 <body>
 
@@ -23,6 +79,25 @@
     <span class="chip chip-eng">Electrical Engineering</span>
     <h1>Engineering Reference Library</h1>
     <p>Circuit design, power systems, embedded programming — organized by topic with formulas, explanations, and reference material.</p>
+  </div>
+</div>
+
+<!-- Progress Indicator -->
+<div class="container">
+  <div class="progress-bar-wrap">
+    <div class="progress-info">
+      <div class="prog-num" id="prog-count">11/13</div>
+      <div class="prog-label">Topics Filled</div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-track-bar">
+        <div class="progress-track-fill" id="prog-fill" style="width:84.6%"></div>
+      </div>
+      <div class="progress-detail">
+        <span><span class="filled">11 complete</span> · 2 empty</span>
+        <span>84%</span>
+      </div>
+    </div>
   </div>
 </div>
 
