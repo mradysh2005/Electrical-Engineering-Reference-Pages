@@ -1,188 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rad.ish Engineering</title>
-<link rel="stylesheet" href="css/style.css">
-<style>
-  .hero { padding: 64px 0 32px; text-align: center; }
-  .hero-brand {
-    font-family: var(--font-display); font-size: 3.8rem; letter-spacing: 4px;
-  }
-  .hero-brand .gold { color: var(--gold); text-shadow: 0 0 40px var(--gold-glow); }
-  .hero-brand .white { color: #fff; }
-  .hero-tagline {
-    font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--text-muted);
-    border-left: 2px solid var(--gold); padding-left: 12px;
-    display: inline-block; margin: 16px auto 0; text-align: left;
-  }
-  .hero-desc { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; margin: 24px auto 32px; line-height: 1.7; }
-  .hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-
-  .profile-badge {
-    background: var(--gold-dim); border: 1px solid var(--gold-border);
-    border-radius: var(--radius-sm); padding: 16px 20px;
-    display: inline-block; margin-top: 32px; text-align: left;
-  }
-  .profile-badge .badge-title {
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
-  }
-  .profile-badge .trait {
-    font-family: var(--font-mono); font-size: 12px; color: #ccc; margin-bottom: 2px;
-  }
-  .trait .yes { color: var(--green); }
-  .trait .no { color: var(--red); }
-
-  .stats-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-    padding: 32px 0; margin: 20px 0;
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  }
-  .stat-block { text-align: center; }
-  .stat-block .stat-num {
-    font-family: var(--font-display); font-size: 2rem; letter-spacing: 1px; color: var(--text);
-  }
-  .stat-block .stat-lbl {
-    font-family: var(--font-mono); font-size: 9px; color: var(--text-dim);
-    text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px;
-  }
-
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 40px 0; }
-
-  .pcard { overflow: hidden; }
-  .pcard-header {
-    padding: 24px 20px 16px; display: flex; align-items: center; gap: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .pcard-icon {
-    width: 40px; height: 40px; border-radius: var(--radius-xs);
-    background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .pcard-header h3 { font-size: 1.3rem; letter-spacing: 1.5px; flex: 1; }
-  .pcard-body { padding: 16px 20px 20px; }
-  .pcard-body p { font-size: 0.88rem; margin-bottom: 14px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
-
-  .about-card { padding: 20px; }
-  .about-card h3 { font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-  .about-card ul { list-style: none; }
-  .about-card li {
-    font-family: var(--font-mono); font-size: 12px; color: #aaa;
-    padding: 4px 0 4px 16px; position: relative; line-height: 1.6; letter-spacing: 0.3px;
-  }
-  .about-card li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: 10px; }
-
-  .expand-hint {
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--text-dim); text-align: center;
-    padding: 10px 0 4px; transition: color var(--transition);
-  }
-  .pcard:hover .expand-hint { color: var(--gold); }
-
-  @media (max-width: 768px) {
-    .grid2 { grid-template-columns: 1fr; }
-    .hero-brand { font-size: 2.8rem; }
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rad.ish — Mike Radysh</title>
+  <meta name="description" content="Personal reference site for an NJIT EE student. Engineering notes, garage log, vehicle guides." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    body { background: #0b0c0e; }
+  </style>
 </head>
 <body>
+  <div id="root"></div>
 
-<nav class="nav"><div class="nav-inner">
-  <span class="nav-brand"><span class="gold">Rad.</span><span class="white">ish</span></span>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="engineering.html">Engineering</a></li>
-    <li><a href="cars.html">Cars</a></li>
-  </ul>
-  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-</div></nav>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<section class="hero"><div class="container">
-  <div class="hero-brand"><span class="gold">Rad.</span><span class="white">ish Engineering</span></div>
-  <div class="hero-tagline">Portfolio &amp; Knowledge Base<br>Mike Radysh · NJIT Electrical Engineering</div>
-  <p class="hero-desc">Engineering reference library, car project database, and reliability analysis — built by a self-taught mechanic studying EE.</p>
-  <div class="hero-btns">
-    <a href="engineering.html" class="btn btn-gold">⚡ Engineering</a>
-    <a href="cars.html" class="btn">🔧 Cars</a>
-  </div>
+  <!-- Site data (plain JS, no JSX) -->
+  <script src="site-data.js"></script>
 
-  <div class="profile-badge">
-    <div class="badge-title">Your Profile</div>
-    <div class="trait"><span class="yes">✔</span> Self-taught mechanic</div>
-    <div class="trait"><span class="yes">✔</span> Routine maintenance DIY</div>
-    <div class="trait"><span class="yes">✔</span> Basic to intermediate repairs</div>
-    <div class="trait"><span class="no">✗</span> Computer diagnostics (dealer)</div>
-    <div class="trait"><span class="no">✗</span> Tire mounting/balancing (shop)</div>
-  </div>
-</div></section>
+  <!-- App component — loaded and transformed before the inline render below -->
+  <script type="text/babel" src="variant-notebook.jsx"></script>
 
-<div class="container"><div class="stats-row">
-  <div class="stat-block"><div class="stat-num">3</div><div class="stat-lbl">Vehicles</div></div>
-  <div class="stat-block"><div class="stat-num">13</div><div class="stat-lbl">EE Topics</div></div>
-  <div class="stat-block"><div class="stat-num">NJIT</div><div class="stat-lbl">B.S. Electrical Eng.</div></div>
-  <div class="stat-block"><div class="stat-num">DIY</div><div class="stat-lbl">Mechanic Level</div></div>
-</div></div>
-
-<div class="container"><div class="grid2">
-  <a href="engineering.html" class="card pcard">
-    <div class="pcard-header">
-      <div class="pcard-icon">⚡</div>
-      <h3>Engineering</h3>
-    </div>
-    <div class="pcard-body">
-      <p>Circuit design, power systems, embedded programming — organized by topic with reference sheets and formulas.</p>
-      <div class="tags">
-        <span class="chip chip-gold">Op-Amps</span><span class="chip chip-gold">555 Timers</span><span class="chip chip-gold">Filters</span><span class="chip chip-gold">Transformers</span><span class="chip chip-blue">RISC-V</span>
-      </div>
-    </div>
-    <div class="expand-hint">▸ Enter Engineering Lab</div>
-  </a>
-
-  <a href="cars.html" class="card pcard">
-    <div class="pcard-header">
-      <div class="pcard-icon">🔧</div>
-      <h3>Cars</h3>
-    </div>
-    <div class="pcard-body">
-      <p>DIY project database with step-by-step guides, tools lists, and an objective reliability rating system.</p>
-      <div class="tags">
-        <span class="chip chip-green">Ford Ranger</span><span class="chip chip-green">Honda Civic</span><span class="chip chip-red">Nissan Rogue</span><span class="chip chip-gold">Reliability</span>
-      </div>
-    </div>
-    <div class="expand-hint">▸ Enter Garage</div>
-  </a>
-</div></div>
-
-<div class="container"><div class="grid2" style="margin-top:0;">
-  <div class="card-flat about-card">
-    <h3><span class="chip chip-gold">EE</span> Engineering</h3>
-    <ul>
-      <li>Circuits &amp; Electronics — op-amps, comparators, Schmitt triggers, oscillators</li>
-      <li>Power Systems — transformers, AC/DC, energy conversion</li>
-      <li>Embedded Systems — MCU programming, GPIO, RISC-V assembly</li>
-      <li>Fundamentals — dB, two-port networks, filters, g-parameters</li>
-    </ul>
-  </div>
-  <div class="card-flat about-card">
-    <h3><span class="chip chip-green">AUTO</span> Cars</h3>
-    <ul>
-      <li>2001 Ford Ranger 3.0 V6 RWD Edge</li>
-      <li>2019 Honda Civic 2.0 NA CVT Sport</li>
-      <li>2016 Nissan Rogue 2.5L CVT</li>
-      <li>DIY projects, reliability ratings, buying guides</li>
-    </ul>
-  </div>
-</div></div>
-
-<footer class="footer"><div class="container">
-  <p>Rad.ish Engineering — Mike Radysh — NJIT</p>
-</div></footer>
-
-<script src="js/main.js"></script>
+  <!-- Mount -->
+  <script type="text/babel">
+    const App = window.VariantNotebook;
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
 </body>
 </html>
