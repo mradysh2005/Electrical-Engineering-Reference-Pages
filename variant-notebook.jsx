@@ -183,7 +183,7 @@
         {/* Hero */}
         <div style={{ display:'grid', gridTemplateColumns:'1.6fr 1fr', gap:60, alignItems:'flex-end', paddingBottom:36, borderBottom:`1px solid ${C.ink2}` }}>
           <div>
-            <div className="nb-sc">Personal reference · since 2024</div>
+            <div className="nb-sc">Personal reference · since 2025</div>
             <h1 className="nb-serif" style={{ fontSize:54, lineHeight:1.05, margin:'18px 0 6px', letterSpacing:-0.6 }}>
               A working notebook for an EE student
               <br/>who keeps his <span style={{ color:C.accent, fontStyle:'italic' }}>own cars</span> running.
@@ -197,9 +197,9 @@
             </div>
           </div>
 
-          {/* Currently studying — small focused list, not a dashboard */}
+          {/* Recent work — small focused list, not a dashboard */}
           <div>
-            <div className="nb-sc" style={{ marginBottom:8 }}>Currently studying</div>
+            <div className="nb-sc" style={{ marginBottom:8 }}>Recent work</div>
             {[
               ['ECE 371', 'Op-Amps & Comparators', 'opamps'],
               ['ECE 342', 'Transformer OC / SC tests', 'transformers'],
@@ -219,8 +219,11 @@
           </div>
         </div>
 
-        {/* Contents */}
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:48, marginTop:40 }}>
+        {/* Recent Updates */}
+        <div style={{ marginTop:40, marginBottom:10, display:'flex', alignItems:'baseline', justifyContent:'space-between' }}>
+          <span className="nb-sc">Recent updates</span>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:48 }}>
           {/* Engineering — categories */}
           <div>
             <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:10 }}>
@@ -262,27 +265,36 @@
           </div>
         </div>
 
-        {/* Latest — a strip, not a dashboard. Same columns as the full Service Log: no reliability. */}
-        <div style={{ marginTop:42 }}>
-          <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:10 }}>
-            <span className="nb-sc">Latest from the log</span>
-            <span className="nb-sc nb-row" onClick={() => go({ name:'cars' })} style={{ display:'inline-block' }}>Full log →</span>
-          </div>
-          <hr className="nb-rule-strong"/>
-          {s.recent.slice(0,4).map((r,i)=>{
-            const v = window.findVehicle(r.vehicle);
-            return (
-              <div key={i} className="nb-row" onClick={() => go({ name:'project', id:'ranger-clutch' })}
-                style={{ display:'grid', gridTemplateColumns:'96px 64px 1fr 120px 80px', gap:14, padding:'10px 4px', borderBottom:`1px solid ${C.lineL}`, alignItems:'center', fontSize:13 }}>
-                <span className="nb-mono nb-mute">{r.date}</span>
-                <span className="nb-tag" style={{ color:kindColor(r.kind), borderColor:kindColor(r.kind) }}>{r.kind}</span>
-                <span className="nb-serif" style={{ fontSize:15 }}>{r.label}</span>
-                <span className="nb-mute" style={{ fontSize:12 }}>{v.year} {v.model}</span>
-                <span className="nb-mono" style={{ textAlign:'right' }}>${r.cost.toFixed(0)}</span>
+        {/* Money Analysis */}
+        {(() => {
+          const shopRate = 120;
+          const moneySpent = s.stats.totalSpent;
+          const moneySaved = Math.round(s.stats.hoursLogged * shopRate);
+          const jobsValue  = moneySpent + moneySaved;
+          const stats = [
+            { label:'Value of jobs done', sub:'what a shop would bill', val:`$${jobsValue.toLocaleString()}`, color:C.accent },
+            { label:'Money spent',        sub:'parts & supplies (DIY)', val:`$${moneySpent.toLocaleString()}`, color:C.ink },
+            { label:'Money saved',        sub:`${s.stats.hoursLogged} hrs × $${shopRate} shop labor`, val:`$${moneySaved.toLocaleString()}`, color:C.green },
+          ];
+          return (
+            <div style={{ marginTop:42 }}>
+              <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:10 }}>
+                <span className="nb-sc">Money analysis</span>
+                <span className="nb-sc nb-row" onClick={() => go({ name:'cars' })} style={{ display:'inline-block' }}>Full log →</span>
               </div>
-            );
-          })}
-        </div>
+              <hr className="nb-rule-strong"/>
+              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:0, marginTop:0, border:`1px solid ${C.line}`, background:C.panelW }}>
+                {stats.map((st, i) => (
+                  <div key={i} style={{ padding:'28px 28px 24px', borderRight: i < 2 ? `1px solid ${C.line}` : 'none', display:'flex', flexDirection:'column', gap:4 }}>
+                    <div className="nb-sc">{st.label}</div>
+                    <div className="nb-serif" style={{ fontSize:42, lineHeight:1.05, letterSpacing:-1, color:st.color, marginTop:8 }}>{st.val}</div>
+                    <div className="nb-mute" style={{ fontSize:11.5, marginTop:4 }}>{st.sub}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     );
   }
