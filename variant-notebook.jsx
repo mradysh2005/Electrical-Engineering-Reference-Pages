@@ -148,19 +148,29 @@
 
   // ═══════════════════════════════════════════════════════════════════════════
   //  VEHICLE TECHNICAL DRAWING
+  //  Ranger: real line-art photo (images/ranger.png) inverted to suit dark bg.
+  //  Civic / Rogue: SVG silhouettes as before.
   // ═══════════════════════════════════════════════════════════════════════════
+  const RangerPhoto = ({ height=100 }) => (
+    <div style={{ width:'100%', height, position:'relative', overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center' }}>
+      <img
+        src="images/ranger.png"
+        alt="2001 Ford Ranger — technical line drawing"
+        style={{
+          maxWidth:'100%',
+          maxHeight:'100%',
+          objectFit:'contain',
+          // Black line art on white → invert gives white lines on black,
+          // perfectly matching the dark panel background.
+          filter:'invert(1)',
+          opacity:0.92,
+        }}
+      />
+    </div>
+  );
+
   const VehicleTech = ({ kind, height=100, stroke=C.ink2 }) => {
-    if (kind === 'ranger') return (
-      <svg viewBox="0 0 240 100" style={{ width:'100%', height }} fill="none" stroke={stroke} strokeWidth="1" strokeLinejoin="round">
-        <path d="M14 72 L14 48 L84 48 L100 28 L144 28 L158 48 L222 48 L222 72 Z"/>
-        <line x1="84" y1="48" x2="100" y2="28"/><line x1="122" y1="28" x2="122" y2="48"/>
-        <circle cx="54" cy="76" r="11"/><circle cx="54" cy="76" r="4"/>
-        <circle cx="184" cy="76" r="11"/><circle cx="184" cy="76" r="4"/>
-        <line x1="14" y1="92" x2="222" y2="92" strokeWidth="0.7"/>
-        <line x1="14" y1="89" x2="14" y2="95" strokeWidth="0.7"/>
-        <line x1="222" y1="89" x2="222" y2="95" strokeWidth="0.7"/>
-      </svg>
-    );
+    if (kind === 'ranger') return <RangerPhoto height={height}/>;
     if (kind === 'civic') return (
       <svg viewBox="0 0 240 100" style={{ width:'100%', height }} fill="none" stroke={stroke} strokeWidth="1" strokeLinejoin="round">
         <path d="M14 68 C36 56,64 44,96 36 L160 36 C188 44,212 56,222 68 Z"/>
