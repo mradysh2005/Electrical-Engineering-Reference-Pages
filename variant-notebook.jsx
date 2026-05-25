@@ -153,36 +153,39 @@
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Reusable spoked wheel — 5 spokes, outer tyre + rim ring + hub
-  // Vehicle illustrations — Material Design Icons (CC0), scaled via viewBox
-  // mdi:car-pickup = Ranger  |  mdi:car-side = Civic  |  mdi:car-estate = Rogue
   const VehicleTech = ({ kind, height=100, stroke=C.ink2 }) => {
-    const body = C.panelW;
-    const vb   = "0 0 24 24";
-    const sw   = { width:'100%', height };
-    const pp   = { fill:body, fillRule:'evenodd', stroke, strokeWidth:'0.5', strokeLinejoin:'round', strokeLinecap:'round' };
-    const gl   = { stroke, strokeWidth:'0.25', opacity:'0.35' }; // ground line
-
     if (kind === 'ranger') return (
-      <svg viewBox={vb} style={sw}>
-        {/* mdi:car-pickup — pickup truck side profile */}
-        <path {...pp} d="M16,6H10.5V10H1V15H3A3,3 0 0,0 6,18A3,3 0 0,0 9,15H15A3,3 0 0,0 18,18A3,3 0 0,0 21,15H23V12C23,10.89 22.11,10 21,10H19L16,6M12,7.5H15.5L17.46,10H12V7.5M6,13.5A1.5,1.5 0 0,1 7.5,15A1.5,1.5 0 0,1 6,16.5A1.5,1.5 0 0,1 4.5,15A1.5,1.5 0 0,1 6,13.5M18,13.5A1.5,1.5 0 0,1 19.5,15A1.5,1.5 0 0,1 18,16.5A1.5,1.5 0 0,1 16.5,15A1.5,1.5 0 0,1 18,13.5Z"/>
-        <line x1="1" y1="19.5" x2="23" y2="19.5" {...gl}/>
+      <svg viewBox="0 0 240 100" style={{ width:'100%', height }} fill="none" stroke={stroke} strokeWidth="1" strokeLinejoin="round">
+        <path d="M14 72 L14 48 L84 48 L100 28 L144 28 L158 48 L222 48 L222 72 Z"/>
+        <line x1="84" y1="48" x2="100" y2="28"/>
+        <line x1="122" y1="28" x2="122" y2="48"/>
+        <circle cx="54"  cy="76" r="11"/><circle cx="54"  cy="76" r="4"/>
+        <circle cx="184" cy="76" r="11"/><circle cx="184" cy="76" r="4"/>
+        <line x1="14"  y1="92" x2="222" y2="92" strokeWidth="0.7"/>
+        <line x1="14"  y1="89" x2="14"  y2="95" strokeWidth="0.7"/>
+        <line x1="222" y1="89" x2="222" y2="95" strokeWidth="0.7"/>
       </svg>
     );
-
     if (kind === 'civic') return (
-      <svg viewBox={vb} style={sw}>
-        {/* mdi:car-side — sedan side profile */}
-        <path {...pp} d="M16,6L19,10H21C22.11,10 23,10.89 23,12V15H21A3,3 0 0,1 18,18A3,3 0 0,1 15,15H9A3,3 0 0,1 6,18A3,3 0 0,1 3,15H1V12C1,10.89 1.89,10 3,10L6,6H16M10.5,7.5H6.75L4.86,10H10.5V7.5M12,7.5V10H17.14L15.25,7.5H12M6,13.5A1.5,1.5 0 0,0 4.5,15A1.5,1.5 0 0,0 6,16.5A1.5,1.5 0 0,0 7.5,15A1.5,1.5 0 0,0 6,13.5M18,13.5A1.5,1.5 0 0,0 16.5,15A1.5,1.5 0 0,0 18,16.5A1.5,1.5 0 0,0 19.5,15A1.5,1.5 0 0,0 18,13.5Z"/>
-        <line x1="1" y1="19.5" x2="23" y2="19.5" {...gl}/>
+      <svg viewBox="0 0 240 100" style={{ width:'100%', height }} fill="none" stroke={stroke} strokeWidth="1" strokeLinejoin="round">
+        <path d="M14 68 C36 56,64 44,96 36 L160 36 C188 44,212 56,222 68 Z"/>
+        <path d="M64 36 L84 22 L152 22 L170 36"/>
+        <circle cx="58"  cy="72" r="11"/><circle cx="58"  cy="72" r="4"/>
+        <circle cx="184" cy="72" r="11"/><circle cx="184" cy="72" r="4"/>
+        <line x1="14"  y1="92" x2="222" y2="92" strokeWidth="0.7"/>
+        <line x1="14"  y1="89" x2="14"  y2="95" strokeWidth="0.7"/>
+        <line x1="222" y1="89" x2="222" y2="95" strokeWidth="0.7"/>
       </svg>
     );
-
     return (
-      <svg viewBox={vb} style={sw}>
-        {/* mdi:car-estate — estate/wagon/SUV side profile */}
-        <path {...pp} d="M3,6H16L19,10H21C22.11,10 23,10.89 23,12V15H21A3,3 0 0,1 18,18A3,3 0 0,1 15,15H9A3,3 0 0,1 6,18A3,3 0 0,1 3,15H1V8C1,6.89 1.89,6 3,6M2.5,7.5V10H10.5V7.5H2.5M12,7.5V10H17.14L15.25,7.5H12M6,13.5A1.5,1.5 0 0,0 4.5,15A1.5,1.5 0 0,0 6,16.5A1.5,1.5 0 0,0 7.5,15A1.5,1.5 0 0,0 6,13.5M18,13.5A1.5,1.5 0 0,0 16.5,15A1.5,1.5 0 0,0 18,16.5A1.5,1.5 0 0,0 19.5,15A1.5,1.5 0 0,0 18,13.5Z"/>
-        <line x1="1" y1="19.5" x2="23" y2="19.5" {...gl}/>
+      <svg viewBox="0 0 240 100" style={{ width:'100%', height }} fill="none" stroke={stroke} strokeWidth="1" strokeLinejoin="round">
+        <path d="M14 70 C24 52,42 40,68 34 L168 34 C192 40,214 52,222 70 Z"/>
+        <path d="M54 34 L76 20 L168 20 L184 34"/>
+        <circle cx="58"  cy="74" r="11"/><circle cx="58"  cy="74" r="4"/>
+        <circle cx="184" cy="74" r="11"/><circle cx="184" cy="74" r="4"/>
+        <line x1="14"  y1="92" x2="222" y2="92" strokeWidth="0.7"/>
+        <line x1="14"  y1="89" x2="14"  y2="95" strokeWidth="0.7"/>
+        <line x1="222" y1="89" x2="222" y2="95" strokeWidth="0.7"/>
       </svg>
     );
   };
