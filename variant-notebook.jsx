@@ -154,162 +154,185 @@
 
   // Reusable spoked wheel — 5 spokes, outer tyre + rim ring + hub
   const DrawWheel = ({ cx, cy, r, stroke }) => {
-    const rim  = r * 0.70;
-    const hub  = r * 0.16;
+    const rim = r * 0.68;
+    const hub = r * 0.15;
     return (
       <g>
-        <circle cx={cx} cy={cy} r={r}   fill={C.panelD} stroke={stroke} strokeWidth="1"/>
-        <circle cx={cx} cy={cy} r={rim} fill="none"     stroke={stroke} strokeWidth="0.75"/>
-        {[0,72,144,216,288].map((deg,i) => {
+        <circle cx={cx} cy={cy} r={r}   fill={C.panelD} stroke={stroke} strokeWidth="1.1"/>
+        <circle cx={cx} cy={cy} r={rim} fill="none"     stroke={stroke} strokeWidth="0.8"/>
+        {[0,60,120,180,240,300].map((deg,i) => {
           const a = (deg - 90) * Math.PI / 180;
           return <line key={i}
-            x1={cx + hub*Math.cos(a)}  y1={cy + hub*Math.sin(a)}
-            x2={cx + rim*Math.cos(a)}  y2={cy + rim*Math.sin(a)}
-            stroke={stroke} strokeWidth="0.75"/>;
+            x1={cx + hub*Math.cos(a)} y1={cy + hub*Math.sin(a)}
+            x2={cx + rim*Math.cos(a)} y2={cy + rim*Math.sin(a)}
+            stroke={stroke} strokeWidth="0.8"/>;
         })}
-        <circle cx={cx} cy={cy} r={hub} fill={C.panelD} stroke={stroke} strokeWidth="0.75"/>
+        <circle cx={cx} cy={cy} r={hub} fill={C.panelD} stroke={stroke} strokeWidth="0.8"/>
       </g>
     );
   };
 
+  // VehicleTech — side-profile SVG illustrations, front of vehicle faces RIGHT
+  // ViewBox 0 0 510 185 | ground y=163 | wheel bottoms at y=163
   const VehicleTech = ({ kind, height=100, stroke=C.ink2 }) => {
-    const body = C.panelW;   // dark body fill  (#171a1f)
-    const dark = C.panelD;   // windows / darker recesses (#0f1013)
-    const sw   = '0 0 500 200';
+    const body = C.panelW;
+    const win  = C.panelD;
+    const sw   = '0 0 510 185';
 
     // ── 2001 Ford Ranger Extended Cab ──────────────────────────────────────
+    // Rear wheel cx=133 r=30  |  Front wheel cx=379 r=30
     if (kind === 'ranger') return (
       <svg viewBox={sw} style={{width:'100%',height}} fill="none" strokeLinejoin="round" strokeLinecap="round">
-        {/* Body silhouette with wheel arch cutouts */}
-        <path fill={body} stroke={stroke} strokeWidth="1" d="
-          M 38 158 L 38 118 L 44 110 L 44 74 L 50 68
-          L 196 68 L 200 96 L 212 100 L 230 100
-          L 258 56 L 364 52 L 392 94 L 396 102
-          L 418 102 L 426 108 L 458 108
-          L 464 98 L 468 76 L 474 68
-          L 482 72 L 490 88 L 490 158
-          L 430 158 A 38 36 0 0 0 354 158
-          L 146 158 A 38 36 0 0 0 70 158 Z"/>
-        {/* Bed interior shelf line */}
-        <line x1="44" y1="80" x2="196" y2="80" stroke={stroke} strokeWidth="0.6" opacity="0.7"/>
-        {/* Subtle tailgate panel dividers */}
-        <line x1="100" y1="68" x2="100" y2="110" stroke={stroke} strokeWidth="0.45" opacity="0.45"/>
-        <line x1="150" y1="68" x2="150" y2="110" stroke={stroke} strokeWidth="0.45" opacity="0.45"/>
-        {/* Taillight block */}
-        <rect x="38" y="116" width="6" height="24" rx="1" fill={dark} stroke={stroke} strokeWidth="0.7"/>
-        {/* Front cab window (door glass + windshield) */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.8" d="
-          M 232 98 L 258 58 L 280 54 L 330 54 L 330 98 Z"/>
+        {/* ── Body silhouette, clockwise from front-bottom ── */}
+        <path fill={body} stroke={stroke} strokeWidth="1.1" d="
+          M 446 163
+          L 452 148  L 454 124  L 440 111
+          L 333 95   L 304 95
+          L 282 54   L 213 50   L 186 50
+          L 170 61   L 157 79
+          L 147 79   L 138 87   L 63 87
+          L 55 96    L 45 96    L 45 163
+          L 57 163   L 83 163
+          A 52 50 0 0 0 183 163
+          L 329 163
+          A 52 50 0 0 0 429 163
+          L 446 163 Z"/>
+        {/* Front door glass + windshield (A-pillar to B-pillar) */}
+        <path fill={win} stroke={stroke} strokeWidth="0.8" d="
+          M 304 93   L 282 55   L 244 51   L 244 93 Z"/>
         {/* B-pillar */}
-        <line x1="330" y1="54" x2="330" y2="100" stroke={stroke} strokeWidth="1.2"/>
+        <line x1="244" y1="51"  x2="244" y2="93"  stroke={stroke} strokeWidth="1.4"/>
         {/* Extended-cab rear quarter window */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.8" d="
-          M 334 56 L 360 54 L 388 92 L 334 94 Z"/>
+        <rect x="152" y="68" width="86" height="10" rx="2"
+          fill={win} stroke={stroke} strokeWidth="0.75"/>
+        {/* Taillight */}
+        <rect x="46"  y="99" width="7"  height="22" rx="1"
+          fill={win} stroke={stroke} strokeWidth="0.7"/>
+        {/* Headlight */}
+        <rect x="447" y="120" width="7"  height="13" rx="1.5"
+          fill={win} stroke={stroke} strokeWidth="0.7"/>
         {/* Hood crease */}
-        <line x1="458" y1="102" x2="490" y2="90" stroke={stroke} strokeWidth="0.6"/>
-        {/* Front headlight */}
-        <rect x="482" y="90" width="8" height="13" rx="1.5" fill={dark} stroke={stroke} strokeWidth="0.7"/>
-        {/* Front bumper step */}
-        <line x1="482" y1="146" x2="490" y2="146" stroke={stroke} strokeWidth="0.8"/>
+        <line x1="440" y1="112" x2="335" y2="96"
+          stroke={stroke} strokeWidth="0.5" opacity="0.5"/>
+        {/* Bed rail inner shadow line */}
+        <line x1="138" y1="93"  x2="63"  y2="93"
+          stroke={stroke} strokeWidth="0.5" opacity="0.4"/>
         {/* Door handle */}
-        <rect x="270" y="84" width="14" height="4" rx="1.5" fill="none" stroke={stroke} strokeWidth="0.65"/>
+        <rect x="264" y="86" width="15" height="4" rx="2"
+          fill="none" stroke={stroke} strokeWidth="0.7"/>
         {/* Antenna */}
-        <line x1="294" y1="52" x2="298" y2="22" stroke={stroke} strokeWidth="0.65"/>
+        <line x1="224" y1="50"  x2="228" y2="22"
+          stroke={stroke} strokeWidth="0.75"/>
         {/* Wheels */}
-        <DrawWheel cx={108} cy={152} r={34} stroke={stroke}/>
-        <DrawWheel cx={392} cy={152} r={34} stroke={stroke}/>
+        <DrawWheel cx={133} cy={133} r={30} stroke={stroke}/>
+        <DrawWheel cx={379} cy={133} r={30} stroke={stroke}/>
         {/* Ground line */}
-        <line x1="38" y1="164" x2="492" y2="164" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
-        <line x1="38"  y1="161" x2="38"  y2="167" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
-        <line x1="492" y1="161" x2="492" y2="167" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
+        <line x1="45" y1="169" x2="455" y2="169"
+          stroke={stroke} strokeWidth="0.35" opacity="0.3"/>
       </svg>
     );
 
     // ── 2019 Honda Civic Sport ─────────────────────────────────────────────
+    // Rear wheel cx=120 r=27  |  Front wheel cx=392 r=27
     if (kind === 'civic') return (
       <svg viewBox={sw} style={{width:'100%',height}} fill="none" strokeLinejoin="round" strokeLinecap="round">
-        {/* Body silhouette */}
-        <path fill={body} stroke={stroke} strokeWidth="1" d="
-          M 48 158 L 48 146 L 58 136 L 88 126
-          L 120 68 L 202 42 L 310 40
-          L 350 42 L 386 56 L 418 82
-          L 440 108 L 452 128 L 454 158
-          L 414 158 A 34 32 0 0 0 346 158
-          L 150 158 A 34 32 0 0 0 82 158 Z"/>
-        {/* Belt line character line */}
-        <line x1="58" y1="122" x2="418" y2="108" stroke={stroke} strokeWidth="0.6" opacity="0.65"/>
-        {/* Taillight */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.7" d="M 50 130 L 58 128 L 62 148 L 50 150 Z"/>
-        {/* Main greenhouse: windshield + front door glass */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.8" d="
-          M 130 72 L 200 44 L 298 42 L 298 80 L 130 80 Z"/>
+        {/* ── Body silhouette ── */}
+        <path fill={body} stroke={stroke} strokeWidth="1.1" d="
+          M 444 163
+          L 452 150  L 455 132  L 450 120
+          L 436 108  L 350 93   L 320 88
+          L 293 52   L 248 44   L 180 44
+          L 154 52   L 106 82
+          L 68 82    L 52 94    L 42 94    L 42 163
+          L 73 163
+          A 51 47 0 0 0 167 163
+          L 345 163
+          A 51 47 0 0 0 439 163
+          L 444 163 Z"/>
+        {/* Front door glass + windshield */}
+        <path fill={win} stroke={stroke} strokeWidth="0.8" d="
+          M 322 88   L 293 53   L 252 45   L 220 45   L 220 88 Z"/>
+        {/* Rear door glass */}
+        <path fill={win} stroke={stroke} strokeWidth="0.8" d="
+          M 220 88   L 220 45   L 155 52   L 108 82 Z"/>
         {/* B-pillar */}
-        <line x1="222" y1="42" x2="218" y2="80" stroke={stroke} strokeWidth="1.2"/>
-        {/* Rear window / C-pillar glass */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.8" d="
-          M 300 44 L 348 46 L 374 78 L 300 80 Z"/>
-        {/* Hood character line */}
-        <line x1="418" y1="84" x2="453" y2="114" stroke={stroke} strokeWidth="0.6"/>
+        <line x1="220" y1="45"  x2="220" y2="88"  stroke={stroke} strokeWidth="1.4"/>
+        {/* Taillight */}
+        <path fill={win} stroke={stroke} strokeWidth="0.7" d="
+          M 44 96    L 52 94    L 56 116   L 44 118 Z"/>
         {/* Headlight */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.7" d="M 436 110 L 452 114 L 452 124 L 434 122 Z"/>
-        {/* Front lip spoiler */}
-        <line x1="88" y1="148" x2="452" y2="138" stroke={stroke} strokeWidth="0.6" opacity="0.65"/>
+        <path fill={win} stroke={stroke} strokeWidth="0.7" d="
+          M 440 110  L 454 120  L 452 132  L 438 120 Z"/>
+        {/* Belt line */}
+        <line x1="322" y1="88"  x2="68"  y2="82"
+          stroke={stroke} strokeWidth="0.5" opacity="0.5"/>
         {/* Door handle */}
-        <rect x="250" y="92" width="14" height="4" rx="1.5" fill="none" stroke={stroke} strokeWidth="0.65"/>
-        {/* Door seam */}
-        <line x1="220" y1="80" x2="208" y2="118" stroke={stroke} strokeWidth="0.5" opacity="0.55"/>
+        <rect x="256" y="96" width="15" height="4" rx="2"
+          fill="none" stroke={stroke} strokeWidth="0.7"/>
         {/* Wheels */}
-        <DrawWheel cx={116} cy={152} r={30} stroke={stroke}/>
-        <DrawWheel cx={384} cy={152} r={30} stroke={stroke}/>
+        <DrawWheel cx={120} cy={136} r={27} stroke={stroke}/>
+        <DrawWheel cx={392} cy={136} r={27} stroke={stroke}/>
         {/* Ground line */}
-        <line x1="48"  y1="164" x2="456" y2="164" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
-        <line x1="48"  y1="161" x2="48"  y2="167" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
-        <line x1="456" y1="161" x2="456" y2="167" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
+        <line x1="42" y1="169" x2="456" y2="169"
+          stroke={stroke} strokeWidth="0.35" opacity="0.3"/>
       </svg>
     );
 
-    // ── 2016 Nissan Rogue SV (crossover SUV) ──────────────────────────────
+    // ── 2016 Nissan Rogue SV ───────────────────────────────────────────────
+    // Rear wheel cx=122 r=29  |  Front wheel cx=384 r=29
     return (
       <svg viewBox={sw} style={{width:'100%',height}} fill="none" strokeLinejoin="round" strokeLinecap="round">
-        {/* Body silhouette */}
-        <path fill={body} stroke={stroke} strokeWidth="1" d="
-          M 50 158 L 50 130 L 56 122 L 62 96
-          L 90 58 L 150 36 L 344 34
-          L 372 44 L 398 62 L 422 88
-          L 440 110 L 448 130 L 450 158
-          L 414 158 A 36 34 0 0 0 342 158
-          L 152 158 A 36 34 0 0 0 80 158 Z"/>
-        {/* Lower body cladding line */}
-        <line x1="62" y1="128" x2="440" y2="124" stroke={stroke} strokeWidth="0.6" opacity="0.65"/>
-        {/* Taillight */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.7" d="M 50 122 L 58 120 L 62 140 L 52 142 Z"/>
-        {/* Roof rails */}
-        <rect x="150" y="33" width="194" height="3" rx="1.5" fill="none" stroke={stroke} strokeWidth="1"/>
-        <rect x="158" y="32" width="10" height="5" rx="1" fill={body} stroke={stroke} strokeWidth="0.65"/>
-        <rect x="322" y="32" width="10" height="5" rx="1" fill={body} stroke={stroke} strokeWidth="0.65"/>
-        {/* Main greenhouse window */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.8" d="
-          M 104 62 L 150 38 L 298 36 L 298 72 L 104 72 Z"/>
+        {/* ── Body silhouette ── */}
+        <path fill={body} stroke={stroke} strokeWidth="1.1" d="
+          M 440 163
+          L 448 150  L 452 130  L 448 118
+          L 436 106  L 355 90   L 326 87
+          L 309 46   L 248 34   L 164 33
+          L 140 39   L 118 62   L 100 82
+          L 68 82    L 52 94    L 42 94    L 42 163
+          L 75 163
+          A 51 48 0 0 0 169 163
+          L 337 163
+          A 51 48 0 0 0 431 163
+          L 440 163 Z"/>
+        {/* Front door glass */}
+        <path fill={win} stroke={stroke} strokeWidth="0.8" d="
+          M 328 86   L 309 47   L 256 36   L 224 36   L 224 86 Z"/>
+        {/* Rear door glass */}
+        <path fill={win} stroke={stroke} strokeWidth="0.8" d="
+          M 224 86   L 224 36   L 164 33   L 164 86 Z"/>
+        {/* Rear quarter glass */}
+        <path fill={win} stroke={stroke} strokeWidth="0.8" d="
+          M 164 86   L 164 33   L 140 39   L 118 62   L 100 82 Z"/>
         {/* B-pillar */}
-        <line x1="210" y1="36" x2="208" y2="72" stroke={stroke} strokeWidth="1.2"/>
-        {/* Rear window */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.8" d="
-          M 300 38 L 344 38 L 368 50 L 392 72 L 300 72 Z"/>
-        {/* Hood character line */}
-        <line x1="398" y1="64" x2="442" y2="108" stroke={stroke} strokeWidth="0.6"/>
+        <line x1="224" y1="36"  x2="224" y2="86"  stroke={stroke} strokeWidth="1.4"/>
+        {/* C-pillar */}
+        <line x1="164" y1="33"  x2="164" y2="86"  stroke={stroke} strokeWidth="1.2"/>
+        {/* Roof rails */}
+        <line x1="165" y1="31"  x2="248" y2="33"
+          stroke={stroke} strokeWidth="2" strokeLinecap="round"/>
+        <rect x="165" y="28" width="10" height="5" rx="1"
+          fill={body} stroke={stroke} strokeWidth="0.65"/>
+        <rect x="240" y="30" width="10" height="5" rx="1"
+          fill={body} stroke={stroke} strokeWidth="0.65"/>
+        {/* Taillight */}
+        <path fill={win} stroke={stroke} strokeWidth="0.7" d="
+          M 44 96    L 52 94    L 56 118   L 44 120 Z"/>
         {/* Headlight */}
-        <path fill={dark} stroke={stroke} strokeWidth="0.7" d="M 432 108 L 448 110 L 448 124 L 430 122 Z"/>
-        {/* Door seam */}
-        <line x1="210" y1="72" x2="200" y2="120" stroke={stroke} strokeWidth="0.5" opacity="0.55"/>
+        <path fill={win} stroke={stroke} strokeWidth="0.7" d="
+          M 436 108  L 450 118  L 448 130  L 434 118 Z"/>
+        {/* Lower cladding line */}
+        <line x1="42" y1="118"  x2="440" y2="114"
+          stroke={stroke} strokeWidth="0.5" opacity="0.5"/>
         {/* Door handle */}
-        <rect x="250" y="86" width="14" height="4" rx="1.5" fill="none" stroke={stroke} strokeWidth="0.65"/>
+        <rect x="260" y="92" width="15" height="4" rx="2"
+          fill="none" stroke={stroke} strokeWidth="0.7"/>
         {/* Wheels */}
-        <DrawWheel cx={116} cy={152} r={32} stroke={stroke}/>
-        <DrawWheel cx={378} cy={152} r={32} stroke={stroke}/>
+        <DrawWheel cx={122} cy={134} r={29} stroke={stroke}/>
+        <DrawWheel cx={384} cy={134} r={29} stroke={stroke}/>
         {/* Ground line */}
-        <line x1="50"  y1="164" x2="452" y2="164" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
-        <line x1="50"  y1="161" x2="50"  y2="167" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
-        <line x1="452" y1="161" x2="452" y2="167" stroke={stroke} strokeWidth="0.4" opacity="0.35"/>
+        <line x1="42" y1="169" x2="452" y2="169"
+          stroke={stroke} strokeWidth="0.35" opacity="0.3"/>
       </svg>
     );
   };
