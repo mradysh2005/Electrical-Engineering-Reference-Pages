@@ -154,8 +154,11 @@
 
   // Reusable spoked wheel — 5 spokes, outer tyre + rim ring + hub
   const VehicleTech = ({ kind, height=100 }) => {
+    // accord borrows the sedan art; the vans borrow the rogue art until they
+    // get their own line drawings in images/
     const src = kind === 'ranger' ? 'images/ranger.png'
               : kind === 'civic'  ? 'images/civic.png'
+              : kind === 'accord' ? 'images/civic.png'
               :                     'images/rogue.png';
     return (
       <img src={src} alt={kind}
@@ -411,7 +414,7 @@
               <br/>who keeps his <span style={{ color:C.accent, fontStyle:'italic' }}>own cars</span> running.
             </h1>
             <div className="nb-mute" style={{ fontSize:13, marginTop:18 }}>
-              3 vehicles · 13 reference sheets · {s.stats.projects} projects
+              {s.vehicles.length} vehicles · {s.stats.eeTopics} reference sheets · {s.stats.projects} projects
             </div>
             <div style={{ display:'flex', gap:10, marginTop:28 }}>
               <button className="nb-btn nb-btn-acc" onClick={() => go({ name:'eng' })}>Engineering →</button>
@@ -469,7 +472,7 @@
           <div>
             <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:10 }}>
               <span className="nb-sc"><span className="nb-acc">02 ·</span> Garage</span>
-              <span className="nb-sc">3 vehicles</span>
+              <span className="nb-sc">{s.vehicles.length} vehicles</span>
             </div>
             <hr className="nb-rule-strong"/>
             {s.vehicles.map((v,i) => (
@@ -868,7 +871,7 @@
         <div style={{ padding:'40px 60px 0', borderBottom:`1px solid ${C.line}` }}>
           <div style={{ paddingBottom:18, borderBottom:`1px solid ${C.ink2}` }}>
             <div className="nb-sc"><span className="nb-acc">02</span> · Garage</div>
-            <h1 className="nb-serif" style={{ fontSize:46, lineHeight:1, margin:'10px 0 0', letterSpacing:-0.5 }}>Three cars, one set of hands</h1>
+            <h1 className="nb-serif" style={{ fontSize:46, lineHeight:1, margin:'10px 0 0', letterSpacing:-0.5 }}>Six cars, one set of hands</h1>
           </div>
           <div style={{ display:'flex' }}>
             {[['vehicles','Vehicles'],['log','Service Log'],['procedures','Procedures'],['guides','Buying Guides']].map(([id,label]) => (
