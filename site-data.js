@@ -6,12 +6,13 @@
 window.SITE = {
   owner: { name: 'Mike Radysh', school: 'NJIT', program: 'B.S. Electrical Engineering', grad: 'Class of 2027' },
 
+  // Reset 2026-06-11 — counting from zero. Totals = sum of the service log.
   stats: {
     vehicles:    6,
     eeTopics:    13,
-    projects:    18,
-    totalSpent:  4280,
-    hoursLogged: 142,
+    projects:    5,
+    totalSpent:  455,
+    hoursLogged: 9,
   },
 
   // ─── ENGINEERING ────────────────────────────────────────────────────────────
@@ -165,7 +166,7 @@ window.SITE = {
       reliability: 7.5,
       photoCaption: 'Project shot · Ranger from passenger 3/4',
       summary: 'Bought for cash, 187k miles. The 3.0 Vulcan is forgiving — every job has gone in clean.',
-      stats: { spent: 1840, hours: 62, projects: 9 },
+      stats: { spent: 39, hours: 1, projects: 1 },
       tags: ['daily', 'pickup', 'manual'],
 
       procedures: [
@@ -321,7 +322,7 @@ window.SITE = {
       reliability: 9.0,
       photoCaption: 'Project shot · Civic front 3/4',
       summary: '2.0 NA. Family runaround. Boring on purpose; maintenance is straightforward.',
-      stats: { spent: 620, hours: 18, projects: 4 },
+      stats: { spent: 107, hours: 2, projects: 2 },
       tags: ['daily', 'sedan', 'CVT'],
 
       procedures: [
@@ -463,7 +464,7 @@ window.SITE = {
       reliability: 5.5,
       photoCaption: 'Project shot · Rogue side profile',
       summary: 'The JF017E CVT is the catch. Fluid every 30k, monitor temps, never tow. Otherwise competent.',
-      stats: { spent: 1820, hours: 62, projects: 5 },
+      stats: { spent: 0, hours: 0, projects: 0 },
       tags: ['family', 'CVT', 'AWD'],
 
       procedures: [
@@ -655,7 +656,7 @@ window.SITE = {
       reliability: 7.0,
       photoCaption: '—',
       summary: 'The J35 is a solid engine but VCM makes it drink oil. Check the dipstick every other fill-up. Keep the 5-spd auto on clean fluid and it behaves.',
-      stats: { spent: 0, hours: 0, projects: 0 },
+      stats: { spent: 309, hours: 6, projects: 2 },
       tags: ['van', 'V6', 'VCM'],
 
       procedures: [
@@ -725,6 +726,92 @@ window.SITE = {
           ],
           notes: [
             'Same 10-minute job as every Honda. Inspect at every oil change.',
+          ],
+          lessons: [],
+        },
+        {
+          id: 'odyssey-lca',
+          title: 'Front Lower Control Arms',
+          titleAccent: 'Control Arms',
+          category: 'repair',
+          interval: { miles: 120000 },
+          estMinutes: 180,
+          difficulty: 3,
+          specs: [
+            { label: 'Lug nut torque',     value: '94 ft-lb',                              highlight: true  },
+            { label: 'Bushing bolts',      value: 'Final torque at RIDE HEIGHT only',      highlight: true  },
+            { label: 'Ball joint nut',     value: 'Castle nut — new cotter pin, never reuse', highlight: true  },
+            { label: 'Arm-to-subframe',    value: '~76 ft-lb (verify FSM for your VIN)',   highlight: true  },
+            { label: 'After the job',      value: 'Alignment required',                    highlight: true  },
+          ],
+          parts: [
+            { item: 'Lower control arms', sub: 'Pair, w/ bushings & ball joints pressed in', partNumber: 'verify by VIN', qty: 1, estCost: 155.00 },
+            { item: 'Cotter pins + hardware', sub: 'New castle-nut cotter pins, both sides',  partNumber: '—',            qty: 1, estCost:   6.00 },
+          ],
+          tools: [
+            { size: '19mm',  name: 'Lug nut socket' },
+            { size: '—',     name: 'Ball joint separator (puller type, not pickle fork if reusing)' },
+            { size: '—',     name: 'Breaker bar — subframe bolts will be tight' },
+            { size: '—',     name: 'Torque wrench' },
+            { size: '—',     name: 'Jack + stands, plus a second jack to load the arm at ride height' },
+          ],
+          steps: [
+            { text: 'Break lugs loose on the ground, then lift and support. Wheel off.' },
+            { text: 'Disconnect the sway-bar end link from the arm.' },
+            { text: 'Pull the cotter pin and back the **castle nut** off the lower ball joint a few turns — leave it on to catch the arm when the taper pops.' },
+            { text: 'Separate the ball joint with a **puller** — hammer shock on the knuckle boss helps break the taper.' },
+            { text: 'Remove the arm-to-subframe bolts and drop the arm. Compare old vs new side by side before installing.' },
+            { text: 'Hang the new arm, start all bolts **finger-tight only**. Seat the ball joint taper and torque the castle nut, then advance to the next slot for the **new cotter pin**.' },
+            { text: 'Load the suspension with a jack until the arm sits at **ride height**, THEN final-torque the bushing bolts. Torquing at droop pre-winds the bushings and they tear in months.' },
+            { text: 'Reconnect the end link, wheel on, lugs to **94 ft-lb**. Repeat on the other side.' },
+            { text: 'Book an **alignment** — toe and camber both move with new arms.' },
+          ],
+          notes: [
+            'The ride-height torque rule is the whole job. Rubber bushings clamped at full droop are permanently twisted at normal stance — that is why "new" arms clunk within a year.',
+            'Verify subframe-bolt torque values against the factory service manual for your exact VIN year before final torque.',
+          ],
+          lessons: [],
+        },
+        {
+          id: 'odyssey-axles',
+          title: 'Front CV Axles',
+          titleAccent: 'CV Axles',
+          category: 'repair',
+          interval: { miles: 150000 },
+          estMinutes: 180,
+          difficulty: 3,
+          specs: [
+            { label: 'Spindle nut socket', value: '36mm',                                   highlight: true  },
+            { label: 'Spindle nut torque', value: '181 ft-lb (verify FSM), then stake',     highlight: true  },
+            { label: 'Spindle nut',        value: 'NEW nut every time — single use',        highlight: true  },
+            { label: 'Lug nut torque',     value: '94 ft-lb',                               highlight: true  },
+            { label: 'ATF check',          value: 'Top off after — fluid escapes at inner joint', highlight: false },
+          ],
+          parts: [
+            { item: 'CV axle assemblies', sub: 'Pair — new units, not reman if budget allows', partNumber: 'verify by VIN', qty: 1, estCost: 140.00 },
+            { item: 'Spindle nuts',       sub: 'New staked nut, both sides',                   partNumber: '—',            qty: 2, estCost:   4.00 },
+          ],
+          tools: [
+            { size: '36mm',  name: 'Spindle nut socket + breaker bar' },
+            { size: '—',     name: 'Hammer + punch (un-stake and re-stake the nut)' },
+            { size: '—',     name: 'Pry bar (pop the inner joint from the trans)' },
+            { size: '—',     name: 'Ball joint separator' },
+            { size: '—',     name: 'Drain pan — some ATF comes out with the inner joint' },
+          ],
+          steps: [
+            { text: 'With the wheel **on the ground**, un-stake the spindle nut and break it loose with the **36mm** socket and breaker bar. It is brutally tight — do this before lifting.' },
+            { text: 'Lift, support, wheel off. Remove the spindle nut.' },
+            { text: 'Separate the lower ball joint so the knuckle can swing outward.' },
+            { text: 'Push the axle splines out of the hub — tap with a brass drift if seized, never directly on the threads.' },
+            { text: 'Pry the inner joint out of the transmission with a sharp pop — the snap ring releases. Keep the **drain pan** under it.' },
+            { text: 'Slide the new axle in until the snap ring **clicks** into the trans. Pull on the inner joint to confirm it is locked — if it slides back out, it never seated.' },
+            { text: 'Feed the outer splines through the hub, reassemble the ball joint with a new cotter pin.' },
+            { text: 'NEW spindle nut, torque to **181 ft-lb** with the wheel on and the car on the ground, then **stake the collar** into the axle groove.' },
+            { text: 'Check the ATF level and top off what was lost. Test drive — no clicking on full-lock turns means the job is good.' },
+          ],
+          notes: [
+            'The snap-ring click on the inner joint is the make-or-break moment. An axle that is not fully seated will walk out under load and dump ATF on the highway.',
+            'Spindle nuts are single-use — the staked collar work-hardens. A reused nut can back off, and a loose spindle nut destroys the hub bearing.',
           ],
           lessons: [],
         },
@@ -848,14 +935,13 @@ window.SITE = {
   },
 
   // ─── SERVICE LOG ─────────────────────────────────────────────────────────
+  // Fresh start 2026-06-11 — log rebuilt from zero; every entry below is real.
   recent: [
-    { date: '2026-04-18', vehicle: 'ranger', kind: 'Repair', label: 'Clutch master + slave',          cost: 184.62, procedureId: null,                 projectId: 'ranger-clutch' },
-    { date: '2026-03-02', vehicle: 'rogue',  kind: 'PM',     label: 'CVT fluid exchange (30k)',        cost:  96.10, procedureId: 'rogue-cvt',            projectId: null },
-    { date: '2026-02-14', vehicle: 'civic',  kind: 'PM',     label: 'Engine oil & filter (0W-20)',     cost:  38.23, procedureId: 'civic-oil',            projectId: null },
-    { date: '2026-01-22', vehicle: 'ranger', kind: 'Mod',    label: 'Front brake pads & rotors',       cost:  124.50, procedureId: 'ranger-brakes-front', projectId: null },
-    { date: '2025-12-08', vehicle: 'rogue',  kind: 'Diag',   label: 'P0420 — cat efficiency (cleared)',cost:   0,    procedureId: null,                  projectId: null },
-    { date: '2025-11-30', vehicle: 'civic',  kind: 'PM',     label: 'Tire rotation + balance',         cost:  60.00, procedureId: null,                  projectId: null },
-    { date: '2025-11-15', vehicle: 'ranger', kind: 'PM',     label: 'Engine oil & filter (5W-30)',      cost:  38.46, procedureId: 'ranger-oil',           projectId: null },
+    { date: '2026-06-11', vehicle: 'civic',   kind: 'PM',     label: 'Engine oil & filter (0W-20)',     cost:  36.23, procedureId: 'civic-oil',     projectId: null },
+    { date: '2026-06-11', vehicle: 'civic',   kind: 'PM',     label: 'CVT fluid change (HCF-2)',         cost:  70.50, procedureId: 'civic-cvt',     projectId: null },
+    { date: '2026-06-11', vehicle: 'odyssey', kind: 'Repair', label: 'Front lower control arms (pair)',  cost: 161.00, procedureId: 'odyssey-lca',   projectId: null },
+    { date: '2026-06-11', vehicle: 'odyssey', kind: 'Repair', label: 'Front CV axles (pair)',            cost: 148.00, procedureId: 'odyssey-axles', projectId: null },
+    { date: '2026-06-11', vehicle: 'ranger',  kind: 'PM',     label: 'Engine oil & filter (5W-30)',      cost:  38.96, procedureId: 'ranger-oil',    projectId: null },
   ],
 
   // ─── ENGINEERING PROJECTS ─────────────────────────────────────────────────
