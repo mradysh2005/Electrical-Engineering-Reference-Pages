@@ -9,7 +9,7 @@ window.SITE = {
   // Reset 2026-06-11 — counting from zero. Totals = sum of the service log.
   stats: {
     vehicles:    6,
-    eeTopics:    13,
+    eeTopics:    18,
     projects:    5,
     totalSpent:  455,
     hoursLogged: 9,
@@ -115,10 +115,35 @@ window.SITE = {
         },
       ],
     },
+    {
+      id: 'random', title: 'Random Signals & Noise', glyph: 'σ',
+      blurb: 'Probability, random variables, distributions. ECE 321.',
+      groups: [
+        {
+          id: 'rv-basics', title: 'Random Variables',
+          blurb: 'Sample spaces, probability, and the mapping to the real line.',
+          topics: [
+            { id: 'sample-space',     title: 'Sample Spaces & Probability', tag: 'ECE 321' },
+            { id: 'random-variables', title: 'Random Variables & Types',    tag: 'ECE 321' },
+          ],
+        },
+        {
+          id: 'distributions', title: 'Distributions',
+          blurb: 'CDF and PDF — how probability accumulates, and how fast.',
+          topics: [
+            { id: 'cdf', title: 'Distribution Function (CDF)', tag: 'ECE 321' },
+            { id: 'pdf', title: 'Density Function (PDF)',      tag: 'ECE 321' },
+          ],
+        },
+      ],
+    },
   ],
 
-  // ─── TOPIC DETAIL (sample) ───────────────────────────────────────────────
-  topicDetail: {
+  // ─── TOPIC DETAILS (keyed by topic id) ─────────────────────────────────────
+  // Topics without an entry here render a "notes coming soon" stub.
+  topicDetails: {
+
+  opamps: {
     id: 'opamps',
     title: 'Op-Amps & Comparators',
     category: 'Circuits & Electronics',
@@ -153,6 +178,141 @@ window.SITE = {
       { sym: 'GBW',     eq: 'A · f₃ᵈᴮ = constant' },
       { sym: 'SR',      eq: 'dVout/dt max' },
     ],
+  },
+
+  // ECE 321 — Module 2, Random Variables (study notes from tutoring sessions)
+  'sample-space': {
+    id: 'sample-space',
+    title: 'Sample Spaces & Probability',
+    category: 'Random Signals & Noise',
+    course: 'ECE 321',
+    reading: 'Module 2 handout A',
+    summary: 'A sample space is the complete list of every possible result of an experiment. Probability assigns each outcome a number between 0 and 1, and the whole list sums to 1.',
+    sections: [
+      {
+        title: 'Sample Space',
+        body: 'The complete list of every possible result of an experiment. Exactly one item from the list occurs each time the experiment runs, and nothing outside the list can occur.\n\n  Coin toss:            {Heads, Tails}\n  Die throw:            {1, 2, 3, 4, 5, 6}\n  Texts received today: {0, 1, 2, 3, ...}',
+        callout: 'Exactly one outcome per run. Nothing off the list can happen.',
+      },
+      {
+        title: 'Probability',
+        body: 'Each outcome in the sample space gets a number between 0 and 1 measuring how likely it is.\n\n  0 → never\n  1 → always\n\nThe probabilities across the entire sample space sum to 1.\nFair coin: P(Heads) = P(Tails) = 0.5',
+      },
+    ],
+    formulas: [
+      { sym: 'P(s)',  eq: '0 ≤ P(s) ≤ 1' },
+      { sym: 'Σ P(s)', eq: '1 over the sample space' },
+    ],
+  },
+
+  'random-variables': {
+    id: 'random-variables',
+    title: 'Random Variables & Types',
+    category: 'Random Signals & Noise',
+    course: 'ECE 321',
+    reading: 'Module 2 handout A',
+    summary: 'A real random variable is a real function mapping every element of a sample space to a point on the real line. Each outcome gets exactly one number, and probabilities pass through the mapping.',
+    sections: [
+      {
+        title: 'The Mapping',
+        body: 'Each outcome gets exactly one number. Two outcomes may share a number; one outcome may never carry two numbers. Capital letters (X) denote random variables.\n\nProbabilities pass through the mapping: add the probabilities of all outcomes that land on a given number.',
+      },
+      {
+        title: 'Worked Example — Even/Odd Die',
+        body: 'X = 0 for faces 1, 3, 5\nX = 1 for faces 2, 4, 6\n\nP(X = 0) = 1/6 + 1/6 + 1/6 = 1/2\nP(X = 1) = 1/2',
+      },
+      {
+        title: 'Types',
+        table: [
+          ['', 'Values', 'Example'],
+          ['Discrete',   'Isolated points you can list',           'Die faces, email counts'],
+          ['Continuous', 'Fill a whole range — impossible to list', 'Noise voltage on a wire'],
+          ['Mixed',      'Probability lumps + a continuous range',  'Bulb lifetime with P(0) > 0 (DOA units)'],
+        ],
+        callout: 'The test: "Can I list the values?" If yes, discrete.',
+      },
+    ],
+    formulas: [
+      { sym: 'X',      eq: 'S → ℝ, one number per outcome' },
+      { sym: 'P(X=x)', eq: 'Σ P(outcomes mapping to x)' },
+    ],
+  },
+
+  cdf: {
+    id: 'cdf',
+    title: 'Distribution Function (CDF)',
+    category: 'Random Signals & Noise',
+    course: 'ECE 321',
+    reading: 'Module 2 handout B',
+    summary: 'Pick a number x — the cdf gives the probability that X lands at or below x. The function accumulates probability from the far left up through x.',
+    sections: [
+      {
+        title: 'Definition',
+        body: 'F_X(x) = P{X ≤ x}\n\nFor a discrete random variable the cdf is a staircase: one jump per value, jump height equal to that value\'s probability.',
+      },
+      {
+        title: 'Worked Values — Even/Odd Variable',
+        body: 'With P(X=0) = P(X=1) = 1/2:',
+        table: [
+          ['x', 'F_X(x)', 'Why'],
+          ['−2',  '0',   'no values at or left of −2'],
+          ['0',   '1/2', 'the value 0 itself counts — the test is ≤'],
+          ['0.5', '1/2', 'only the value 0 passes the test'],
+          ['7',   '1',   'both values pass'],
+        ],
+      },
+      {
+        title: 'Properties',
+        body: '1. F_X(−∞) = 0\n2. F_X(∞) = 1\n3. 0 ≤ F_X(x) ≤ 1\n4. F_X(x₁) ≤ F_X(x₂) for x₁ < x₂ — nondecreasing; moving right only collects more probability\n5. P{x₁ < X ≤ x₂} = F_X(x₂) − F_X(x₁)\n6. F_X(x⁺) = F_X(x) — continuous from the right',
+        callout: 'Interval probability = cdf at the right end minus cdf at the left end.',
+      },
+      {
+        title: 'Interval Example — Fair Die',
+        body: 'X = face value:\n\nP{2 < X ≤ 5} = F_X(5) − F_X(2) = 5/6 − 2/6 = 1/2\n\nMatches faces 3, 4, 5 at 1/6 each.',
+      },
+    ],
+    formulas: [
+      { sym: 'F_X(x)', eq: 'P{X ≤ x}' },
+      { sym: 'F_X(−∞)', eq: '0' },
+      { sym: 'F_X(∞)',  eq: '1' },
+      { sym: 'P{x₁<X≤x₂}', eq: 'F_X(x₂) − F_X(x₁)' },
+    ],
+  },
+
+  pdf: {
+    id: 'pdf',
+    title: 'Density Function (PDF)',
+    category: 'Random Signals & Noise',
+    course: 'ECE 321',
+    reading: 'Module 2 handout C — in progress',
+    summary: 'The pdf is the derivative of the cdf — it measures how fast probability accumulates along the number line. Tall pdf means densely packed probability; zero pdf means none there.',
+    sections: [
+      {
+        title: 'Definition',
+        body: 'f_X(x) = dF_X(x)/dx\n\nTall pdf  → densely packed probability\nZero pdf → no probability there',
+      },
+      {
+        title: 'Properties',
+        body: '• f_X(x) ≥ 0 for all x\n• ∫ f_X(x) dx over all x = 1 — total area under the pdf is 1\n• F_X(x) = ∫ from −∞ to x of f_X(α) dα\n• P{x₁ < X ≤ x₂} = area under the pdf between x₁ and x₂',
+      },
+      {
+        title: 'Single Points & Impulses',
+        body: 'For a continuous random variable, P{X = any single exact value} = 0 — the area over a single point is zero.\n\nWhen the cdf has jumps (discrete values), the pdf contains impulse (delta) functions at those points, with impulse area equal to the jump height.',
+        callout: 'Probability lives on intervals, not points.',
+      },
+      {
+        title: 'Resume Point — Next Session',
+        body: 'Open exercise, unanswered: given the flat pdf f_X(x) = 1/2 for 0 ≤ x ≤ 2 and 0 elsewhere, compute the area under it and decide whether it qualifies as a valid density. (It\'s a rectangle: width 2, height 1/2.)\n\nStill ahead:\n• Module C remainder — Example 2.3 (solve for α), cdf from pdf by integration\n• Module D — Gaussian N(a_X, σ_X²), standard normal, Q-function, erf/erfc, m-sigma table\n• Module G — Bernoulli trials, binomial, Stirling, De Moivre–Laplace and Poisson approximations\n• Chapter 1 Probability PowerPoint',
+      },
+    ],
+    formulas: [
+      { sym: 'f_X(x)', eq: 'dF_X(x)/dx' },
+      { sym: '∫ f_X',  eq: '1 (total area)' },
+      { sym: 'F_X(x)', eq: '∫₋∞ˣ f_X(α) dα' },
+      { sym: 'P{X=a}', eq: '0 (continuous RV)' },
+    ],
+  },
+
   },
 
   // ─── VEHICLES ────────────────────────────────────────────────────────────

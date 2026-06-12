@@ -426,6 +426,7 @@
           <div>
             <div className="nb-sc" style={{ marginBottom:8 }}>Recent work</div>
             {[
+              ['ECE 321', 'Random Variables & Types',     'random-variables'],
               ['ECE 371', 'Op-Amps & Comparators',       'opamps'],
               ['ECE 342', 'Transformer OC / SC tests',    'transformers'],
               ['ECE 395', 'RISC-V calling convention',    'riscv-isa'],
@@ -771,8 +772,30 @@
   // ═══════════════════════════════════════════════════════════════════════════
   //  TOPIC DETAIL
   // ═══════════════════════════════════════════════════════════════════════════
-  function TopicDetail({ go }) {
-    const t = window.SITE.topicDetail;
+  function TopicDetail({ go, id }) {
+    const found = window.findTopic(id);
+    const t = (window.SITE.topicDetails || {})[id]
+      || (found && {
+        id,
+        title: found.topic.title,
+        category: found.cat.title,
+        course: found.topic.tag,
+        reading: '—',
+        summary: found.group.blurb,
+        sections: [{
+          title: 'Notes coming soon',
+          body: 'No notes written for this sheet yet — the title is on the shelf, the content is still in the notebook.',
+        }],
+        formulas: [],
+      })
+      || window.SITE.topicDetails.opamps;
+
+    // Siblings from the same category; falls back to circuits classics.
+    const seeAlso = (found
+      ? found.cat.groups.flatMap(g => g.topics).map(tp => tp.id).filter(tid => tid !== id)
+      : ['schmitt', '555', 'wien']
+    ).slice(0, 3);
+
     return (
       <div>
         <div style={{ padding:'32px 60px 22px', borderBottom:`1px solid ${C.ink2}` }}>
@@ -829,21 +852,25 @@
             ))}
           </div>
           <div style={{ padding:'30px 24px', background:C.panel }}>
-            <div className="nb-sc" style={{ marginBottom:10 }}>Formulas</div>
-            <div className="nb-card" style={{ padding:0 }}>
-              {t.formulas.map((f,i) => (
-                <div key={i} style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:14, padding:'10px 14px', borderBottom: i<t.formulas.length-1 ? `1px solid ${C.lineL}` : 'none', alignItems:'baseline' }}>
-                  <span className="nb-mono nb-acc" style={{ fontSize:13 }}>{f.sym}</span>
-                  <span className="nb-mono" style={{ fontSize:13 }}>= {f.eq}</span>
+            {t.formulas.length > 0 && (
+              <>
+                <div className="nb-sc" style={{ marginBottom:10 }}>Formulas</div>
+                <div className="nb-card" style={{ padding:0 }}>
+                  {t.formulas.map((f,i) => (
+                    <div key={i} style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:14, padding:'10px 14px', borderBottom: i<t.formulas.length-1 ? `1px solid ${C.lineL}` : 'none', alignItems:'baseline' }}>
+                      <span className="nb-mono nb-acc" style={{ fontSize:13 }}>{f.sym}</span>
+                      <span className="nb-mono" style={{ fontSize:13 }}>= {f.eq}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div className="nb-sc" style={{ marginTop:24, marginBottom:10 }}>See also</div>
+              </>
+            )}
+            <div className="nb-sc" style={{ marginTop: t.formulas.length > 0 ? 24 : 0, marginBottom:10 }}>See also</div>
             <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-              {['schmitt','555','wien'].map(id => {
-                const f = window.findTopic(id); if (!f) return null;
+              {seeAlso.map(tid => {
+                const f = window.findTopic(tid); if (!f) return null;
                 return (
-                  <div key={id} className="nb-row" onClick={() => go({ name:'topic', id })}
+                  <div key={tid} className="nb-row" onClick={() => go({ name:'topic', id:tid })}
                     style={{ padding:'10px 14px', border:`1px solid ${C.line}`, background:C.panelW }}>
                     <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline' }}>
                       <span className="nb-serif nb-row-title" style={{ fontSize:14 }}>{f.topic.title}</span>
