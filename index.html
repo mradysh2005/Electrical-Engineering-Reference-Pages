@@ -21,13 +21,32 @@
   <!-- Site data (plain JS, no JSX) -->
   <script src="site-data.js"></script>
 
-  <!-- App component — loaded and transformed before the inline render below -->
-  <script type="text/babel" src="variant-notebook.jsx"></script>
+  <!--
+    Compile + mount the app explicitly.
 
-  <!-- Mount -->
-  <script type="text/babel">
-    const App = window.VariantNotebook;
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    We deliberately do NOT use <script type="text/babel"> auto-processing:
+    recent @babel/standalone builds default preset-react to the *automatic*
+    JSX runtime, which emits `import { jsx } from "react/jsx-runtime"`. That
+    import can't run in a plain browser script and fails silently — blank page.
+    Forcing runtime:'classic' compiles JSX to React.createElement (no imports).
+  -->
+  <script>
+    (async () => {
+      const root = document.getElementById('root');
+      try {
+        const src = await (await fetch('variant-notebook.jsx')).text();
+        const { code } = Babel.transform(src, { presets: [['react', { runtime: 'classic' }]] });
+        (0, eval)(code); // sets window.VariantNotebook
+        const App = window.VariantNotebook;
+        if (typeof App !== 'function') throw new Error('VariantNotebook component did not load');
+        ReactDOM.createRoot(root).render(React.createElement(App));
+      } catch (err) {
+        console.error(err);
+        root.innerHTML =
+          '<pre style="color:#c8634d;font-family:monospace;padding:32px;white-space:pre-wrap;font-size:13px">'
+          + 'Failed to load the app:\n\n' + ((err && err.stack) || err) + '</pre>';
+      }
+    })();
   </script>
 </body>
 </html>
