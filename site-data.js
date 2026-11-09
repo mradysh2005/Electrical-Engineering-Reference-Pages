@@ -6,13 +6,13 @@
 window.SITE = {
   owner: { name: 'Mike Radysh', school: 'NJIT', program: 'B.S. Electrical Engineering', grad: 'Class of 2027' },
 
-  // Reset 2026-06-11 — counting from zero. Totals = sum of the service log.
+  // Garage restarted from scratch 2026-11-09. null = not entered yet; renders as a visible [update] placeholder.
   stats: {
     vehicles:    8,
     eeTopics:    18,
-    projects:    10,
-    totalSpent:  767,
-    hoursLogged: 14,
+    projects:    7,
+    totalSpent:  null,
+    hoursLogged: null,
   },
 
   // ─── ENGINEERING ────────────────────────────────────────────────────────────
@@ -319,15 +319,15 @@ window.SITE = {
   vehicles: [
     {
       id: 'ranger',
-      year: 2001, make: 'Ford', model: 'Ranger', trim: 'Edge',
-      engine: '3.0L V6 Vulcan', drive: 'RWD', trans: '5-spd Manual',
-      mileage: 187420, acquired: 'Mar 2023', color: 'Toreador Red',
-      status: 'Daily driver',
-      reliability: 7.5,
-      photoCaption: 'Project shot · Ranger from passenger 3/4',
-      summary: 'Bought for cash, 187k miles. The 3.0 Vulcan is forgiving — every job has gone in clean.',
-      stats: { spent: 39, hours: 1, projects: 1 },
-      tags: ['daily', 'pickup', 'manual'],
+      year: 2001, make: 'Ford', model: 'Ranger', trim: null,
+      engine: null, drive: null, trans: null,
+      mileage: 170000, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: 1 },
+      tags: [],
 
       procedures: [
         {
@@ -475,15 +475,15 @@ window.SITE = {
 
     {
       id: 'civic',
-      year: 2019, make: 'Honda', model: 'Civic', trim: 'Sport',
-      engine: '2.0L NA i-VTEC', drive: 'FWD', trans: 'CVT',
-      mileage: 71200, acquired: 'Aug 2024', color: 'Aegean Blue',
-      status: 'Family runaround',
-      reliability: 9.0,
-      photoCaption: 'Project shot · Civic front 3/4',
-      summary: '2.0 NA. Family runaround. Boring on purpose; maintenance is straightforward.',
-      stats: { spent: 107, hours: 2, projects: 2 },
-      tags: ['daily', 'sedan', 'CVT'],
+      year: 2019, make: 'Honda', model: 'Civic', trim: null,
+      engine: null, drive: null, trans: null,
+      mileage: 117500, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: 1 },
+      tags: [],
 
       procedures: [
         {
@@ -642,15 +642,15 @@ window.SITE = {
 
     {
       id: 'rogue',
-      year: 2016, make: 'Nissan', model: 'Rogue', trim: 'SV',
-      engine: '2.5L QR25DE', drive: 'AWD', trans: 'CVT (JF017E)',
-      mileage: 112900, acquired: 'Jan 2024', color: 'Pearl White',
-      status: 'Watching the CVT',
-      reliability: 5.5,
-      photoCaption: 'Project shot · Rogue side profile',
-      summary: 'The JF017E CVT is the catch. Fluid every 30k, monitor temps, never tow. Otherwise competent.',
-      stats: { spent: 0, hours: 0, projects: 0 },
-      tags: ['family', 'CVT', 'AWD'],
+      year: 2016, make: 'Nissan', model: 'Rogue', trim: null,
+      engine: null, drive: null, trans: null,
+      mileage: null, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: null },
+      tags: [],
 
       procedures: [
         {
@@ -746,15 +746,15 @@ window.SITE = {
 
     {
       id: 'sienna',
-      year: 2012, make: 'Toyota', model: 'Sienna', trim: '—',
-      engine: '3.5L 2GR-FE V6', drive: 'FWD', trans: '6-spd Auto',
-      mileage: 160000, acquired: 'Jun 2026', color: '—',
-      status: 'Family hauler',
-      reliability: 8.5,
-      photoCaption: '—',
-      summary: 'The 2GR-FE is one of Toyota\'s best engines. Keep the fluids on schedule and it runs forever. Watch the sliding-door cables — known wear item on this generation.',
-      stats: { spent: 0, hours: 0, projects: 0 },
-      tags: ['van', 'V6', 'family'],
+      year: 2012, make: 'Toyota', model: 'Sienna', trim: null,
+      engine: null, drive: null, trans: null,
+      mileage: null, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: null },
+      tags: [],
 
       procedures: [
         {
@@ -834,15 +834,15 @@ window.SITE = {
 
     {
       id: 'odyssey',
-      year: 2012, make: 'Honda', model: 'Odyssey', trim: 'EX-L',
-      engine: '3.5L J35 V6 (VCM)', drive: 'FWD', trans: '5-spd Auto',
-      mileage: 150000, acquired: 'Jun 2026', color: '—',
-      status: 'Family hauler',
-      reliability: 7.0,
-      photoCaption: '—',
-      summary: 'The J35 is a solid engine but VCM makes it drink oil. Check the dipstick every other fill-up. Keep the 5-spd auto on clean fluid and it behaves.',
-      stats: { spent: 309, hours: 6, projects: 2 },
-      tags: ['van', 'V6', 'VCM'],
+      year: 2012, make: 'Honda', model: 'Odyssey', trim: null,
+      engine: null, drive: null, trans: null,
+      mileage: null, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: null },
+      tags: [],
 
       procedures: [
         {
@@ -1005,15 +1005,15 @@ window.SITE = {
 
     {
       id: 'accord',
-      year: 2018, make: 'Honda', model: 'Accord', trim: 'EX-L 1.5T',
-      engine: '1.5L Turbo (L15BE)', drive: 'FWD', trans: 'CVT',
-      mileage: 90000, acquired: 'Jun 2026', color: '—',
-      status: 'Daily driver',
-      reliability: 7.5,
-      photoCaption: '—',
-      summary: 'The 1.5T with the oil-dilution caveat — short trips put fuel in the oil. Check the level and smell it at every fill-up; change oil on the early side.',
-      stats: { spent: 0, hours: 0, projects: 0 },
-      tags: ['sedan', '1.5T', 'CVT'],
+      year: 2018, make: 'Honda', model: 'Accord', trim: null,
+      engine: null, drive: null, trans: null,
+      mileage: null, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: null },
+      tags: [],
 
       procedures: [
         {
@@ -1091,14 +1091,14 @@ window.SITE = {
     {
       id: 'pilot',
       year: 2022, make: 'Honda', model: 'Pilot', trim: 'Special Edition',
-      engine: '3.5L J35Y6 V6 (VCM)', drive: '—', trans: '9-spd Auto',
-      mileage: 82228, acquired: '—', color: '—',
-      status: 'Family hauler',
-      reliability: 8.0,
-      photoCaption: '—',
-      summary: 'Same J35 family as the Odyssey, same VCM caveat — watch oil consumption between changes. Otherwise a low-drama 3-row.',
-      stats: { spent: 44, hours: 1, projects: 1 },
-      tags: ['SUV', 'V6', 'VCM'],
+      engine: null, drive: null, trans: null,
+      mileage: 82228, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: 1 },
+      tags: [],
 
       procedures: [
         {
@@ -1145,15 +1145,15 @@ window.SITE = {
 
     {
       id: 'rav4',
-      year: 2017, make: 'Toyota', model: 'RAV4', trim: 'Trim unknown',
-      engine: '2.5L 2AR-FE I4', drive: '—', trans: '6-spd Auto',
-      mileage: 172614, acquired: '—', color: '—',
-      status: 'Daily driver',
-      reliability: 8.5,
-      photoCaption: '—',
-      summary: 'High-mileage 2AR-FE — a durable engine that mostly asks for clean oil. Caught up on brakes, plugs, and filters in one session.',
-      stats: { spent: 268, hours: 4, projects: 4 },
-      tags: ['SUV', 'I4', 'high-mileage'],
+      year: 2017, make: 'Toyota', model: 'RAV4', trim: null,
+      engine: null, drive: null, trans: null,
+      mileage: 172614, acquired: null, color: null,
+      status: null,
+      reliability: null,
+      photoCaption: null,
+      summary: null,
+      stats: { spent: null, hours: null, projects: 4 },
+      tags: [],
 
       procedures: [
         {
@@ -1338,18 +1338,15 @@ window.SITE = {
   },
 
   // ─── SERVICE LOG ─────────────────────────────────────────────────────────
-  // Fresh start 2026-06-11 — log rebuilt from zero; every entry below is real.
+  // Restarted 2026-11-09 — only jobs the owner has reported. null date/cost = still to fill in.
   recent: [
-    { date: '2026-11-09', vehicle: 'pilot',   kind: 'PM',     label: 'Engine oil & filter (0W-20) @ 82,228 mi',          cost:  44.23, procedureId: 'pilot-oil',         projectId: null },
-    { date: '2026-11-09', vehicle: 'rav4',    kind: 'Repair', label: 'Front pads & rotors, calipers lubed @ 172,614 mi', cost: 158.50, procedureId: 'rav4-brakes-front', projectId: null },
-    { date: '2026-11-09', vehicle: 'rav4',    kind: 'PM',     label: 'Engine oil & filter (0W-20) @ 172,614 mi',         cost:  36.98, procedureId: 'rav4-oil',          projectId: null },
-    { date: '2026-11-09', vehicle: 'rav4',    kind: 'PM',     label: 'Spark plugs (x4) @ 172,614 mi',                    cost:  38.00, procedureId: 'rav4-plugs',        projectId: null },
-    { date: '2026-11-09', vehicle: 'rav4',    kind: 'PM',     label: 'Engine + cabin air filters @ 172,614 mi',          cost:  34.98, procedureId: 'rav4-air',          projectId: null },
-    { date: '2026-06-11', vehicle: 'civic',   kind: 'PM',     label: 'Engine oil & filter (0W-20)',     cost:  36.23, procedureId: 'civic-oil',     projectId: null },
-    { date: '2026-06-11', vehicle: 'civic',   kind: 'PM',     label: 'CVT fluid change (HCF-2)',         cost:  70.50, procedureId: 'civic-cvt',     projectId: null },
-    { date: '2026-06-11', vehicle: 'odyssey', kind: 'Repair', label: 'Front lower control arms (pair)',  cost: 161.00, procedureId: 'odyssey-lca',   projectId: null },
-    { date: '2026-06-11', vehicle: 'odyssey', kind: 'Repair', label: 'Front CV axles (pair)',            cost: 148.00, procedureId: 'odyssey-axles', projectId: null },
-    { date: '2026-06-11', vehicle: 'ranger',  kind: 'PM',     label: 'Engine oil & filter (5W-30)',      cost:  38.96, procedureId: 'ranger-oil',    projectId: null },
+    { date: null, vehicle: 'ranger', kind: 'PM',     label: 'Engine oil & filter @ 170,000 mi',                 cost: null, procedureId: 'ranger-oil',        projectId: null },
+    { date: null, vehicle: 'civic',  kind: 'PM',     label: 'Engine oil & filter @ 117,500 mi',                 cost: null, procedureId: 'civic-oil',         projectId: null },
+    { date: null, vehicle: 'pilot',  kind: 'PM',     label: 'Engine oil & filter @ 82,228 mi',                  cost: null, procedureId: 'pilot-oil',         projectId: null },
+    { date: null, vehicle: 'rav4',   kind: 'Repair', label: 'Front pads & rotors, calipers lubed @ 172,614 mi', cost: null, procedureId: 'rav4-brakes-front', projectId: null },
+    { date: null, vehicle: 'rav4',   kind: 'PM',     label: 'Engine oil & filter @ 172,614 mi',                 cost: null, procedureId: 'rav4-oil',          projectId: null },
+    { date: null, vehicle: 'rav4',   kind: 'PM',     label: 'Spark plugs @ 172,614 mi',                         cost: null, procedureId: 'rav4-plugs',        projectId: null },
+    { date: null, vehicle: 'rav4',   kind: 'PM',     label: 'Both air filters @ 172,614 mi',                    cost: null, procedureId: 'rav4-air',          projectId: null },
   ],
 
   // ─── ENGINEERING PROJECTS ─────────────────────────────────────────────────
