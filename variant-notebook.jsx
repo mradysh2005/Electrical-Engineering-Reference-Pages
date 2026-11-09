@@ -898,7 +898,7 @@
         <div style={{ padding:'40px 60px 0', borderBottom:`1px solid ${C.line}` }}>
           <div style={{ paddingBottom:18, borderBottom:`1px solid ${C.ink2}` }}>
             <div className="nb-sc"><span className="nb-acc">02</span> · Garage</div>
-            <h1 className="nb-serif" style={{ fontSize:46, lineHeight:1, margin:'10px 0 0', letterSpacing:-0.5 }}>Six cars, one set of hands</h1>
+            <h1 className="nb-serif" style={{ fontSize:46, lineHeight:1, margin:'10px 0 0', letterSpacing:-0.5 }}>Eight cars, one set of hands</h1>
           </div>
           <div style={{ display:'flex' }}>
             {[['vehicles','Vehicles'],['log','Service Log'],['procedures','Procedures'],['guides','Buying Guides']].map(([id,label]) => (

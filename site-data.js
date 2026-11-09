@@ -8,11 +8,11 @@ window.SITE = {
 
   // Reset 2026-06-11 — counting from zero. Totals = sum of the service log.
   stats: {
-    vehicles:    6,
+    vehicles:    8,
     eeTopics:    18,
-    projects:    5,
-    totalSpent:  455,
-    hoursLogged: 9,
+    projects:    10,
+    totalSpent:  767,
+    hoursLogged: 14,
   },
 
   // ─── ENGINEERING ────────────────────────────────────────────────────────────
@@ -1087,6 +1087,224 @@ window.SITE = {
         },
       ],
     },
+
+    {
+      id: 'pilot',
+      year: 2022, make: 'Honda', model: 'Pilot', trim: 'Special Edition',
+      engine: '3.5L J35Y6 V6 (VCM)', drive: '—', trans: '9-spd Auto',
+      mileage: 82228, acquired: '—', color: '—',
+      status: 'Family hauler',
+      reliability: 8.0,
+      photoCaption: '—',
+      summary: 'Same J35 family as the Odyssey, same VCM caveat — watch oil consumption between changes. Otherwise a low-drama 3-row.',
+      stats: { spent: 44, hours: 1, projects: 1 },
+      tags: ['SUV', 'V6', 'VCM'],
+
+      procedures: [
+        {
+          id: 'pilot-oil',
+          title: 'Engine Oil & Filter',
+          titleAccent: 'Oil',
+          category: 'routine',
+          interval: { miles: 5000, months: 6 },
+          estMinutes: 45,
+          difficulty: 1,
+          specs: [
+            { label: 'Oil capacity',       value: '5.7 qt w/ filter',      highlight: true  },
+            { label: 'Oil spec',           value: '0W-20 full synthetic',  highlight: true  },
+            { label: 'Drain plug socket',  value: '17mm',                  highlight: true  },
+            { label: 'Drain plug torque',  value: '29 ft-lb',              highlight: true  },
+            { label: 'Filter',             value: 'Honda 15400-PLM-A02',   highlight: false },
+          ],
+          parts: [
+            { item: 'Motor Oil 0W-20',   sub: 'Full synthetic, 6 qt',   partNumber: 'SN-0W20-FS',     qty: 1, estCost: 34.99 },
+            { item: 'Oil Filter',        sub: 'Honda OEM spin-on',      partNumber: '15400-PLM-A02',  qty: 1, estCost:  7.99 },
+            { item: 'Drain plug washer', sub: 'Honda aluminum crush',   partNumber: '94109-14000',    qty: 1, estCost:  1.25 },
+          ],
+          tools: [
+            { size: '17mm',  name: 'Drain plug socket' },
+            { size: '—',     name: 'Oil filter wrench (spin-on)' },
+            { size: '3/8"',  name: 'Drive ratchet' },
+            { size: '—',     name: 'Drain pan (6 qt minimum)' },
+            { size: '—',     name: 'Funnel' },
+          ],
+          steps: [
+            { text: 'Warm engine **3 min**, lift and support. Drain via the **17mm** plug.' },
+            { text: 'Spin off the filter, oil the new gasket, hand-tight plus **3/4 turn**.' },
+            { text: 'New washer on the drain plug, torque to **29 ft-lb**.' },
+            { text: 'Fill with **5.7 qt** of 0W-20. Start, check for leaks, verify the dipstick.' },
+            { text: 'Reset the Maintenance Minder and write down the mileage — on a VCM engine you are tracking **consumption between changes**.' },
+          ],
+          notes: [
+            'VCM shuts down cylinders on light load, which can foul the rear-bank plugs and burn oil over time. A level that drops more than ~1 qt per 3k mi is worth watching.',
+          ],
+          lessons: [],
+        },
+      ],
+    },
+
+    {
+      id: 'rav4',
+      year: 2017, make: 'Toyota', model: 'RAV4', trim: 'Trim unknown',
+      engine: '2.5L 2AR-FE I4', drive: '—', trans: '6-spd Auto',
+      mileage: 172614, acquired: '—', color: '—',
+      status: 'Daily driver',
+      reliability: 8.5,
+      photoCaption: '—',
+      summary: 'High-mileage 2AR-FE — a durable engine that mostly asks for clean oil. Caught up on brakes, plugs, and filters in one session.',
+      stats: { spent: 268, hours: 4, projects: 4 },
+      tags: ['SUV', 'I4', 'high-mileage'],
+
+      procedures: [
+        {
+          id: 'rav4-oil',
+          title: 'Engine Oil & Filter',
+          titleAccent: 'Oil',
+          category: 'routine',
+          interval: { miles: 5000, months: 6 },
+          estMinutes: 40,
+          difficulty: 1,
+          specs: [
+            { label: 'Oil capacity',       value: '4.6 qt w/ filter',      highlight: true  },
+            { label: 'Oil spec',           value: '0W-20 full synthetic',  highlight: true  },
+            { label: 'Drain plug socket',  value: '14mm',                  highlight: true  },
+            { label: 'Drain plug torque',  value: '30 ft-lb',              highlight: true  },
+            { label: 'Filter',             value: 'Toyota 90915-YZZD4 (verify)', highlight: false },
+          ],
+          parts: [
+            { item: 'Motor Oil 0W-20',   sub: 'Full synthetic, 5 qt',   partNumber: 'SN-0W20-FS',   qty: 1, estCost: 28.99 },
+            { item: 'Oil Filter',        sub: 'Toyota OEM spin-on',     partNumber: '90915-YZZD4',  qty: 1, estCost:  6.99 },
+            { item: 'Drain plug gasket', sub: 'Toyota crush gasket',    partNumber: '90430-12031',  qty: 1, estCost:  1.00 },
+          ],
+          tools: [
+            { size: '14mm',  name: 'Drain plug socket' },
+            { size: '—',     name: 'Oil filter wrench (cap or band)' },
+            { size: '3/8"',  name: 'Drive ratchet' },
+            { size: '—',     name: 'Drain pan (5 qt minimum)' },
+            { size: '—',     name: 'Funnel' },
+          ],
+          steps: [
+            { text: 'Warm engine **3 min**, lift and support. Drain via the **14mm** plug.' },
+            { text: 'Spin off the filter — check the old gasket came off with it. Oil the new gasket, hand-tight plus **3/4 turn**.' },
+            { text: 'New gasket on the drain plug, torque to **30 ft-lb**.' },
+            { text: 'Fill with **4.6 qt** of 0W-20. Start, check for leaks, verify the dipstick.' },
+          ],
+          notes: [
+            'At 170k+ the 2AR-FE is healthy if it is not burning oil between changes — check the dipstick at 2.5k mi to get a baseline.',
+          ],
+          lessons: [],
+        },
+        {
+          id: 'rav4-brakes-front',
+          title: 'Front Brake Pads & Rotors',
+          titleAccent: 'Rotors',
+          category: 'repair',
+          interval: { miles: 50000 },
+          estMinutes: 120,
+          difficulty: 2,
+          specs: [
+            { label: 'Lug nut torque',   value: '76 ft-lb (21mm)',             highlight: true  },
+            { label: 'Caliper bolts',    value: '25 ft-lb (14mm, verify FSM)', highlight: true  },
+            { label: 'Bracket bolts',    value: '79 ft-lb (17mm, verify FSM)', highlight: true  },
+            { label: 'Brake fluid',      value: 'DOT 3',                       highlight: true  },
+            { label: 'Piston retract',   value: 'Straight push (no rotation)', highlight: false },
+          ],
+          parts: [
+            { item: 'Front rotors',      sub: 'Pair',                                  partNumber: 'verify by VIN', qty: 2, estCost: 52.00 },
+            { item: 'Front brake pads',  sub: 'Ceramic, axle set',                     partNumber: 'verify by VIN', qty: 1, estCost: 48.00 },
+            { item: 'Caliper grease',    sub: 'Silicone / synthetic, slide-pin safe',  partNumber: '—',             qty: 1, estCost:  6.50 },
+          ],
+          tools: [
+            { size: '21mm',  name: 'Lug nut socket' },
+            { size: '17mm',  name: 'Caliper bracket bolts' },
+            { size: '14mm',  name: 'Caliper slide bolt socket' },
+            { size: '—',     name: 'C-clamp or piston press' },
+            { size: '—',     name: 'Wire brush (hub face + bracket abutments)' },
+            { size: '—',     name: 'Torque wrench + jack stands' },
+          ],
+          steps: [
+            { text: 'Break lug nuts loose on the ground, then lift and support. Wheel off.' },
+            { text: 'Remove the two **14mm** caliper slide bolts and hang the caliper — never by the hose.' },
+            { text: 'Remove the bracket (**17mm**, 2 bolts). Pull the rotor — tap the hat with a mallet if it is rusted to the hub.' },
+            { text: 'Wire-brush the hub face to bare metal and clean the bracket abutments where the pad clips sit.' },
+            { text: 'Pull the slide pins, wipe out the old grease, and **re-lube the pins and boots** with fresh caliper grease. Pins should slide freely by hand.' },
+            { text: 'Press the piston back with a C-clamp against the old pad. Watch the reservoir so it does not overflow.' },
+            { text: 'New rotor, bracket on at **79 ft-lb**, new pads + clips, caliper bolts at **25 ft-lb**, lugs at **76 ft-lb** in a star pattern.' },
+            { text: 'Pump the pedal until firm **before** moving the car, then bed the pads: 10 stops from 30 to 5 mph with cool-down between.' },
+          ],
+          notes: [
+            'Seized or dry slide pins are the usual reason for uneven inner/outer pad wear. Lubing them is half the value of this job.',
+            'Keep grease off the pad faces and rotor friction surface — only pins, boots, and the clip contact points.',
+          ],
+          lessons: [],
+        },
+        {
+          id: 'rav4-plugs',
+          title: 'Spark Plugs',
+          titleAccent: 'Plugs',
+          category: 'routine',
+          interval: { miles: 120000 },
+          estMinutes: 60,
+          difficulty: 2,
+          specs: [
+            { label: 'Plug',          value: 'Denso FK20HR11 iridium (verify)', highlight: true  },
+            { label: 'Gap',           value: '1.0–1.1 mm (pre-gapped)',         highlight: true  },
+            { label: 'Plug torque',   value: '18 ft-lb (verify FSM)',           highlight: true  },
+            { label: 'Coil bolts',    value: '10mm',                            highlight: false },
+          ],
+          parts: [
+            { item: 'Spark plugs', sub: 'Iridium, OEM-spec', partNumber: 'FK20HR11', qty: 4, estCost: 9.50 },
+          ],
+          tools: [
+            { size: '14mm',  name: 'Thin-wall spark plug socket + extension' },
+            { size: '10mm',  name: 'Coil hold-down bolts' },
+            { size: '—',     name: 'Compressed air (blow out the wells first)' },
+            { size: '—',     name: 'Torque wrench (in-lb / low range)' },
+          ],
+          steps: [
+            { text: 'Engine **cold** — aluminum head threads are easy to strip when hot.' },
+            { text: 'Unplug and pull the four coils (**10mm** bolts). Blow out each well before the plug comes out.' },
+            { text: 'Remove the old plugs and read them — even tan is healthy; oily or black means look further.' },
+            { text: 'Thread new plugs in **by hand** first, then torque to **18 ft-lb**.' },
+            { text: 'Reinstall coils and connectors, start and confirm a smooth idle with no CEL.' },
+          ],
+          notes: [
+            'At 172k these were likely overdue — the factory interval is 120k.',
+          ],
+          lessons: [],
+        },
+        {
+          id: 'rav4-air',
+          title: 'Engine & Cabin Air Filters',
+          titleAccent: 'Air',
+          category: 'routine',
+          interval: { miles: 15000, months: 12 },
+          estMinutes: 15,
+          difficulty: 1,
+          specs: [
+            { label: 'Engine filter', value: 'Toyota 17801-0V020 (verify)', highlight: true  },
+            { label: 'Cabin filter',  value: 'Toyota 87139-YZZ08 (verify)', highlight: true  },
+            { label: 'Tools needed',  value: 'None — clips only',           highlight: false },
+          ],
+          parts: [
+            { item: 'Engine Air Filter', sub: 'Panel filter',               partNumber: '17801-0V020', qty: 1, estCost: 19.99 },
+            { item: 'Cabin Air Filter',  sub: 'Behind the glove box',       partNumber: '87139-YZZ08', qty: 1, estCost: 14.99 },
+          ],
+          tools: [
+            { size: '—',  name: 'Shop rag / vacuum' },
+          ],
+          steps: [
+            { text: 'Engine: unclip the airbox lid, swap the panel filter matching the old orientation, wipe the housing, re-clip.' },
+            { text: 'Cabin: empty the glove box, release the damper arm and squeeze the sides to drop it down.' },
+            { text: 'Pull the cabin filter tray, note the **airflow arrow**, and slide the new one in the same way.' },
+          ],
+          notes: [
+            'Check the cabin filter every oil change — leaves and debris pile up there fast.',
+          ],
+          lessons: [],
+        },
+      ],
+    },
   ],
 
   // ─── PROJECT DETAIL (garage repair — referenced from service log) ─────────
@@ -1122,6 +1340,11 @@ window.SITE = {
   // ─── SERVICE LOG ─────────────────────────────────────────────────────────
   // Fresh start 2026-06-11 — log rebuilt from zero; every entry below is real.
   recent: [
+    { date: '2026-11-09', vehicle: 'pilot',   kind: 'PM',     label: 'Engine oil & filter (0W-20) @ 82,228 mi',          cost:  44.23, procedureId: 'pilot-oil',         projectId: null },
+    { date: '2026-11-09', vehicle: 'rav4',    kind: 'Repair', label: 'Front pads & rotors, calipers lubed @ 172,614 mi', cost: 158.50, procedureId: 'rav4-brakes-front', projectId: null },
+    { date: '2026-11-09', vehicle: 'rav4',    kind: 'PM',     label: 'Engine oil & filter (0W-20) @ 172,614 mi',         cost:  36.98, procedureId: 'rav4-oil',          projectId: null },
+    { date: '2026-11-09', vehicle: 'rav4',    kind: 'PM',     label: 'Spark plugs (x4) @ 172,614 mi',                    cost:  38.00, procedureId: 'rav4-plugs',        projectId: null },
+    { date: '2026-11-09', vehicle: 'rav4',    kind: 'PM',     label: 'Engine + cabin air filters @ 172,614 mi',          cost:  34.98, procedureId: 'rav4-air',          projectId: null },
     { date: '2026-06-11', vehicle: 'civic',   kind: 'PM',     label: 'Engine oil & filter (0W-20)',     cost:  36.23, procedureId: 'civic-oil',     projectId: null },
     { date: '2026-06-11', vehicle: 'civic',   kind: 'PM',     label: 'CVT fluid change (HCF-2)',         cost:  70.50, procedureId: 'civic-cvt',     projectId: null },
     { date: '2026-06-11', vehicle: 'odyssey', kind: 'Repair', label: 'Front lower control arms (pair)',  cost: 161.00, procedureId: 'odyssey-lca',   projectId: null },
