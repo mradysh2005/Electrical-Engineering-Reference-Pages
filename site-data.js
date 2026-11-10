@@ -10,7 +10,7 @@ window.SITE = {
   stats: {
     vehicles:    8,
     eeTopics:    18,
-    projects:    7,
+    projects:    8,
     totalSpent:  null,
     hoursLogged: null,
   },
@@ -482,7 +482,7 @@ window.SITE = {
       reliability: null,
       photoCaption: null,
       summary: null,
-      stats: { spent: null, hours: null, projects: 1 },
+      stats: { spent: null, hours: null, projects: 2 },
       tags: [],
 
       procedures: [
@@ -1342,6 +1342,7 @@ window.SITE = {
   recent: [
     { date: null, vehicle: 'ranger', kind: 'PM',     label: 'Engine oil & filter @ 170,000 mi',                 cost: null, procedureId: 'ranger-oil',        projectId: null },
     { date: null, vehicle: 'civic',  kind: 'PM',     label: 'Engine oil & filter @ 117,500 mi',                 cost: null, procedureId: 'civic-oil',         projectId: null },
+    { date: null, vehicle: 'civic',  kind: 'Repair', label: 'Brake pads, front & rear',                         cost: null, procedureId: null,                projectId: null },
     { date: null, vehicle: 'pilot',  kind: 'PM',     label: 'Engine oil & filter @ 82,228 mi',                  cost: null, procedureId: 'pilot-oil',         projectId: null },
     { date: null, vehicle: 'rav4',   kind: 'Repair', label: 'Front pads & rotors, calipers lubed @ 172,614 mi', cost: null, procedureId: 'rav4-brakes-front', projectId: null },
     { date: null, vehicle: 'rav4',   kind: 'PM',     label: 'Engine oil & filter @ 172,614 mi',                 cost: null, procedureId: 'rav4-oil',          projectId: null },

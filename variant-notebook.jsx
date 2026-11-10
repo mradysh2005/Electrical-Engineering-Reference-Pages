@@ -958,7 +958,7 @@
                   <div key={i} className="nb-row"
                     onClick={() => r.procedureId
                       ? go({ name:'procedure', vehicleId:r.vehicle, id:r.procedureId })
-                      : go({ name:'garage-project' })}
+                      : r.projectId && go({ name:'garage-project' })}
                     style={{ display:'grid', gridTemplateColumns:'120px 80px 1fr 140px 100px', gap:14, padding:'13px 18px', borderBottom: i<s.recent.length-1 ? `1px solid ${C.lineL}` : 'none', alignItems:'center', fontSize:13 }}>
                     <span className="nb-mono">{ph(r.date)}</span>
                     <span className="nb-tag" style={{ color:kindColor(r.kind), borderColor:kindColor(r.kind) }}>{r.kind}</span>
@@ -1108,7 +1108,7 @@
               <hr className="nb-rule-strong"/>
               {window.SITE.recent.filter(r => r.vehicle===v.id).map((r,i,arr) => (
                 <div key={i} className="nb-row"
-                  onClick={() => r.procedureId ? go({ name:'procedure', vehicleId:v.id, id:r.procedureId }) : go({ name:'garage-project' })}
+                  onClick={() => r.procedureId ? go({ name:'procedure', vehicleId:v.id, id:r.procedureId }) : r.projectId && go({ name:'garage-project' })}
                   style={{ display:'grid', gridTemplateColumns:'120px 80px 1fr 90px', gap:14, padding:'12px 4px', borderBottom: i<arr.length-1 ? `1px solid ${C.lineL}` : 'none', alignItems:'center', fontSize:13 }}>
                   <span className="nb-mono">{ph(r.date)}</span>
                   <span className="nb-tag" style={{ color:kindColor(r.kind), borderColor:kindColor(r.kind) }}>{r.kind}</span>
