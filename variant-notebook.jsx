@@ -107,9 +107,9 @@
   const catColor  = (c) => c === 'routine' ? C.green : c === 'repair' ? C.red : c === 'mod' ? C.blue : C.accent;
   const statusColor = (s) => s === 'complete' ? C.green : s === 'active' ? C.accent : C.mute;
 
-  // Garage data not entered yet is null and renders as a visible placeholder.
-  const Ph  = () => <span style={{ color:C.red, fontFamily:fontMono, fontSize:'0.8em', fontStyle:'normal', letterSpacing:0 }}>[update]</span>;
-  const ph  = (v, fmt) => v == null ? <Ph/> : (fmt ? fmt(v) : v);
+  // Garage data not entered yet is null and renders as a visible [field name] placeholder.
+  const Ph  = ({ label }) => <span style={{ color:C.red, fontFamily:fontMono, fontSize:'0.8em', fontStyle:'normal', letterSpacing:0, textTransform:'none' }}>[{label}]</span>;
+  const ph  = (v, label, fmt) => v == null ? <Ph label={label}/> : (fmt ? fmt(v) : v);
   const usd = (n) => `$${n.toLocaleString()}`;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -487,9 +487,9 @@
                 <span className="nb-mono nb-mute" style={{ fontSize:11 }}>02.0{i+1}</span>
                 <div>
                   <div className="nb-serif nb-row-title" style={{ fontSize:18 }}>{v.year} {v.make} {v.model}</div>
-                  <div className="nb-mute" style={{ fontSize:11.5, marginTop:2 }}>{ph(v.engine)} · {ph(v.trans)}</div>
+                  <div className="nb-mute" style={{ fontSize:11.5, marginTop:2 }}>{ph(v.engine, 'engine')} · {ph(v.trans, 'transmission')}</div>
                 </div>
-                <span className="nb-mono nb-mute" style={{ fontSize:11 }}>{ph(v.mileage, m => `${(m/1000).toFixed(1).replace(/[.]0$/,'')}k mi`)}</span>
+                <span className="nb-mono nb-mute" style={{ fontSize:11 }}>{ph(v.mileage, 'mileage', m => `${(m/1000).toFixed(1).replace(/[.]0$/,'')}k mi`)}</span>
               </div>
             ))}
           </div>
@@ -504,9 +504,9 @@
           <hr className="nb-rule-strong"/>
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', border:`1px solid ${C.line}`, background:C.panelW }}>
             {[
-              { label:'Value of jobs done', sub:'what a shop would bill',               val:ph(jobsValue, usd),  color:C.accent },
-              { label:'Money spent',        sub:'parts & supplies (DIY)',               val:ph(moneySpent, usd), color:C.ink },
-              { label:'Money saved',        sub:`${s.stats.hoursLogged ?? '[update]'} hrs × $${shopRate}/hr shop labor`, val:ph(moneySaved, usd), color:C.green },
+              { label:'Value of jobs done', sub:'what a shop would bill',               val:ph(jobsValue, 'job value', usd),  color:C.accent },
+              { label:'Money spent',        sub:'parts & supplies (DIY)',               val:ph(moneySpent, 'spent', usd), color:C.ink },
+              { label:'Money saved',        sub:`${s.stats.hoursLogged ?? '[hours]'} hrs × $${shopRate}/hr shop labor`, val:ph(moneySaved, 'saved', usd), color:C.green },
             ].map((st,i) => (
               <div key={i} style={{ padding:'28px 28px 24px', borderRight: i<2 ? `1px solid ${C.line}` : 'none', display:'flex', flexDirection:'column', gap:4 }}>
                 <div className="nb-sc">{st.label}</div>
@@ -765,7 +765,7 @@
               <div className="nb-card nb-row" onClick={() => go({ name:'vehicle', id:v.id })} style={{ padding:'14px 16px', cursor:'pointer' }}>
                 <div className="nb-sc" style={{ marginBottom:4 }}>Linked vehicle</div>
                 <div className="nb-serif nb-row-title" style={{ fontSize:16 }}>{v.year} {v.make} {v.model}</div>
-                <div className="nb-mute" style={{ fontSize:12, marginTop:2 }}>{ph(v.engine)} · {ph(v.trans)}</div>
+                <div className="nb-mute" style={{ fontSize:12, marginTop:2 }}>{ph(v.engine, 'engine')} · {ph(v.trans, 'transmission')}</div>
               </div>
             )}
           </div>
@@ -923,9 +923,9 @@
                       <div>
                         <div className="nb-mono nb-acc" style={{ fontSize:11 }}>02.0{i+1}</div>
                         <h3 className="nb-serif nb-row-title" style={{ fontSize:20, margin:'4px 0 0' }}>{v.year} {v.make} {v.model}</h3>
-                        <div className="nb-mute" style={{ fontSize:12, marginTop:4 }}>{ph(v.engine)} · {ph(v.trans)} · {ph(v.drive)}</div>
+                        <div className="nb-mute" style={{ fontSize:12, marginTop:4 }}>{ph(v.engine, 'engine')} · {ph(v.trans, 'transmission')} · {ph(v.drive, 'drive')}</div>
                       </div>
-                      <span className="nb-tag" style={{ color:relColor(v.reliability), borderColor:relColor(v.reliability) }}>{ph(v.reliability, r => r.toFixed(1))}</span>
+                      <span className="nb-tag" style={{ color:relColor(v.reliability), borderColor:relColor(v.reliability) }}>{ph(v.reliability, 'reliability', r => r.toFixed(1))}</span>
                     </div>
                   </div>
                   <div style={{ padding:'14px 18px 18px' }}>
@@ -934,7 +934,7 @@
                   <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', borderTop:`1px solid ${C.lineL}` }}>
                     <div style={{ padding:'10px 14px', borderRight:`1px solid ${C.lineL}` }}>
                       <div className="nb-sc">Mileage</div>
-                      <div className="nb-serif" style={{ fontSize:18, marginTop:2 }}>{ph(v.mileage, m => `${(m/1000).toFixed(1).replace(/[.]0$/,'')}k`)}</div>
+                      <div className="nb-serif" style={{ fontSize:18, marginTop:2 }}>{ph(v.mileage, 'mileage', m => `${(m/1000).toFixed(1).replace(/[.]0$/,'')}k`)}</div>
                     </div>
                     <div style={{ padding:'10px 14px' }}>
                       <div className="nb-sc">Procedures</div>
@@ -960,11 +960,11 @@
                       ? go({ name:'procedure', vehicleId:r.vehicle, id:r.procedureId })
                       : r.projectId && go({ name:'garage-project' })}
                     style={{ display:'grid', gridTemplateColumns:'120px 80px 1fr 140px 100px', gap:14, padding:'13px 18px', borderBottom: i<s.recent.length-1 ? `1px solid ${C.lineL}` : 'none', alignItems:'center', fontSize:13 }}>
-                    <span className="nb-mono">{ph(r.date)}</span>
+                    <span className="nb-mono">{ph(r.date, 'date')}</span>
                     <span className="nb-tag" style={{ color:kindColor(r.kind), borderColor:kindColor(r.kind) }}>{r.kind}</span>
                     <span className="nb-serif" style={{ fontSize:15 }}>{r.label}</span>
                     <span className="nb-mute" style={{ fontSize:12.5 }}>{v.year} {v.model}</span>
-                    <span className="nb-mono" style={{ textAlign:'right' }}>{ph(r.cost, c => `$${c.toFixed(2)}`)}</span>
+                    <span className="nb-mono" style={{ textAlign:'right' }}>{ph(r.cost, 'cost', c => `$${c.toFixed(2)}`)}</span>
                   </div>
                 );
               })}
@@ -980,7 +980,7 @@
                     <SectionLabel
                       n={`02.${String(vi+1).padStart(2,'0')}`}
                       title={`${v.year} ${v.make} ${v.model}`}
-                      right={`${v.procedures.length} procedures · ${v.engine ?? '[update]'}`}
+                      right={`${v.procedures.length} procedures · ${v.engine ?? '[engine]'}`}
                       onRight={() => go({ name:'vehicle', id:v.id })}
                     />
                     <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:14 }}>
@@ -1012,7 +1012,7 @@
                               <div style={{ display:'flex', justifyContent:'space-between' }}>
                                 <span className="nb-sc">Last logged</span>
                                 <span className="nb-mono" style={{ fontSize:11, color: lastLog ? C.green : C.mute }}>
-                                  {lastLog ? ph(lastLog.date) : 'not logged'}
+                                  {lastLog ? ph(lastLog.date, 'date') : 'not logged'}
                                 </span>
                               </div>
                             </div>
@@ -1070,17 +1070,17 @@
               <div>
                 <div className="nb-sc">
                   <span className="nb-acc">02.0{idx+1}</span>
-                  <span style={{ marginLeft:14 }}>Acquired {ph(v.acquired)}</span>
+                  <span style={{ marginLeft:14 }}>Acquired {ph(v.acquired, 'acquired')}</span>
                 </div>
                 <h1 className="nb-serif" style={{ fontSize:50, lineHeight:1, margin:'10px 0 0', letterSpacing:-0.5 }}>
                   {v.year} {v.make} <span style={{ color:C.accent }}>{v.model}</span>
                 </h1>
                 <div className="nb-ink2" style={{ fontSize:14, marginTop:8 }}>
-                  {ph(v.trim)} · {ph(v.engine)} · {ph(v.trans)} · {ph(v.drive)} · {ph(v.color)}
+                  {ph(v.trim, 'trim')} · {ph(v.engine, 'engine')} · {ph(v.trans, 'transmission')} · {ph(v.drive, 'drive')} · {ph(v.color, 'color')}
                 </div>
               </div>
               <span className="nb-tag" style={{ color:relColor(v.reliability), borderColor:relColor(v.reliability), fontSize:12, padding:'4px 12px' }}>
-                Reliability {ph(v.reliability, r => r.toFixed(1))} / 10
+                Reliability {ph(v.reliability, 'reliability', r => r.toFixed(1))} / 10
               </span>
             </div>
           </div>
@@ -1097,23 +1097,23 @@
               <div className="nb-card" style={{ padding:0 }}>
                 <div style={{ padding:'10px 16px', borderBottom:`1px solid ${C.lineL}`, display:'flex', justifyContent:'space-between' }}>
                   <span className="nb-sc">Fig. 01 · Vehicle elevation</span>
-                  <span className="nb-mono nb-mute" style={{ fontSize:11 }}>{ph(v.color)}</span>
+                  <span className="nb-mono nb-mute" style={{ fontSize:11 }}>{ph(v.color, 'color')}</span>
                 </div>
                 <div style={{ aspectRatio:'16/9', display:'flex', alignItems:'center', justifyContent:'center', padding:24 }}>
                   <VehicleTech kind={v.id} height={170} stroke={C.ink}/>
                 </div>
               </div>
-              <p className="nb-serif" style={{ marginTop:24, fontSize:18, lineHeight:1.55, fontStyle:'italic', color:C.ink }}>{ph(v.summary)}</p>
+              <p className="nb-serif" style={{ marginTop:24, fontSize:18, lineHeight:1.55, fontStyle:'italic', color:C.ink }}>{ph(v.summary, 'summary')}</p>
               <div className="nb-sc" style={{ marginTop:30, marginBottom:10 }}>Service log · {v.model}</div>
               <hr className="nb-rule-strong"/>
               {window.SITE.recent.filter(r => r.vehicle===v.id).map((r,i,arr) => (
                 <div key={i} className="nb-row"
                   onClick={() => r.procedureId ? go({ name:'procedure', vehicleId:v.id, id:r.procedureId }) : r.projectId && go({ name:'garage-project' })}
                   style={{ display:'grid', gridTemplateColumns:'120px 80px 1fr 90px', gap:14, padding:'12px 4px', borderBottom: i<arr.length-1 ? `1px solid ${C.lineL}` : 'none', alignItems:'center', fontSize:13 }}>
-                  <span className="nb-mono">{ph(r.date)}</span>
+                  <span className="nb-mono">{ph(r.date, 'date')}</span>
                   <span className="nb-tag" style={{ color:kindColor(r.kind), borderColor:kindColor(r.kind) }}>{r.kind}</span>
                   <span className="nb-serif" style={{ fontSize:15 }}>{r.label}</span>
-                  <span className="nb-mono" style={{ textAlign:'right' }}>{ph(r.cost, c => `$${c.toFixed(2)}`)}</span>
+                  <span className="nb-mono" style={{ textAlign:'right' }}>{ph(r.cost, 'cost', c => `$${c.toFixed(2)}`)}</span>
                 </div>
               ))}
             </div>
@@ -1128,17 +1128,17 @@
               ].map(([k,val]) => (
                 <div key={k} style={{ display:'grid', gridTemplateColumns:'1fr 1.4fr', gap:14, padding:'10px 0', borderBottom:`1px solid ${C.lineL}`, fontSize:13 }}>
                   <span className="nb-sc">{k}</span>
-                  <span className="nb-mono" style={{ color:C.ink }}>{ph(val)}</span>
+                  <span className="nb-mono" style={{ color:C.ink }}>{ph(val, k.toLowerCase())}</span>
                 </div>
               ))}
 
               <div className="nb-sc" style={{ marginTop:28, marginBottom:10 }}>Ownership totals</div>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:0, border:`1px solid ${C.line}`, background:C.panelW }}>
                 {[
-                  { label:'Spent', val:ph(v.stats.spent, usd), big:true },
-                  { label:'$/1k mi', val:v.stats.spent == null || v.mileage == null ? <Ph/> : `$${(v.stats.spent/v.mileage*1000).toFixed(2)}`, big:true },
-                  { label:'Hours', val:ph(v.stats.hours), big:false },
-                  { label:'Jobs', val:ph(v.stats.projects), big:false },
+                  { label:'Spent', val:ph(v.stats.spent, 'spent', usd), big:true },
+                  { label:'$/1k mi', val:v.stats.spent == null || v.mileage == null ? <Ph label="$/1k mi"/> : `$${(v.stats.spent/v.mileage*1000).toFixed(2)}`, big:true },
+                  { label:'Hours', val:ph(v.stats.hours, 'hours'), big:false },
+                  { label:'Jobs', val:ph(v.stats.projects, 'jobs'), big:false },
                 ].map((st,i) => (
                   <div key={i} style={{ padding:'14px 16px', borderRight: i%2===0 ? `1px solid ${C.lineL}` : 'none', borderBottom: i<2 ? `1px solid ${C.lineL}` : 'none' }}>
                     <div className="nb-sc">{st.label}</div>
@@ -1198,7 +1198,7 @@
                       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
                         <span className="nb-sc">Last logged</span>
                         <span className="nb-mono" style={{ fontSize:11, color: lastLog ? C.green : C.mute }}>
-                          {lastLog ? ph(lastLog.date) : 'not logged'}
+                          {lastLog ? ph(lastLog.date, 'date') : 'not logged'}
                         </span>
                       </div>
                     </div>
@@ -1260,13 +1260,13 @@
               <div className="nb-mute" style={{ fontSize:13, marginTop:10, display:'flex', gap:14, flexWrap:'wrap', fontFamily:fontMono }}>
                 <span>{v.year} {v.make} {v.model}</span>
                 <span>·</span>
-                <span>{ph(v.engine)}</span>
+                <span>{ph(v.engine, 'engine')}</span>
                 <span>·</span>
                 <span>Every {interval}</span>
                 <span>·</span>
                 <span>~{proc.estMinutes} min</span>
                 {lastLog && (
-                  <><span>·</span><span style={{ color:C.green }}>Last: {ph(lastLog.date)}</span></>
+                  <><span>·</span><span style={{ color:C.green }}>Last: {ph(lastLog.date, 'date')}</span></>
                 )}
               </div>
             </div>
@@ -1541,13 +1541,13 @@
           <SectionLabel title="Headline totals"/>
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', border:`1px solid ${C.line}`, background:C.panelW }}>
             <div style={{ borderRight:`1px solid ${C.line}` }}>
-              <StatBox big label="Value of jobs done" val={ph(jobsValue, usd)} sub="what a shop would bill (parts + labor)" color={C.accent}/>
+              <StatBox big label="Value of jobs done" val={ph(jobsValue, 'job value', usd)} sub="what a shop would bill (parts + labor)" color={C.accent}/>
             </div>
             <div style={{ borderRight:`1px solid ${C.line}` }}>
-              <StatBox big label="Money spent"         val={ph(totalSpent, usd)} sub="parts & supplies, all vehicles" color={C.ink}/>
+              <StatBox big label="Money spent"         val={ph(totalSpent, 'spent', usd)} sub="parts & supplies, all vehicles" color={C.ink}/>
             </div>
             <div>
-              <StatBox big label="Money saved"         val={ph(totalSaved, usd)} sub={`${s.stats.hoursLogged ?? '[update]'} hrs × $${shopRate}/hr shop labor`} color={C.green}/>
+              <StatBox big label="Money saved"         val={ph(totalSaved, 'saved', usd)} sub={`${s.stats.hoursLogged ?? '[hours]'} hrs × $${shopRate}/hr shop labor`} color={C.green}/>
             </div>
           </div>
         </div>
@@ -1564,13 +1564,13 @@
                 style={{ display:'grid', gridTemplateColumns:'1fr 100px 100px 100px 110px 110px', gap:14, padding:'14px 18px', borderBottom: i<vehicleRows.length-1 ? `1px solid ${C.lineL}` : 'none', alignItems:'center' }}>
                 <div>
                   <div className="nb-serif nb-row-title" style={{ fontSize:16 }}>{v.year} {v.make} {v.model}</div>
-                  <div className="nb-mute" style={{ fontSize:11, marginTop:2 }}>{ph(v.engine)} · {ph(v.mileage, m => `${m.toLocaleString()} mi`)}</div>
+                  <div className="nb-mute" style={{ fontSize:11, marginTop:2 }}>{ph(v.engine, 'engine')} · {ph(v.mileage, 'mileage', m => `${m.toLocaleString()} mi`)}</div>
                 </div>
-                <span className="nb-mono" style={{ textAlign:'right' }}>{ph(v.stats.spent, usd)}</span>
-                <span className="nb-mono" style={{ textAlign:'right' }}>{ph(v.stats.hours)}</span>
-                <span className="nb-mono" style={{ textAlign:'right' }}>{ph(v.stats.projects)}</span>
-                <span className="nb-mono" style={{ textAlign:'right', color:C.green }}>{ph(saved, usd)}</span>
-                <span className="nb-mono" style={{ textAlign:'right', color:C.accent, fontWeight:600 }}>{ph(value, usd)}</span>
+                <span className="nb-mono" style={{ textAlign:'right' }}>{ph(v.stats.spent, 'spent', usd)}</span>
+                <span className="nb-mono" style={{ textAlign:'right' }}>{ph(v.stats.hours, 'hours')}</span>
+                <span className="nb-mono" style={{ textAlign:'right' }}>{ph(v.stats.projects, 'jobs')}</span>
+                <span className="nb-mono" style={{ textAlign:'right', color:C.green }}>{ph(saved, 'saved', usd)}</span>
+                <span className="nb-mono" style={{ textAlign:'right', color:C.accent, fontWeight:600 }}>{ph(value, 'value', usd)}</span>
               </div>
             ))}
           </div>

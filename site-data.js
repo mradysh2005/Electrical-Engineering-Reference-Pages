@@ -6,7 +6,7 @@
 window.SITE = {
   owner: { name: 'Mike Radysh', school: 'NJIT', program: 'B.S. Electrical Engineering', grad: 'Class of 2027' },
 
-  // Garage restarted from scratch 2026-11-09. null = not entered yet; renders as a visible [update] placeholder.
+  // Garage restarted from scratch 2026-11-09. null = not entered yet; renders as a visible placeholder naming the field, e.g. [mileage].
   stats: {
     vehicles:    8,
     eeTopics:    18,
